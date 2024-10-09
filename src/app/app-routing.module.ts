@@ -31,6 +31,41 @@ const routes: Routes = [
     component: ContentLayoutAdminComponent,
     // canActivate: [AuthGuardService],
     children: [
+      {
+        path:'clients',
+        loadChildren: () =>
+          import('./modules/clients/clients.module').then(
+            (m)=>m.ClientsModule
+          )
+      },
+      {
+        path:'Advertisement',
+        loadChildren:()=>
+          import('./modules/advertisement/advertisement.module').then(
+            (m)=>m.AdvertisementModule
+          )
+      },
+      {
+        path:'employees',
+        loadChildren:()=>
+          import('./modules/employees/employees.module').then(
+            (m)=>m.EmployeesModule
+          )
+      },
+      {
+        path:'categories',
+        loadChildren:()=>
+          import('./modules/categories/categories.module').then(
+            (m)=>m.CategoriesModule
+          )
+      },
+      {
+        path:'dashBoard',
+        loadChildren:()=>
+          import('./modules/dashboard/dashboard.module').then(
+            (m)=>m.DashboardModule
+          )
+      }
     
     ],
   },

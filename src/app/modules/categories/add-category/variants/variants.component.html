@@ -1,0 +1,77 @@
+<form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+    <div class="variants row">
+      <div class="col-lg-6 col-md-12 col-sm-12 mb-3">
+        <div class="items-menu box-shadow">
+          
+          <div class="side-menu">
+            <div>
+              <div class="box-shadow mb-3" >
+                <div class="item" >
+                    <div class="p-float-label">
+                        <input pInputText type="text" formControlName="nameEn" />
+                        <label>{{ 'Search_Category' | translate }}</label>
+                        <span *ngIf="submitted && form['nameEn'].errors" class="error-validation">{{ 'Field_Required_Product' | translate }}</span>
+                      </div>
+
+                      <div class="item__image">
+                        <div class="">
+                            <div class="col-12 side-icon mb-4 col-lg-8">
+                              <span class="material-symbols-outlined">add_photo_alternate</span>
+                              <div class="title">{{ 'Image_Category' | translate }}</div>
+                            </div>
+                            <div >
+                              <app-img-control #imgControl [fileInput]="fileInput" (onSelected)="onSelectedFile($event)"></app-img-control>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                  
+                </div>
+               
+                  
+                 
+              </div>
+              
+               </div>
+               <div class="col-xs-12 mb-3">
+                <p-button class="btn-outline" [label]="'Add_Item_Category' | translate" (onClick)="AddVariant()"></p-button>
+              </div>
+            </div>
+          
+        </div>
+
+        <div class=" col-lg-6 col-md-12 col-sm-12 mb-3 variant_image">
+         
+      <div class="card">
+        <div class="card-edit">
+          <span class="material-symbols-outlined" [matMenuTriggerFor]="menu">more_vert</span>
+        </div>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item >
+            <span class="material-symbols-outlined">edit</span>
+            {{ 'Edit_Category' | translate }}
+          </button>
+          <button mat-menu-item >
+            <span class="material-symbols-outlined">delete</span>
+            {{ 'Delete_Category' | translate }}
+          </button>
+        </mat-menu>
+     
+         <div class="card-img">
+                                
+       <img src="../../../../../assets/images/coffee.jpg" alt="">
+  </div>
+                             
+  <div class="card-title">Coffee</div>
+  </div>
+    </div>
+        
+    </div>
+    <div class="col-xs-12 text-end mt-4">
+      <p-button type="Submit" class="btn-primary" [loading]="btnLoading" [label]="'Save_Category' | translate"></p-button>
+    </div>
+  </form>
+  
+  
+  <p-toast key="toast"></p-toast>
+  
