@@ -279,6 +279,14 @@
       // opacity: 0;
       cursor: pointer;
       align-self: flex-end;
+      padding-right: 0.5rem;
+      .material-symbols-outlined{
+        color: $primary-color;
+      }
+      :lang(ar){
+        padding-right: 0;
+        padding-left: 12rem;
+      }
     }
   }
 }

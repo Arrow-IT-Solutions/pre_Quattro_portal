@@ -1,0 +1,74 @@
+<form [formGroup]="dataForm" (ngSubmit)="onSubmit()" class="add-event">
+    <div class="add-event">
+      <div class="box-shadow mb-3">
+        <div class="row">
+          <div class="col-12 side-icon">
+            <span class="material-symbols-outlined">info</span>
+            <span>{{ 'Basic_Info_Client' | translate }}</span>
+          </div>
+          <div class="col-12 row m-0 p-0">
+            <div class="col-12 mb-3">
+                <div class="p-float-label">
+                  <p-dropdown [options]="eventCategory" [(ngModel)]="selectedcategory" optionValue="value" [optionLabel]="getCategoryLable()"
+                    formControlName="eventCategory"></p-dropdown>
+                  <label id="month">{{ 'EventCategory' | translate }}</label>
+                </div>
+              </div>
+            
+              <div class="col-12 mb-3">
+                <div class="p-float-label">
+                  <p-dropdown [options]="countryCode" [(ngModel)]="selectedCode"
+                    formControlName="countryCode"></p-dropdown>
+                  <label id="month">{{ 'countryCodeClient' | translate }}</label>
+                </div>
+              </div>
+            
+            <div class="col-12 mb-3">
+              <div class="p-float-label">
+                <input pInputText type="text" formControlName="clientPhone" />
+                <label>{{ 'client-phone' | translate }}</label>
+              </div>
+            </div>
+            <div class="col-12 mb-3">
+                <div class="p-float-label">
+                  <p-dropdown [options]="clients" [(ngModel)]="selectedclient" optionValue="value" 
+                    formControlName="clientName"></p-dropdown>
+                  <label id="month">{{ 'client-Name' | translate }}</label>
+                </div>
+              </div>
+           
+            <div class="col-12 mb-3">
+              <div class="p-float-label">
+                <input pInputText formControlName="nuOfPersons" />
+                <label>{{ 'PersonsNumber' | translate }}</label>
+              </div>
+            </div>
+  
+           
+           
+  
+           
+            <div class="col-12 mb-3">
+              <div class="p-float-label">
+                <p-calendar [showIcon]="true" formControlName="Date"></p-calendar>
+                <label>{{ 'event_date' | translate }}</label>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+  
+   
+        
+  
+      <div class="col-xs-12 text-end mt-4">
+        <p-button type="Submit" class="btn-primary" label="Save" [loading]="btnLoading"></p-button>
+      </div>
+    </div>
+  </form>
+  
+  <p-toast key="toast"></p-toast>
+  
+
+

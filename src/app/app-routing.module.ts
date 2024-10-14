@@ -65,6 +65,41 @@ const routes: Routes = [
           import('./modules/dashboard/dashboard.module').then(
             (m)=>m.DashboardModule
           )
+      },
+      {
+        path:'category-event',
+        loadChildren:()=>
+          import('./modules/category-event/category-event.module').then(
+            (m)=>m.CategoryEventModule
+          )
+      },
+      {
+        path:'events',
+        loadChildren:()=>
+          import('./modules/events/events.module').then(
+            (m)=>m.EventsModule
+          )
+      },
+      {
+        path:'feedback',
+        loadChildren:()=>
+          import('./modules/feedback/feedback.module').then(
+            (m)=>m.FeedbackModule
+          )
+      },
+      {
+        path:'notification',
+        loadChildren:()=>
+          import('./modules/notification/notification.module').then(
+            (m)=>m.NotificationModule
+          )
+      },
+      {
+        path:'rewards',
+        loadChildren:()=>
+          import('./modules/rewards/rewards.module').then(
+            (m)=>m.RewardsModule
+          )
       }
     
     ],

@@ -1,32 +1,32 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { AdvertisementService } from 'src/app/Core/services/advertisement.service';
+import { RewardsService } from 'src/app/Core/services/rewards.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
-import { AdRequest, AdUpdateRequest } from '../advertisement.module';
 
 @Component({
-  selector: 'app-add-advertisement',
-  templateUrl: './add-advertisement.component.html',
-  styleUrls: ['./add-advertisement.component.scss'],
+  selector: 'app-add-reward',
+  templateUrl: './add-reward.component.html',
+  styleUrls: ['./add-reward.component.scss'],
   providers:[MessageService]
 })
-export class AddAdvertisementComponent {
+export class AddRewardComponent {
+  Type:any[] = [
+    { nameAr: 'منتج', nameEn: 'product', value: 0 },
+    { nameAr: 'ميزة', nameEn: 'feature', value: 1 }
+  ];
+  selectedtype:string | null=null;
   dataForm!: FormGroup;
   submitted: boolean = false;
   btnLoading: boolean = false;
   loading: boolean = false;
-  contryCode: string[]=["+962","+963"];
-  selectedCode: number | null = null;
-  gender:string[]=["male","female"];
-  selectedgender:string | null=null;
-  constructor(public formBuilder:FormBuilder,public layoutService:LayoutService,public advertiseService:AdvertisementService){
+  constructor(public formBuilder:FormBuilder,public layoutService:LayoutService,public reward:RewardsService){
     this.dataForm=formBuilder.group({
-      tittleAr:[''],
-      tittleEn:[''],
-      quattros:[''],
-      startDate:[''],
-      endDate:['']
+      type:[''],
+      RewardNameAr:[''],
+      RewardtNameEn:[''],
+      notes:[''],
+      Quattros:['']
 
     })
   }
@@ -36,7 +36,7 @@ export class AddAdvertisementComponent {
 
       this.resetForm();
 
-      if (this.advertiseService.SelectedData != null) {
+      if (this.reward.SelectedData != null) {
         await this.FillData();
       }
     } catch (exceptionVar) {
@@ -65,7 +65,10 @@ export class AddAdvertisementComponent {
       this.btnLoading = false;
     }
   }
-  
+  async Save() {
+
+    
+  }
   resetForm() {
     this.dataForm.reset();
   }
@@ -74,17 +77,9 @@ export class AddAdvertisementComponent {
 
  
   }
-  async Save() {
-
-    
-
-    
-
-    this.btnLoading = false;
-    this.submitted = false;
+ 
+  getTypeLable(): string {
+    return this.layoutService.config.lang == 'ar' ? 'nameAr' : 'nameEn';
   }
 
-
-
 }
-

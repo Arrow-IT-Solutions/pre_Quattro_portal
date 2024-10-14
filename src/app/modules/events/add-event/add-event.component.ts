@@ -1,32 +1,41 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { AdvertisementService } from 'src/app/Core/services/advertisement.service';
+import { EventsService } from 'src/app/Core/services/events.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
-import { AdRequest, AdUpdateRequest } from '../advertisement.module';
 
 @Component({
-  selector: 'app-add-advertisement',
-  templateUrl: './add-advertisement.component.html',
-  styleUrls: ['./add-advertisement.component.scss'],
+  selector: 'app-add-event',
+  templateUrl: './add-event.component.html',
+  styleUrls: ['./add-event.component.scss'],
   providers:[MessageService]
 })
-export class AddAdvertisementComponent {
+export class AddEventComponent {
   dataForm!: FormGroup;
   submitted: boolean = false;
   btnLoading: boolean = false;
   loading: boolean = false;
-  contryCode: string[]=["+962","+963"];
-  selectedCode: number | null = null;
-  gender:string[]=["male","female"];
-  selectedgender:string | null=null;
-  constructor(public formBuilder:FormBuilder,public layoutService:LayoutService,public advertiseService:AdvertisementService){
+  countryCode: string[]=["+962","+963"];
+  selectedCode: string | null = null;
+  eventCategory:any[] = [
+    { nameAr: '', nameEn: 'option1', value: 0 },
+    { nameAr: '', nameEn: 'option2', value: 1 }
+  ];
+  clients:any[] = [
+    { nameAr: '', nameEn: 'option1', value: 0 },
+    { nameAr: '', nameEn: 'option2', value: 1 }
+  ];
+  selectedcategory:string | null=null;
+  selectedclient:string | null=null;
+
+  constructor(public formBuilder:FormBuilder,public layoutService:LayoutService,public event:EventsService){
     this.dataForm=formBuilder.group({
-      tittleAr:[''],
-      tittleEn:[''],
-      quattros:[''],
-      startDate:[''],
-      endDate:['']
+      clientName:[''],
+      countryCode:[''],
+      clientPhone:[''],
+      eventCategory:[''],
+      nuOfPersons:[''],
+      Date:['']
 
     })
   }
@@ -36,7 +45,7 @@ export class AddAdvertisementComponent {
 
       this.resetForm();
 
-      if (this.advertiseService.SelectedData != null) {
+      if (this.event.SelectedData != null) {
         await this.FillData();
       }
     } catch (exceptionVar) {
@@ -65,7 +74,11 @@ export class AddAdvertisementComponent {
       this.btnLoading = false;
     }
   }
-  
+  async Save() {
+
+    
+  }
+
   resetForm() {
     this.dataForm.reset();
   }
@@ -74,17 +87,8 @@ export class AddAdvertisementComponent {
 
  
   }
-  async Save() {
-
-    
-
-    
-
-    this.btnLoading = false;
-    this.submitted = false;
+  getCategoryLable(): string {
+    return this.layoutService.config.lang == 'ar' ? 'nameAr' : 'nameEn';
   }
 
-
-
 }
-

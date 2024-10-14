@@ -172,8 +172,8 @@
       & .material-symbols-outlined {
         color: $blue-color;
         font-size: $medium-icon;
-        top: 5px;
       }
+      
 
       &--info {
         display: flex;
@@ -241,4 +241,10 @@
     width: 100% !important;
     justify-content: start !important;
   }
+}
+.contents{
+  width: 90%;
+  padding: 1rem;
+  column-gap: 2rem;
+
 }

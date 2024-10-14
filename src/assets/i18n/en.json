@@ -198,6 +198,38 @@
   "Date_From":"Date From",
   "Date_To":"Date To",
   "Add_Item_Category":"Add Category",
-  "Save_Category":"Save"
+  "Save_Category":"Save",
+  "eventTittle":"Event Name",
+  "totalEvents":"Total Events",
+  "Create_Event":"Create New Event",
+  "Update_Event":"Update Event",
+  "EventNameAr":"Event Name in Arabic",
+  "EventNameEn":"Event Name in English",
+  "EventCategory":"Event Category",
+  "event_date":" Date",
+  "personNumber":"Number of persons",
+  "NameOfClient":"Client Name",
+  "PersonsNumber":"Number of Persons",
+  "client-Name":"Client Name",
+  "UserName":"User Name",
+  "rateType":"rate Type",
+  "User_Note":"Notes",
+  "totalFeedBack":"Total FeedBack",
+  "notification_Type":"Type",
+  "totalNotification":"Total Notifications",
+  "Create_Notification":"Create New Notification",
+  "Update_Notification":"Update Notification",
+  "reward_Type":"Type",
+  "RewardName":"Name",
+  "Search_RewardName":"Reward Name",
+  "totalRaward":"Total Raward",
+  "Create_Reward":"Create New Reward",
+  "Update_Reward":"Update Reward",
+  "RewardNameAr":"Reward Name in Arabic",
+  "RewardNameEn":"Reward Name in English"
+  
+
+  
+ 
 
 }

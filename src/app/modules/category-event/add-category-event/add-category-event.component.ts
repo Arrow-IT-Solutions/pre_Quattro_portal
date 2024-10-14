@@ -1,42 +1,37 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { AdvertisementService } from 'src/app/Core/services/advertisement.service';
+import { CategoryEventService } from 'src/app/Core/services/category-event.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
-import { AdRequest, AdUpdateRequest } from '../advertisement.module';
 
 @Component({
-  selector: 'app-add-advertisement',
-  templateUrl: './add-advertisement.component.html',
-  styleUrls: ['./add-advertisement.component.scss'],
+  selector: 'app-add-category-event',
+  templateUrl: './add-category-event.component.html',
+  styleUrls: ['./add-category-event.component.scss'],
   providers:[MessageService]
 })
-export class AddAdvertisementComponent {
+export class AddCategoryEventComponent {
   dataForm!: FormGroup;
   submitted: boolean = false;
   btnLoading: boolean = false;
   loading: boolean = false;
-  contryCode: string[]=["+962","+963"];
-  selectedCode: number | null = null;
-  gender:string[]=["male","female"];
-  selectedgender:string | null=null;
-  constructor(public formBuilder:FormBuilder,public layoutService:LayoutService,public advertiseService:AdvertisementService){
+ 
+  constructor(public formBuilder:FormBuilder,public layoutService:LayoutService,public addCategoryEvent:CategoryEventService){
     this.dataForm=formBuilder.group({
       tittleAr:[''],
       tittleEn:[''],
-      quattros:[''],
-      startDate:[''],
-      endDate:['']
+      
 
     })
   }
+
   async ngOnInit() {
     try {
       this.loading = true;
 
       this.resetForm();
 
-      if (this.advertiseService.SelectedData != null) {
+      if (this.addCategoryEvent.SelectedData != null) {
         await this.FillData();
       }
     } catch (exceptionVar) {
@@ -65,7 +60,6 @@ export class AddAdvertisementComponent {
       this.btnLoading = false;
     }
   }
-  
   resetForm() {
     this.dataForm.reset();
   }
@@ -74,17 +68,11 @@ export class AddAdvertisementComponent {
 
  
   }
+
   async Save() {
-
-    
-
-    
 
     this.btnLoading = false;
     this.submitted = false;
   }
 
-
-
 }
-

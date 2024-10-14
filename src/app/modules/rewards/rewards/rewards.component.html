@@ -1,11 +1,11 @@
-<div [formGroup]="dataForm" class="clients">
+<div [formGroup]="dataForm" class="rewards">
     <div class="row mb-4 m-0 flex-row-reverse p-0">
-        <div class="col-lg-3 col-md-10 col p-0 clients__search">
+        <div class="col-lg-3 col-md-10 col p-0 rewards__search">
           <div class="flex flex-wrap justify-content-center gap-3">
             <span class="p-input-icon-left p-0">
               <i class="pi pi-search"></i>
               <input class="search-field" type="text" (ngModelChange)="OnChange()"
-                placeholder="{{ 'Search_ClientName' | translate }}" formControlName="clientName" pInputText />
+                placeholder="{{ 'Search_RewardName' | translate }}" formControlName="rewardName" pInputText />
             </span>
           </div>
         </div>
@@ -23,22 +23,16 @@
                   <span>Filter By</span>
                 </div>
                 <div class="container">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mt-3">
+                        <div class="p-float-label">
+                          <p-dropdown [options]="Type" [(ngModel)]="selectedtype" optionValue="value" [optionLabel]="getTypeLable()"
+                          formControlName="Type"></p-dropdown>
+                        <label>{{ 'reward_Type' | translate }}</label>
+                        </div>
+                      </div>
                  
-                  <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mt-3">
-                    <div class="p-float-label">
-                      <input type="text" pInputText formControlName="phone" (ngModelChange)="OnChange()"
-                        class="search-field" type="text" />
-                      <label>{{ 'Search_ClientPhone' | translate }}</label>
-                    </div>
-                  </div>
                 
-                  <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mt-3">
-                    <div class="p-float-label">
-                      <input type="text" pInputText formControlName="id" (ngModelChange)="OnChange()"
-                        class="search-field" type="text" />
-                      <label>{{ 'Search_ClientId' | translate}}</label>
-                    </div>
-                  </div>
+                  
                 </div>
     
                 <div class="col result">
@@ -58,8 +52,8 @@
           <div class="card col-12 mx-0 mb-2">
             <div class="col-lg-2 col-md-6 col-sm-6 d-flex card__left">
               <div class="image-container">
-                <div class="user-card__image  client-image">
-                  
+                <div class="user-card__image">
+                  ahmad
                   <img *ngIf=" char"  />
                     <ng-template #char>{{ getFirstChar() }}</ng-template>
                 </div>
@@ -71,35 +65,25 @@
                 <div class="card-section__title">info</div>
                 <div class="card-section__items">
                   <div class="card__contents__item">
-                    <div class="card-label">{{ 'ClientName' | translate }}</div>
+                    <div class="card-label">{{ 'RewardName' | translate }}</div>
                     <div class="card-info">
                       <span class="material-symbols-outlined fill"></span>
-                      Nour Saleem
+                      Reward Name
                     </div>
+                  </div>
+                  <div class="card__contents__item">
+                    <div class="card-label">{{ 'reward_Type' | translate  }}</div>
+                    <div class="card-info">product</div>
+                  </div>
+                  <div class="card__contents__item">
+                    <div class="card-label">{{ 'quattros-number' | translate  }}</div>
+                    <div class="card-info">100</div>
                   </div>
                 
                 </div>
               </div>
   
-              <div class="card-section d-flex">
-                <div class="card__contents__item">
-                    <div class="card-label">{{ 'contryCode' | translate  }}</div>
-                    <div class="card-info">+962</div>
-                  </div>
-                  <div class="card__contents__item">
-                    <div class="card-label">{{ 'client-phone' | translate   }}</div>
-                    <div class="card-info">98876543</div>
-                  </div>
-                  <div class="card__contents__item">
-                      <div class="card-label">{{ 'client-gender' | translate  }}</div>
-                      <div class="card-info">female</div>
-                    </div>
-                    <div class="card__contents__item">
-                      <div class="card-label">{{ 'Birthdate_client' | translate  }}</div>
-                      <div class="card-info">29-7-1999</div>
-                    </div>
-              
-              </div>
+             
   
             </div>
             <div class="one">
@@ -125,7 +109,7 @@
      
       <div class="row">
         <div class="total">
-          {{ "total" | translate }}:
+          {{ "totalRaward" | translate }}:
           {{ totalRecords }}
         </div>
         <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" [rowsPerPageOptions]="[4, 12, 20, 30]"
@@ -149,4 +133,5 @@
  
 </div>
   
+
 

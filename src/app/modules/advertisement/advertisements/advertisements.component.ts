@@ -21,7 +21,7 @@ export class AdvertisementsComponent {
   doneTypingInterval = 1000;
   typingTimer: any;
   isResetting: boolean = false;
-  ClientTotal: number = 0;
+  AdvertisementTotal: number = 0;
   
   constructor(public formBuilder:FormBuilder,public Advertise:AdvertisementService,public translate: TranslateService,public layoutService: LayoutService){
     this.dataForm = this.formBuilder.group({
@@ -42,7 +42,7 @@ export class AdvertisementsComponent {
   async FillData(pageIndex: number = 0) {
     this.loading = true;
     this.data = [];
-    this.ClientTotal=0;
+    this.AdvertisementTotal=0;
     let filter: AdvertiseSearchRequest = {
       
     };

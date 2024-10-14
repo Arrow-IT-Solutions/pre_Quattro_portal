@@ -41,6 +41,13 @@ export const navbarData: NavbarData[] = [
     }
 
   ]},
+  {
+    label: 'Categories',
+    labelar: ' الفئات',
+    id: 'Categories',
+    icon: 'category',
+    routeLink: "categories"
+  },
    
   {
     label: 'Advertisement',
@@ -50,13 +57,42 @@ export const navbarData: NavbarData[] = [
     routeLink: "Advertisement"
   },
  
+  
   {
-    label: 'Categories',
-    labelar: ' الفئات',
-    id: 'Categories',
-    icon: 'category',
-    routeLink: "categories"
+    label: 'Category Event',
+    labelar: ' حدث الفئة',
+    id: 'Category-event',
+    icon: 'event_note',
+    routeLink: "category-event"
+    // call_to_action
   },
-
-
+  {
+    label: 'Events',
+    labelar: ' الأحداث',
+    id: 'events',
+    icon: 'event',
+    routeLink: "events"
+  },
+  {
+    label: 'Notifications',
+    labelar: ' الإشعارات',
+    id: 'notification',
+    icon: 'notifications',
+    routeLink: "notification"
+  },
+  {
+    label: 'FeedBack',
+    labelar: ' الآراء',
+    id: 'feedback',
+    icon: 'Comment',
+    routeLink: "feedback"
+  },
+  {
+    label: 'ٌRewards',
+    labelar: ' المكافآت',
+    id: 'reward',
+    icon: 'star',
+    routeLink: "rewards"
+  },
+  
 ];
