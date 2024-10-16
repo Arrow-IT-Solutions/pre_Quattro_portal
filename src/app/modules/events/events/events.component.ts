@@ -22,6 +22,11 @@ export class EventsComponent {
   typingTimer: any;
   isResetting: boolean = false;
   EventTotal: number = 0;
+  eventCategory:any[] = [
+    { nameAr: '', nameEn: 'Option1', value: 0 },
+    { nameAr: '', nameEn: 'Option2', value: 1 }
+  ];
+  selectedcategoryEvent:string | null=null;
 
   
   constructor(public formBuilder:FormBuilder,public event:EventsService,
@@ -75,5 +80,8 @@ export class EventsComponent {
     this.dataForm.reset();
     await this.FillData();
     this.isResetting = false;
+  }
+  getCategoryLable(): string {
+    return this.layoutService.config.lang == 'ar' ? 'nameAr' : 'nameEn';
   }
 }

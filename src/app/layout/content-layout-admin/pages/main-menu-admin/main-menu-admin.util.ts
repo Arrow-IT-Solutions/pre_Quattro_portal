@@ -53,7 +53,7 @@ export const navbarData: NavbarData[] = [
     label: 'Advertisement',
     labelar: 'الإعلانات',
     id: 'Advertisement',
-    icon: 'receipt_long',
+    icon: 'dvr',
     routeLink: "Advertisement"
   },
  
