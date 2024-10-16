@@ -177,10 +177,13 @@
   overflow-y: auto;
 }
   & .card {
-    border-color: rgba($light-purple, 0.5);
+    
     display: flex;
     flex-direction: row;
     padding: 0.75rem 0;
+    border-radius: 6px;border-top: 10px solid;
+
+    border-color: rgba($primary-color, 0.5);
     
     @media (max-width:767px) {
       flex-direction: column;
@@ -361,7 +364,7 @@
       }
 
       & .material-symbols-outlined {
-        color: $blue-color;
+        color: $primary-color-hover;
       }
     }
     .one{
@@ -370,6 +373,10 @@
       justify-content: center;
 
       width: 20px;
+      
+       .material-symbols-outlined {
+        color: $primary-color-hover;
+      }
       @media (max-width: 991px) and (min-width: 768px) {
         width: 100%;
          // Tablets
