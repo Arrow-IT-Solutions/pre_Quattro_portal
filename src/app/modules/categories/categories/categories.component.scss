@@ -26,7 +26,7 @@
         padding: 0.5rem 0.75rem;
         border-radius: 6px;
         background-color: $white-color;
-        border-color: $light-gray;
+        // border-color: $light-gray;
         top: 1px;
         color: $primary-color;
         right: 0.75rem;
@@ -116,8 +116,9 @@
 
   & .card {
     background-color: $white-color;
-    border-radius: 6px;
-    border-color: rgba($light-purple, 0.5);
+    border-radius: 6px;border-top: 10px solid;
+
+    border-color: rgba($primary-color, 0.5);
     position: relative;
 
     & .d-flex{
@@ -144,10 +145,10 @@
     }
 
     &__header {
-      background-color: $blue-color;
+      // background-color: $blue-color;
       height: 6px;
       border-radius: 6px 6px 0px 0px;
-      border-color: $blue-color;
+    
 
       .material-symbols-outlined {
         font-size: $small-icon;
@@ -180,7 +181,7 @@
         column-gap: 0.5rem;
         color: $light-gray;
         background-color: $lighter-gray-2;
-        border-top: 1px solid $lighter-gray;
+        // border-top: 1px solid $lighter-gray;
         margin-top: 1rem;
         padding: 0.5rem 1rem;
         border-radius: 0 0 6px 6px;
