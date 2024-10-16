@@ -226,7 +226,8 @@
   "Create_Reward":"إنشاء جائزة جديدة",
   "Update_Reward":"تعديل",
   "RewardNameAr":"اسم الجائزة باللغة العربية",
-  "RewardNameEn":"اسم الجائزة باللغة الانكليزية"
-
-
+  "RewardNameEn":"اسم الجائزة باللغة الانكليزية",
+  "Edit_Ad" : "تعديل",
+  "Delete_Ad" : "حذف",
+  "Ad-Image" : "الصورة"
 }

@@ -1,69 +1,62 @@
 <form [formGroup]="dataForm" (ngSubmit)="onSubmit()" class="add-Advertise">
-    <div class="add-Advertise">
-      <div class="box-shadow mb-3">
-        <div class="row">
-          <div class="col-12 side-icon">
-            <span class="material-symbols-outlined">info</span>
-            <span>{{ 'Basic_Info_Advertise' | translate }}</span>
+  <div class="add-Advertise">
+    <div class="box-shadow mb-3">
+      <div class="row">
+        <div class="col-12 side-icon">
+          <span class="material-symbols-outlined">info</span>
+          <span>{{ 'Basic_Info_Advertise' | translate }}</span>
+        </div>
+        <div class="col-12 row m-0 p-0">
+          <div class="col-12 mb-3">
+            <div class="p-float-label">
+              <input pInputText type="text" formControlName="tittleAr" />
+              <label>{{ 'AdvertiseNameAr' | translate }}</label>
+            </div>
           </div>
-          <div class="col-12 row m-0 p-0">
-            <div class="col-12 mb-3">
-              <div class="p-float-label">
-                <input pInputText type="text" formControlName="tittleAr" />
-                <label>{{ 'AdvertiseNameAr' | translate }}</label>
-              </div>
+          <div class="col-12 mb-3">
+            <div class="p-float-label">
+              <input pInputText type="text" formControlName="tittleEn" />
+              <label>{{ 'AdvertiseNameEn' | translate }}</label>
             </div>
-            <div class="col-12 mb-3">
-                <div class="p-float-label">
-                  <input pInputText type="text" formControlName="tittleEn" />
-                  <label>{{ 'AdvertiseNameEn' | translate }}</label>
-                </div>
-              </div>
-              
-            
-            <div class="col-12 mb-3">
-              <div class="p-float-label">
-                <input pInputText type="text" formControlName="quattros" />
-                <label>{{ 'quattros-number' | translate }}</label>
-              </div>
+          </div>
+
+
+          <div class="col-12 mb-3">
+            <div class="p-float-label">
+              <input pInputText type="text" formControlName="quattros" />
+              <label>{{ 'quattros-number' | translate }}</label>
             </div>
-           
-           
-          
-  
-           
-           
-  
-           
-            <div class="col-12 mb-3">
-              <div class="p-float-label">
-                <p-calendar [showIcon]="true" formControlName="startDate"></p-calendar>
-                <label>{{ 'startDate_advertise' | translate }}</label>
-              </div>
+          </div>
+
+          <div class="col-12 mb-3">
+            <div class="p-float-label">
+              <p-calendar [showIcon]="true" formControlName="startDate"></p-calendar>
+              <label>{{ 'startDate_advertise' | translate }}</label>
             </div>
-            <div class="col-12 mb-3">
-                <div class="p-float-label">
-                  <p-calendar [showIcon]="true" formControlName="endDate"></p-calendar>
-                  <label>{{ 'endDate_advertise' | translate }}</label>
-                </div>
-              </div>
-            <div>
-                <app-img-control></app-img-control>
+          </div>
+          <div class="col-12 mb-3">
+            <div class="p-float-label">
+              <p-calendar [showIcon]="true" formControlName="endDate"></p-calendar>
+              <label>{{ 'endDate_advertise' | translate }}</label>
             </div>
+          </div>
+          <div>
+            <app-img-control (onSelected)="OnSelectFile($event)" [fileInput]="fileInput"></app-img-control>
+            <small *ngIf="submitted && img" class="errorValidation">
+              {{ "Field_Requierd" | translate }}
+            </small>
           </div>
         </div>
       </div>
-  
-   
-        
-  
-      <div class="col-xs-12 text-end mt-4">
-        <p-button type="Submit" class="btn-primary" label="Save" [loading]="btnLoading"></p-button>
-      </div>
     </div>
-  </form>
-  
-  <p-toast key="toast"></p-toast>
-  
 
 
+
+
+    <div class="col-xs-12 text-end mt-4">
+      <p-button type="Submit" class="btn-primary" label="Save" [loading]="btnLoading"></p-button>
+    </div>
+  </div>
+</form>
+
+<p-toast key="toast"></p-toast>

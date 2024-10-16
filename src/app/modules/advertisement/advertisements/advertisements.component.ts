@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { LayoutService } from 'src/app/layout/service/layout.service';
-import { AdResponse, AdvertiseResponse, AdvertiseSearchRequest } from '../advertisement.module';
+import { AdResponse, AdvertiseSearchRequest } from '../advertisement.module';
 import { AdvertisementService } from 'src/app/Core/services/advertisement.service';
 import { AddAdvertisementComponent } from '../add-advertisement/add-advertisement.component';
 
@@ -22,56 +22,63 @@ export class AdvertisementsComponent {
   typingTimer: any;
   isResetting: boolean = false;
   AdvertisementTotal: number = 0;
-  
-  constructor(public formBuilder:FormBuilder,public Advertise:AdvertisementService,public translate: TranslateService,public layoutService: LayoutService){
+  adTotal: Number = 0;
+
+  constructor(public formBuilder: FormBuilder, public adService: AdvertisementService, public translate: TranslateService, public layoutService: LayoutService) {
     this.dataForm = this.formBuilder.group({
       AdName: [''],
       startDate: [''],
       endDate: [''],
-
       id: [''],
     });
   }
-  async ngOnInit(){
+  async ngOnInit() {
     await this.FillData();
   }
-  Search(){
+  Search() {
     this.FillData();
   }
 
   async FillData(pageIndex: number = 0) {
     this.loading = true;
     this.data = [];
-    this.AdvertisementTotal=0;
+    this.AdvertisementTotal = 0;
     let filter: AdvertiseSearchRequest = {
-      
+      uuid: '',
+      name: '',
+      startDate: '',
+      endDate: ''
     };
-   
-    
+    const response = (await this.adService.Search(filter)) as any;
+    console.log('Response: ', response)
+    if (response.data == null || response.data.length == 0) {
+      this.data = [];
+      this.adTotal = 0;
+    } else if (response.data != null && response.data.length != 0) {
+      this.data = response.data;
+      this.adTotal = response.data[0];
+    }
+
+    this.totalRecords = response.totalRecords;
+
     this.loading = false;
   }
-  
-  openDialog(row: AdvertiseResponse | null =null){
-    window.scrollTo({top:0,behavior:'smooth'});
-    document.body.style.overflow='hidden';
-    let content=this.Advertise.SelectedData == null ? 'Create_Advertise' : 'Update_ِAdvertise';
-     this.translate.get(content).subscribe((res:string) =>{
-      content=res
-     });
-     var component=this.layoutService.OpenDialog(AddAdvertisementComponent,content);
-     this.Advertise.Dialog=component;
-     component.OnClose.subscribe(()=>{
-      document.body.style.overflow='';
+
+  OpenDialog(row: AdResponse | null = null) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.body.style.overflow = 'hidden';
+    this.adService.SelectedData = row;
+    let content = this.adService.SelectedData == null ? 'Create_Advertise' : 'Update_ِAdvertise';
+    this.translate.get(content).subscribe((res: string) => {
+      content = res
+    });
+    var component = this.layoutService.OpenDialog(AddAdvertisementComponent, content);
+    this.adService.Dialog = component;
+    component.OnClose.subscribe(() => {
+      document.body.style.overflow = '';
       this.FillData();
-     });
+    });
   }
-
-
-
-
-
-
-
 
   async resetform() {
     this.isResetting = true;
@@ -92,7 +99,7 @@ export class AdvertisementsComponent {
     this.pageSize = event.rows
     this.first = event.first
     this.FillData(event.first)
-    
+
   }
 
 }

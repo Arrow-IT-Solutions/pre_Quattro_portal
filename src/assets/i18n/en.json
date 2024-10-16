@@ -161,7 +161,7 @@
   "AdTittle":"Tittle",
   "Ad-Quattro":"Quattros",
   "Create_Advertise":"create new Advertisement",
-  "Update_ِAdvertise":"Edit Client",
+  "Update_ِAdvertise":"Edit Advertisement",
   "Basic_Info_Advertise":"Basic Info",
   "AdvertiseNameAr":"Advertisement Name in Arabic",
   "AdvertiseNameEn":"Advertisement Name in English",
@@ -226,10 +226,13 @@
   "Create_Reward":"Create New Reward",
   "Update_Reward":"Update Reward",
   "RewardNameAr":"Reward Name in Arabic",
-  "RewardNameEn":"Reward Name in English"
-  
+  "RewardNameEn":"Reward Name in English",
+  "Edit_Ad" : "Edit",
+  "Delete_Ad" : "Delete",
+  "Ad-Image" : "Image"
 
-  
- 
+
+
+
 
 }

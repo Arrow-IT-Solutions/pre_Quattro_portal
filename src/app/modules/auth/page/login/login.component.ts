@@ -65,7 +65,8 @@ export class LoginComponent implements AfterViewInit {
   async Save() {
     var authRequest: AuthRequest = {
       userName: this.loginForm.controls['UserName'].value,
-      password: this.loginForm.controls['Password'].value
+      password: this.loginForm.controls['Password'].value,
+      platformType: '0'
     };
 
     const response = await this.authService.Auth(authRequest);
@@ -95,7 +96,7 @@ export class LoginComponent implements AfterViewInit {
 
       switch (response.userType) {
         case '0':
-          this.router.navigateByUrl('layout-admin/drivers'); // admin or user
+          this.router.navigateByUrl('layout-admin/dashBoard'); // admin or user
           break;
 
         case '3':
