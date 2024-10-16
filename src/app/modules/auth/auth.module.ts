@@ -12,19 +12,20 @@ import {
   declarations: [LoginComponent],
   imports: [AuthRoutingModule, SharedModule],
 })
-export class AuthModule {}
+export class AuthModule { }
 
 export interface AuthRequest {
   userName: string;
   password: string;
+  platformType: string
 }
 
 export interface CurrentUser {
   userUUID: string;
   userName: string;
-  userType:string,
-  token:string,
-  loggedInUser:string
+  userType: string,
+  token: string,
+  loggedInUser: string
 }
 
 export interface resetPasswordRequest {

@@ -26,27 +26,55 @@ import { SharedModule } from 'src/app/shared/shared.module';
 })
 export class AdvertisementModule { }
 
-export interface AdResponse extends ResponseBase  {
- 
+export interface AdResponse extends ResponseBase {
 
-  
- }
- export interface AdvertiseSearchRequest extends SearchRequestBase{
-  
- }
- export interface AdvertiseResponse extends ResponseBase  {
-  
-
-  
- }
- export interface AdTranslationRequest {
+  uuid?: string;
+  adTranslation?: { [key: string]: AdTranslationResponse };
+  quattro: string;
+  startDate: string;
+  endDate: string;
+  image: string
 
 }
- export interface AdUpdateRequest extends RequestBase {
-  
- }
+export interface AdvertiseSearchRequest extends SearchRequestBase {
+  uuid?: string;
+  name: string;
+  startDate: string;
+  endDate: string
 
- export interface AdRequest extends RequestBase {
-  
- }
+}
+export interface AdTranslationRequest {
+  uuid?: string;
+  name?: string;
+  description?: string;
+  language?: string;
+}
+export interface AdUpdateRequest extends RequestBase {
+  adTranslation?: AdTranslationRequest[];
+  quattro?: string,
+  startDate?: string,
+  endDate?: string,
+  image?: string,
+}
+
+export interface AdRequest extends RequestBase {
+  adTranslation?: AdTranslationRequest[];
+  quattro?: string,
+  startDate?: string,
+  endDate?: string,
+  image?: string,
+}
+
+export interface AdTranslationResponse {
+  uuid?: string;
+  name?: string;
+  description: string;
+  language?: string;
+}
+
+export interface AdTranslationUpdateRequest {
+  uuid?: string;
+  name?: string;
+  description?: string;
+}
 
