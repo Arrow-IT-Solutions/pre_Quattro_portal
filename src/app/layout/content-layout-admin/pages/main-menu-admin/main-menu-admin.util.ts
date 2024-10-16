@@ -13,35 +13,86 @@ export interface NavbarData {
 }
 
 export const navbarData: NavbarData[] = [
+  {
+    label: 'Dashboard',
+    labelar: 'لوحة التحكم',
+    id: 'dashboard',
+    icon: 'speed',
+    routeLink: 'dashBoard'
+  },
+  {
+  label: 'Users',
+  labelar: 'المستخدمين',
+  id: 'Users',
+  icon: 'group',
+  items: [
+    {
+      label: 'Clients',
+      labelar: 'الزبائن',
+      id: 'Clients',
+      routeLink: "clients"
+    },
+    {
+      label: 'Employees',
+      labelar: 'الموظفين',
+      id: 'Employees',
+      
+      routeLink: "employees"
+    }
 
+  ]},
   {
-    label: 'Drivers',
-    labelar: 'السائقين',
-    id: 'Drivers',
+    label: 'Categories',
+    labelar: ' الفئات',
+    id: 'Categories',
+    icon: 'category',
+    routeLink: "categories"
+  },
+   
+  {
+    label: 'Advertisement',
+    labelar: 'الإعلانات',
+    id: 'Advertisement',
     icon: 'receipt_long',
-    routeLink: "drivers"
+    routeLink: "Advertisement"
+  },
+ 
+  
+  {
+    label: 'Category Event',
+    labelar: ' حدث الفئة',
+    id: 'Category-event',
+    icon: 'event_note',
+    routeLink: "category-event"
+    // call_to_action
   },
   {
-    label: 'Payments',
-    labelar: 'الدفعات',
-    id: 'Payments',
-    icon: 'receipt_long',
-    routeLink: "payments"
+    label: 'Events',
+    labelar: ' الأحداث',
+    id: 'events',
+    icon: 'event',
+    routeLink: "events"
   },
   {
-    label: 'Monthly Payments',
-    labelar: 'الدفعات الشهريه',
-    id: 'Months',
-    icon: 'receipt_long',
-    routeLink: "months"
+    label: 'Notifications',
+    labelar: ' الإشعارات',
+    id: 'notification',
+    icon: 'notifications',
+    routeLink: "notification"
   },
   {
-    label: 'Expired Licence Report',
-    labelar: 'تقرير الرخص المنتهية',
-    id: 'ExpiredLicence',
-    icon: 'receipt_long',
-    routeLink: "expiredLicenceReport"
+    label: 'FeedBack',
+    labelar: ' الآراء',
+    id: 'feedback',
+    icon: 'Comment',
+    routeLink: "feedback"
   },
-
-
+  {
+    label: 'ٌRewards',
+    labelar: ' المكافآت',
+    id: 'reward',
+    icon: 'star',
+    routeLink: "rewards"
+  },
+  
 ];

@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  baseApiUrl: 'https://localhost:51417'
+  baseApiUrl: 'https://quattro-dev-api.apps-jo.com'
 };
 
-//https://taxi-api-dev.apps-jo.com
+//https://quattro-dev-api.apps-jo.com
