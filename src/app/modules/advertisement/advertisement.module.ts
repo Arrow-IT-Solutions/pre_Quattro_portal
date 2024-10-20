@@ -43,12 +43,6 @@ export interface AdvertiseSearchRequest extends SearchRequestBase {
   endDate: string
 
 }
-export interface AdTranslationRequest {
-  uuid?: string;
-  name?: string;
-  description?: string;
-  language?: string;
-}
 export interface AdUpdateRequest extends RequestBase {
   adTranslation?: AdTranslationRequest[];
   quattro?: string,
@@ -68,13 +62,15 @@ export interface AdRequest extends RequestBase {
 export interface AdTranslationResponse {
   uuid?: string;
   name?: string;
-  description: string;
   language?: string;
 }
-
+export interface AdTranslationRequest {
+  uuid?: string;
+  name?: string;
+  language?: string;
+}
 export interface AdTranslationUpdateRequest {
   uuid?: string;
   name?: string;
-  description?: string;
 }
 

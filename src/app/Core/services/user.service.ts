@@ -11,14 +11,14 @@ import { HttpClientService } from './http-client.service';
 export class UserService {
   userResponse: UserResponse;
 
-  currentUser : CurrentUser;
+  currentUser: CurrentUser;
 
 
-  constructor(public layoutService: LayoutService,public httpClient : HttpClientService) {}
+  constructor(public layoutService: LayoutService, public httpClient: HttpClientService) { }
 
   async Search(filter: UserSearchRequest) {
 
-    const apiUrl = `/api/user/search?${this.layoutService.Filter(filter)}`;
+    const apiUrl = `/api/user/list?${this.layoutService.Filter(filter)}`;
     return await this.httpClient.get(apiUrl);
 
   }
@@ -27,36 +27,36 @@ export class UserService {
 
     const apiUrl = `/api/user/ResetPassword`;
 
-    return await this.httpClient.post(apiUrl,data);
+    return await this.httpClient.post(apiUrl, data);
   }
 
   async isVerified(data: any) {
-  
+
     const apiUrl = `/api/user/IsVerified`;
 
-    return await this.httpClient.post(apiUrl,data)
+    return await this.httpClient.post(apiUrl, data)
   }
 
   async reSendOTP(data: any) {
 
     const apiUrl = `/api/user/ReSendOTP`;
 
-    return await this.httpClient.post(apiUrl,data);
+    return await this.httpClient.post(apiUrl, data);
   }
 
   async updateUser(data: any) {
-  
+
     const apiUrl = `/api/user`;
 
-    return await this.httpClient.put(apiUrl,data);
+    return await this.httpClient.put(apiUrl, data);
   }
 
   async addUser(data: UserRequest) {
-   
+
 
     const apiUrl = `/api/user`;
 
-    return  await this.httpClient.post(apiUrl,data);
+    return await this.httpClient.post(apiUrl, data);
   }
 
   async GetLoggedInUser(id: string) {
@@ -75,5 +75,5 @@ export class UserService {
     }
   }
 
-  
+
 }

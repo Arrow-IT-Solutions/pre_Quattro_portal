@@ -6,7 +6,8 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { AddNotificationComponent } from './add-notification/add-notification.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ResponseBase } from 'src/app/shared/class/class';
+import { ResponseBase, RequestBase, SearchRequestBase } from 'src/app/shared/class/class';
+import { UserResponse } from '../auth/auth.module';
 
 
 
@@ -23,6 +24,32 @@ import { ResponseBase } from 'src/app/shared/class/class';
   ]
 })
 export class NotificationModule { }
-export interface NotificationsResponse extends ResponseBase  {
-    
+export interface NotificationResponse extends ResponseBase {
+
+  uuid?: string;
+  note: string;
+  userIDFK: string;
+  NotificationType: string;
+  notificationTypeValue: string,
+  user: UserResponse
+
+}
+export interface NotificationSearchRequest extends SearchRequestBase {
+  uuid?: string;
+  name: string;
+  type: string;
+
+}
+
+export interface NotificationUpdateRequest extends RequestBase {
+  uuid?: string,
+  notificationType?: string,
+  note?: string,
+}
+
+export interface NotificationRequest extends RequestBase {
+  uuid?: string,
+  notificationType?: string,
+  note?: string,
+  userIDFK?: string,
 }

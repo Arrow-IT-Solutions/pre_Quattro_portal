@@ -23,7 +23,8 @@ export class AdvertisementsComponent {
   isResetting: boolean = false;
   AdvertisementTotal: number = 0;
   adTotal: Number = 0;
-
+  link = '';
+  visible: boolean = false;
   constructor(public formBuilder: FormBuilder, public adService: AdvertisementService, public translate: TranslateService, public layoutService: LayoutService) {
     this.dataForm = this.formBuilder.group({
       AdName: [''],
@@ -43,11 +44,13 @@ export class AdvertisementsComponent {
     this.loading = true;
     this.data = [];
     this.AdvertisementTotal = 0;
+    const fromDate = this.dataForm.controls['startDate'].value == '' ? '' : new Date(this.dataForm.controls['startDate'].value.toISOString())
+    const toDate = this.dataForm.controls['endDate'].value == '' ? '' : new Date(this.dataForm.controls['endDate'].value.toISOString())
     let filter: AdvertiseSearchRequest = {
       uuid: '',
-      name: '',
-      startDate: '',
-      endDate: ''
+      name: this.dataForm.controls['AdName'].value,
+      startDate: fromDate.toLocaleString(),
+      endDate: toDate.toLocaleString()
     };
     const response = (await this.adService.Search(filter)) as any;
     console.log('Response: ', response)
@@ -100,6 +103,11 @@ export class AdvertisementsComponent {
     this.first = event.first
     this.FillData(event.first)
 
+  }
+
+  showDialog(link: string) {
+    this.link = link;
+    this.visible = true;
   }
 
 }
