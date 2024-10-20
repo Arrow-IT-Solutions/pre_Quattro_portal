@@ -93,12 +93,10 @@ export class AddAdvertisementComponent {
     var adTranslation = [
       {
         name: this.dataForm.controls['tittleAr'].value == null ? '' : this.dataForm.controls['tittleAr'].value.toString(),
-        description: '',
         language: 'ar'
       },
       {
         name: this.dataForm.controls['tittleEn'].value == null ? '' : this.dataForm.controls['tittleEn'].value.toString(),
-        description: '',
         language: 'en'
       }
     ];

@@ -34,101 +34,70 @@ export interface resetPasswordRequest {
 }
 
 export interface UserRequest extends RequestBase {
-  id?: string;
-  nameEn?: string;
-  nameAr?: string;
-  type?: string;
-  userNameType?: string;
-  email?: string;
-  phone?: string;
-  gender?: string;
-  address?: string;
+
+  uuid?: string;
+  userTranslation?: UserTranslationRequest[];
+  roleIDFK?: string;
   username?: string;
+  userType?: string;
   password?: string;
-  status?: string;
-  link?: string;
-  verificationCode?: string;
+  userStatus?: string;
+  isForceLogout?: string;
+  deviceType?: string;
+  oTP?: string;
+  isTermsApproved?: string;
+  notificationToken?: string;
   isVerified?: string;
-  // clientRequest? :ClientRequest
+  isBlocked?: string;
 }
 
 export interface UserResponse extends ResponseBase {
-  id?: string;
-  nameEn?: string;
-  nameAr?: string;
-  type?: string;
-  typeValue?: string;
-  userNameType?: string;
-  userNameTypeValue?: string;
-  phone?: string;
-  gender?: string;
-  genderValue?: string;
-  address?: string;
-  email?: string;
+  uuid?: string;
+  userTranslation?: { [key: string]: UserTranslationResponse };
+  userType?: string;
+  userTypeValue?: string;
+  roleIDFK: string;
   username?: string;
-  passwordHash?: string;
-  statusValue?: string;
-  link?: string;
-  verificationCode?: string;
+  userStatus: string;
+  userStatusValue?: string;
+  isForceLogout: string;
+  isForceLogoutValue: string;
+  deviceType: string;
+  oTP: string;
+  isTermsApproved: string;
+  isTermsApprovedValue: string;
+  notificationToken: string;
   isVerified?: string;
   isVerifiedValue?: string;
-  creationDate?: string;
-  updateDate?: string;
-  isDelete?: string;
-  // clientResponse?: ClientResponse;
-  pageIndex?: string;
-  pageSize?: string;
-  totalRecords?: string;
+  isBlocked?: string;
+  isBlockedValue?: string;
 }
 
 export interface UserSearchRequest extends SearchRequestBase {
-  id?: string;
-  birthDate?: string;
-  // deviceType?: string;
-  type?: string;
+  uuid?: string;
   name?: string;
-  phone?: string;
-  email?: string;
-  // status?: string;
+  userType?: string;
+  isTermsApproved?: string;
+  userStatus?: string;
+  includeRole?: string;
+  includeNotifications?: string;
+  includeFeedback?: string;
 }
 
-// export interface UserRequest
-// {
-//   id?:string ,
-//   namear?:string ,
-//   nameEn?:string ,
-//   birthdate?:string ,
-//   email?:string ,
-//   type?:string ,
-//   userNameType?:string,
-//   phone?:string,
-//   gender?:string,
-//   password?:string,
-//   status?:string,
-//   isVerified?:string,
-//   clientRequest?:ClientRequest
-
-// }
-
-// export interface UserResponse  extends ResponseBase
-// {
-//    nameEn?:string ,
-//    nameAr ?: string
-//    type? : string
-//    typeValue? : string,
-//    userNameType?:string,
-//    userNameTypeValue?:string,
-//    phone?:string,
-//    gender?:string,
-//    genderValue?:string,
-//    address?:string,
-//    email?:string,
-//    username?:string,
-//    status?:string,
-//    statusValue?:string,
-//    link?:string,
-//    verificationCode?:string,
-//    isVerified?:string,
-//    clientResponse?:ClientResponse,
-
-// }
+export interface UserTranslationResponse {
+  uuid?: string;
+  firstName?: string;
+  lastName?: string;
+  language?: string;
+}
+export interface UserTranslationRequest {
+  uuid?: string;
+  firstName?: string;
+  lastName?: string;
+  language?: string;
+}
+export interface UserTranslationUpdateRequest {
+  uuid?: string;
+  firstName?: string;
+  lastName?: string;
+}
