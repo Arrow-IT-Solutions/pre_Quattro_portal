@@ -5,11 +5,13 @@ import { LayoutService } from 'src/app/layout/service/layout.service';
 import { AdResponse, AdvertiseSearchRequest } from '../advertisement.module';
 import { AdvertisementService } from 'src/app/Core/services/advertisement.service';
 import { AddAdvertisementComponent } from '../add-advertisement/add-advertisement.component';
+import { MessageService, ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-advertisements',
   templateUrl: './advertisements.component.html',
-  styleUrls: ['./advertisements.component.scss']
+  styleUrls: ['./advertisements.component.scss'],
+  providers: [MessageService, ConfirmationService]
 })
 export class AdvertisementsComponent {
   pageSize: number = 12;
@@ -25,7 +27,7 @@ export class AdvertisementsComponent {
   adTotal: Number = 0;
   link = '';
   visible: boolean = false;
-  constructor(public formBuilder: FormBuilder, public adService: AdvertisementService, public translate: TranslateService, public layoutService: LayoutService) {
+  constructor(public formBuilder: FormBuilder, public adService: AdvertisementService, public translate: TranslateService, public layoutService: LayoutService, public messageService: MessageService, public confirmationService: ConfirmationService) {
     this.dataForm = this.formBuilder.group({
       AdName: [''],
       startDate: [''],
@@ -108,6 +110,31 @@ export class AdvertisementsComponent {
   showDialog(link: string) {
     this.link = link;
     this.visible = true;
+  }
+
+  confirmDelete(row: AdResponse) {
+
+    console.log(row)
+    this.confirmationService.confirm({
+      message: "Do_you_want_to_delete_this_record?",
+      header: "Delete_Confirmation",
+      icon: 'pi pi-info-circle',
+      key: 'positionDialog',
+      closeOnEscape: true,
+      accept: async () => {
+        const response = (await this.adService.Delete(row.uuid!)) as any;
+
+        this.confirmationService.close();
+
+        this.layoutService.showSuccess(this.messageService, 'toste', true, response.requestMessage);
+
+        this.FillData();
+
+      },
+      reject: () => {
+        // this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
+      },
+    });
   }
 
 }

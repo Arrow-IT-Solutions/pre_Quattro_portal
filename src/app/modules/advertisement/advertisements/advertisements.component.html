@@ -93,7 +93,6 @@
             <div class="card-section">
               <div class="card-section__title"></div>
               <div class="card-section__items">
-
               </div>
             </div>
           </div>
@@ -106,13 +105,11 @@
                 <span class="material-symbols-outlined">Edit</span>
                 {{ 'Edit_Ad' | translate }}
               </button>
-              <button mat-menu-item>
+              <button mat-menu-item (click)="confirmDelete(row)">
                 <span class="material-symbols-outlined">delete</span>
                 {{ 'Delete_Ad' | translate }}
               </button>
             </mat-menu>
-
-
           </div>
         </div>
       </div>
@@ -144,6 +141,14 @@
     <img [src]="link" />
   </p-dialog>
 
+  <p-confirmDialog #positionDialog key="positionDialog" position="bottom" [baseZIndex]="10000" onHide="true">
+    <ng-template pTemplate="footer">
+      <button type="button" pButton icon="pi pi-times" label="{{ 'No' | translate }}"
+        (click)="positionDialog.reject()"></button>
+      <button type="button" pButton icon="pi pi-check" label="{{ 'Yes' | translate }}"
+        (click)="positionDialog.accept()"></button>
+    </ng-template>
+  </p-confirmDialog>
 
 
 

@@ -6,7 +6,7 @@ import { CategoryEventComponent } from './category-event/category-event.componen
 import { AddCategoryEventComponent } from './add-category-event/add-category-event.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ResponseBase } from 'src/app/shared/class/class';
+import { ResponseBase, RequestBase, SearchRequestBase } from 'src/app/shared/class/class';
 
 
 
@@ -23,6 +23,42 @@ import { ResponseBase } from 'src/app/shared/class/class';
   ]
 })
 export class CategoryEventModule { }
-export interface eventResponse extends ResponseBase  { 
+export interface eventResponse extends ResponseBase {
 }
-export interface EventResponse extends ResponseBase  {}
+export interface EventResponse extends ResponseBase {
+
+}
+
+export interface EventCategoryResponse extends ResponseBase {
+
+  uuid?: string;
+  eventCategoryTranslation?: { [key: string]: EventCategoryTranslationResponse };
+
+}
+export interface EventCategorySearchRequest extends SearchRequestBase {
+  uuid?: string;
+  name: string;
+
+}
+export interface EventCategoryUpdateRequest extends RequestBase {
+  eventCategoryTranslation?: EventCategoryTranslationRequest[];
+}
+
+export interface EventCategoryRequest extends RequestBase {
+  eventCategoryTranslation?: EventCategoryTranslationRequest[];
+}
+
+export interface EventCategoryTranslationResponse {
+  uuid?: string;
+  name?: string;
+  language?: string;
+}
+export interface EventCategoryTranslationRequest {
+  uuid?: string;
+  name?: string;
+  language?: string;
+}
+export interface EventCategoryTranslationUpdateRequest {
+  uuid?: string;
+  name?: string;
+}

@@ -5,15 +5,15 @@ import { LayoutService } from 'src/app/layout/service/layout.service';
 import { AddNotificationComponent } from '../add-notification/add-notification.component';
 import { NotificationResponse, NotificationSearchRequest } from '../notification.module';
 import { NotificationService } from 'src/app/Core/services/notification.service';
-import { MessageService } from 'primeng/api';
 import { ConstantService } from 'src/app/Core/services/constant.service';
 import { ConstantResponse } from 'src/app/Core/services/constant.service';
+import { MessageService, ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService]
 })
 export class NotificationsComponent {
   pageSize: number = 12;
@@ -34,7 +34,7 @@ export class NotificationsComponent {
   typeList: ConstantResponse[] = [];
 
   constructor(public formBuilder: FormBuilder, public notificationService: NotificationService,
-    public translate: TranslateService, public layoutService: LayoutService, public constantService: ConstantService) {
+    public translate: TranslateService, public layoutService: LayoutService, public constantService: ConstantService, public messageService: MessageService, public confirmationService: ConfirmationService) {
     this.dataForm = this.formBuilder.group({
       UserName: [''],
       Type: ['']
@@ -114,6 +114,31 @@ export class NotificationsComponent {
     component.OnClose.subscribe(() => {
       document.body.style.overflow = '';
       this.FillData();
+    });
+  }
+
+  confirmDelete(row: NotificationResponse) {
+
+    console.log(row)
+    this.confirmationService.confirm({
+      message: "Do_you_want_to_delete_this_record?",
+      header: "Delete_Confirmation",
+      icon: 'pi pi-info-circle',
+      key: 'positionDialog',
+      closeOnEscape: true,
+      accept: async () => {
+        const response = (await this.notificationService.Delete(row.uuid!)) as any;
+
+        this.confirmationService.close();
+
+        this.layoutService.showSuccess(this.messageService, 'toste', true, response.requestMessage);
+
+        this.FillData();
+
+      },
+      reject: () => {
+        // this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
+      },
     });
   }
 
