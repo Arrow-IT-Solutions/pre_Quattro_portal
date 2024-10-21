@@ -1,85 +1,87 @@
 <div [formGroup]="dataForm" class="event">
-    <div class="d-flex row mb-4 m-0 flex-row-reverse p-0">
-        <div class="col-lg-3 col-md-10 col p-0 event__search">
-          <div class="flex flex-wrap justify-content-center gap-3">
-            <span class="p-input-icon-left p-0">
-              <i class="pi pi-search"></i>
-              <input class="search-field" type="text" (ngModelChange)="OnChange()"
-                placeholder="{{ 'eventTittle' | translate }}" formControlName="eventName" pInputText />
-            </span>
-            
-          </div>
- 
-        </div>
-       
+  <div class="d-flex row mb-4 m-0 flex-row-reverse p-0">
+    <div class="col-lg-3 col-md-10 col p-0 event__search">
+      <div class="flex flex-wrap justify-content-center gap-3">
+        <span class="p-input-icon-left p-0">
+          <i class="pi pi-search"></i>
+          <input class="search-field" type="text" (ngModelChange)="OnChange()"
+            placeholder="{{ 'eventTittle' | translate }}" formControlName="eventName" pInputText />
+        </span>
+
       </div>
-  
-    <ng-container *ngIf="!loading; else ListView">
-      <div class="row mx-0 mt-2 box">
-        <div>
-          <div class="card col-11 mx-0 mb-2">
-            <div class="col-lg-9 col-md-12 col-sm-12 card__contents">
-              <div class="card-section">
-                <div class="card-section__title">info</div>
-                <div class="card-section__items">
-                  <div class="card__contents__item">
-                    <div class="card-label">{{ 'eventTittle' | translate }}</div>
-                    <div class="card-info">
-                      <span class="material-symbols-outlined fill"></span>
-                      Event Name
-                      
-                    </div>
+
+    </div>
+
+  </div>
+
+  <ng-container *ngIf="!loading; else ListView">
+    <div class="row mx-0 mt-2 box">
+      <div *ngFor="let row of data">
+        <div class="card col-11 mx-0 mb-2">
+          <div class="col-lg-9 col-md-12 col-sm-12 card__contents">
+            <div class="card-section">
+              <div class="card-section__title">info</div>
+              <div class="card-section__items">
+                <div class="card__contents__item">
+                  <div class="card-label">{{ 'eventTittle' | translate }}</div>
+                  <div class="card-info">
+                    <span class="material-symbols-outlined fill"></span>
+                    {{ row.eventCategoryTranslation![layoutService.config.lang]?.name }}
+
                   </div>
                 </div>
               </div>
             </div>
-            <div class="one">
-              <div [matMenuTriggerFor]="menu" class="card__actions">
-                <span class="material-symbols-outlined card__actions__details">more_vert</span>
-              </div>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item >
-                  <span class="material-symbols-outlined">Edit</span>
-                  {{ 'Edit_Driver' | translate }}
-                </button>
-                <button mat-menu-item >
-                  <span class="material-symbols-outlined">delete</span>
-                  {{ 'Delete_Driver' | translate }}
-                </button>
-              </mat-menu>
-  
-              
+          </div>
+          <div class="one">
+            <div [matMenuTriggerFor]="menu" class="card__actions">
+              <span class="material-symbols-outlined card__actions__details">more_vert</span>
             </div>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="OpenDialog(row)">
+                <span class="material-symbols-outlined">Edit</span>
+                {{ 'Edit_EventCategory' | translate }}
+              </button>
+              <button mat-menu-item (click)="confirmDelete(row)">
+                <span class="material-symbols-outlined">delete</span>
+                {{ 'Delete_EventCategory' | translate }}
+              </button>
+            </mat-menu>
+
+
           </div>
         </div>
       </div>
-     
-      <div class="row">
-        <div class="total">
-          {{ "totalEvents" | translate }}:
-          {{ totalRecords }}
-        </div>
-        <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" [rowsPerPageOptions]="[4, 12, 20, 30]"
-          [first]="first" (onPageChange)="paginate($event)"></p-paginator>
+    </div>
+
+    <div class="row">
+      <div class="total">
+        {{ "totalEvents" | translate }}:
+        {{ totalRecords }}
       </div>
-      <button class="add-button" (click)="openDialog()">
-        <span class="material-symbols-outlined">add</span>
-      </button>
-    </ng-container>
-  
-     <ng-template #ListView>
-      <div class="row">
-        <div *ngFor="let list of [1, 2, 3, 4]" class="row mx-0 mt-2">
-          <p-skeleton height="7.5rem"></p-skeleton> 
-        </div>
+      <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" [rowsPerPageOptions]="[4, 12, 20, 30]"
+        [first]="first" (onPageChange)="paginate($event)"></p-paginator>
+    </div>
+    <button class="add-button" (click)="OpenDialog()">
+      <span class="material-symbols-outlined">add</span>
+    </button>
+  </ng-container>
+
+  <ng-template #ListView>
+    <div class="row">
+      <div *ngFor="let list of [1, 2, 3, 4]" class="row mx-0 mt-2">
+        <p-skeleton height="7.5rem"></p-skeleton>
       </div>
-    </ng-template> 
-  
- 
-   
- 
+    </div>
+  </ng-template>
+
+  <p-confirmDialog #positionDialog key="positionDialog" position="bottom" [baseZIndex]="10000" onHide="true">
+    <ng-template pTemplate="footer">
+      <button type="button" pButton icon="pi pi-times" label="{{ 'No' | translate }}"
+        (click)="positionDialog.reject()"></button>
+      <button type="button" pButton icon="pi pi-check" label="{{ 'Yes' | translate }}"
+        (click)="positionDialog.accept()"></button>
+    </ng-template>
+  </p-confirmDialog>
+
 </div>
-  
-
-
-

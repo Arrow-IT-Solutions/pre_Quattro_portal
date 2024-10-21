@@ -4,11 +4,13 @@ import { FeedbackResponse, FeedbackSearchRequest } from '../feedback.module';
 import { TranslateService } from '@ngx-translate/core';
 import { LayoutService } from 'src/app/layout/service/layout.service';
 import { FeeddbackService } from 'src/app/Core/services/feeddback.service';
+import { MessageService, ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-feedback',
   templateUrl: './feedback.component.html',
-  styleUrls: ['./feedback.component.scss']
+  styleUrls: ['./feedback.component.scss'],
+  providers: [MessageService, ConfirmationService]
 })
 export class FeedbackComponent {
   pageSize: number = 12;
@@ -22,7 +24,7 @@ export class FeedbackComponent {
   isResetting: boolean = false;
   Total: number = 0;
   constructor(public formBuilder: FormBuilder,
-    public translate: TranslateService, public layoutService: LayoutService, public feeddbackService: FeeddbackService) {
+    public translate: TranslateService, public layoutService: LayoutService, public feeddbackService: FeeddbackService, public messageService: MessageService, public confirmationService: ConfirmationService) {
     this.dataForm = this.formBuilder.group({
       UserName: ['']
 
@@ -76,6 +78,31 @@ export class FeedbackComponent {
     this.first = event.first
     this.FillData(event.first)
 
+  }
+
+  confirmDelete(row: FeedbackResponse) {
+
+    console.log(row)
+    this.confirmationService.confirm({
+      message: "Do_you_want_to_delete_this_record?",
+      header: "Delete_Confirmation",
+      icon: 'pi pi-info-circle',
+      key: 'positionDialog',
+      closeOnEscape: true,
+      accept: async () => {
+        const response = (await this.feeddbackService.Delete(row.uuid!)) as any;
+
+        this.confirmationService.close();
+
+        this.layoutService.showSuccess(this.messageService, 'toste', true, response.requestMessage);
+
+        this.FillData();
+
+      },
+      reject: () => {
+        // this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
+      },
+    });
   }
 
 }

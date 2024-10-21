@@ -3,25 +3,24 @@ import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { CategoryEventService } from 'src/app/Core/services/category-event.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
+import { EventCategoryRequest, EventCategoryUpdateRequest } from '../category-event.module';
 
 @Component({
   selector: 'app-add-category-event',
   templateUrl: './add-category-event.component.html',
   styleUrls: ['./add-category-event.component.scss'],
-  providers:[MessageService]
+  providers: [MessageService]
 })
 export class AddCategoryEventComponent {
   dataForm!: FormGroup;
   submitted: boolean = false;
   btnLoading: boolean = false;
   loading: boolean = false;
- 
-  constructor(public formBuilder:FormBuilder,public layoutService:LayoutService,public addCategoryEvent:CategoryEventService){
-    this.dataForm=formBuilder.group({
-      tittleAr:[''],
-      tittleEn:[''],
-      
 
+  constructor(public formBuilder: FormBuilder, public layoutService: LayoutService, public categoryEventService: CategoryEventService, public messageService: MessageService) {
+    this.dataForm = formBuilder.group({
+      tittleAr: [''],
+      tittleEn: [''],
     })
   }
 
@@ -31,7 +30,8 @@ export class AddCategoryEventComponent {
 
       this.resetForm();
 
-      if (this.addCategoryEvent.SelectedData != null) {
+      if (this.categoryEventService.SelectedData != null) {
+        console.log(this.categoryEventService.SelectedData)
         await this.FillData();
       }
     } catch (exceptionVar) {
@@ -65,11 +65,56 @@ export class AddCategoryEventComponent {
   }
 
   async FillData() {
+    let temp = {
+      tittleAr: this.categoryEventService.SelectedData?.eventCategoryTranslation!['ar'].name,
+      tittleEn: this.categoryEventService.SelectedData?.eventCategoryTranslation!['en'].name,
+    };
+    this.dataForm.patchValue(temp);
 
- 
   }
 
   async Save() {
+
+    let response;
+
+    var eventCategoryTranslation = [
+      {
+        name: this.dataForm.controls['tittleAr'].value == null ? '' : this.dataForm.controls['tittleAr'].value.toString(),
+        language: 'ar'
+      },
+      {
+        name: this.dataForm.controls['tittleEn'].value == null ? '' : this.dataForm.controls['tittleEn'].value.toString(),
+        language: 'en'
+      }
+    ];
+    if (this.categoryEventService.SelectedData != null) {
+      // update
+
+      var eventCategory: EventCategoryUpdateRequest = {
+        uuid: this.categoryEventService.SelectedData?.uuid?.toString(),
+        eventCategoryTranslation: eventCategoryTranslation,
+      };
+
+      response = await this.categoryEventService.Update(eventCategory);
+    } else {
+      // add
+      var eventCategory: EventCategoryRequest = {
+        eventCategoryTranslation: eventCategoryTranslation,
+      };
+
+      response = await this.categoryEventService.Add(eventCategory);
+    }
+
+    if (response?.requestStatus?.toString() == '200') {
+      this.layoutService.showSuccess(this.messageService, 'toast', true, response?.requestMessage);
+      if (this.categoryEventService.SelectedData == null) {
+        this.resetForm();
+      } else {
+        this.categoryEventService.Dialog.close();
+      }
+    } else {
+      this.layoutService.showError(this.messageService, 'toast', true, response?.requestMessage);
+    }
 
     this.btnLoading = false;
     this.submitted = false;
