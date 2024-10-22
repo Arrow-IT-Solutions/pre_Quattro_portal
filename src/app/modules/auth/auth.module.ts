@@ -71,6 +71,7 @@ export interface UserResponse extends ResponseBase {
   isVerifiedValue?: string;
   isBlocked?: string;
   isBlockedValue?: string;
+  countryCode: string,
 }
 
 export interface UserSearchRequest extends SearchRequestBase {
@@ -100,4 +101,24 @@ export interface UserTranslationUpdateRequest {
   uuid?: string;
   firstName?: string;
   lastName?: string;
+  language?: string
+}
+
+export interface CountryCodeResponse {
+  uuid?: string;
+  countryCodeTranslation?: { [key: string]: CountryCodeTranslationResponse };
+  code: string;
+  flag: string
+}
+
+export interface CountryCodeTranslationResponse {
+  uuid?: string;
+  name?: string;
+  language?: string;
+}
+
+export interface CountryCodeSearchRequest extends SearchRequestBase {
+  uuid?: string;
+  name?: string;
+  code?: string;
 }

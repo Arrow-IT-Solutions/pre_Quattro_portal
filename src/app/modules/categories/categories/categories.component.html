@@ -1,109 +1,110 @@
 <form [formGroup]="dataForm" class="categories">
-    <div class="row mb-4 m-0 flex-row-reverse p-0">
-        <div class="col-lg-3 col-md-10 col p-0 categories__search">
-          <div class="flex flex-wrap justify-content-center gap-3">
-            <span class="p-input-icon-left p-0">
-              <i class="pi pi-search"></i>
-              <input (ngModelChange)="OnChange()" class="search-field" type="text" pInputText placeholder="{{ 'Search_Category' | translate }}" formControlName="name" />
-            </span>
-          </div>
-        </div>
-        <p-accordion class="p-0">
-          <p-accordionTab>
-            <ng-template pTemplate="header">
-              <div class="flex align-items-center">
-                <span class="material-symbols-outlined">tune</span>
-              </div>
-            </ng-template>
-            <ng-template pTemplate="content">
-              <div class="m-0 row">
-                <div class="filter-title">
-                  <span class="material-symbols-outlined">filter_alt</span>
-                  <span>{{ 'FilterBy_Category' | translate }}</span>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mt-3">
-                    <div class="p-float-label">
-                      <input type="text" pInputText formControlName="id" (ngModelChange)="OnChange()"
-                        class="search-field" type="text" />
-                      <label>{{ 'Search_CategoryId' | translate}}</label>
-                    </div>
-                  </div>
-
-                  <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mt-3">
-                    <div class="p-float-label">
-                      <input type="text" pInputText formControlName="phone" (ngModelChange)="OnChange()"
-                        class="search-field" type="text" />
-                      <label>{{ 'Search_CategoryType' | translate }}</label>
-                    </div>
-                  </div>
-               
-                
-                <div class="col mt-3 text-end">
-                  <p-button class="btn-outline-secondary" (onClick)="resetForm()">
-                    <span class="material-symbols-outlined">restart_alt</span>
-                  </p-button>
-                </div>
-              </div>
-            </ng-template>
-          </p-accordionTab>
-        </p-accordion>
+  <div class="row mb-4 m-0 flex-row-reverse p-0">
+    <div class="col-lg-3 col-md-10 col p-0 categories__search">
+      <div class="flex flex-wrap justify-content-center gap-3">
+        <span class="p-input-icon-left p-0">
+          <i class="pi pi-search"></i>
+          <input (ngModelChange)="OnChange()" class="search-field" type="text" pInputText
+            placeholder="{{ 'Search_Category' | translate }}" formControlName="name" />
+        </span>
       </div>
-      <ng-container *ngIf="!loading; else ListView">
-        <div class="row">
-          <div class="col-lg-12 col-md-4 col-sm-6 col-xs-12 mt-2 mb-2" >
-            <div class="card">
-              <div class="card__header mb-3"></div>
-              <div class="card__edit">
-                <span class="material-symbols-outlined" [matMenuTriggerFor]="menu">more_vert</span>
+    </div>
+    <p-accordion class="p-0">
+      <p-accordionTab>
+        <ng-template pTemplate="header">
+          <div class="flex align-items-center">
+            <span class="material-symbols-outlined">tune</span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <div class="m-0 row">
+            <div class="filter-title">
+              <span class="material-symbols-outlined">filter_alt</span>
+              <span>{{ 'FilterBy_Category' | translate }}</span>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mt-3">
+              <div class="p-float-label">
+                <input type="text" pInputText formControlName="id" (ngModelChange)="OnChange()" class="search-field"
+                  type="text" />
+                <label>{{ 'Search_CategoryId' | translate}}</label>
               </div>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item >
-                  <span class="material-symbols-outlined">edit</span>
-                  {{ 'Edit_Category' | translate }}
-                </button>
-                <button mat-menu-item >
-                  <span class="material-symbols-outlined">delete</span>
-                  {{ 'Delete_Category' | translate }}
-                </button>
-              </mat-menu>
-              <div class="d-flex contents ">
-                <div class="card__img">
-                  
-                  <!-- <img *ngIf=" char"  /> -->
-                    <!-- <ng-template #char>{{ getFirstChar() }}</ng-template> -->
-                </div>
-                <div class="px-2">
-                  <div class="card-label">{{ 'Search_Category' | translate  }}</div>
-                  <div class="card__header--title">Coffee</div>
-                  
-                </div>
-                <div class="px-2">
-                  <div class="card-label">{{ 'Search_CategoryType' | translate  }}</div>
-                  <span class="card__header--title">Drinks</span>
-                  
-                  
-                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12 mt-3">
+              <div class="p-float-label">
+                <input type="text" pInputText formControlName="phone" (ngModelChange)="OnChange()" class="search-field"
+                  type="text" />
+                <label>{{ 'Search_CategoryType' | translate }}</label>
               </div>
-    
-             
+            </div>
+
+
+            <div class="col mt-3 text-end">
+              <p-button class="btn-outline-secondary" (onClick)="resetForm()">
+                <span class="material-symbols-outlined">restart_alt</span>
+              </p-button>
             </div>
           </div>
+        </ng-template>
+      </p-accordionTab>
+    </p-accordion>
+  </div>
+  <ng-container *ngIf="!loading; else ListView">
+    <div class="row" *ngFor="let row of data">
+      <div class="col-lg-12 col-md-4 col-sm-6 col-xs-12 mt-2 mb-2">
+        <div class="card">
+          <div class="card__header mb-3"></div>
+          <div class="card__edit">
+            <span class="material-symbols-outlined" [matMenuTriggerFor]="menu">more_vert</span>
+          </div>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <span class="material-symbols-outlined">edit</span>
+              {{ 'Edit_Category' | translate }}
+            </button>
+            <button mat-menu-item>
+              <span class="material-symbols-outlined">delete</span>
+              {{ 'Delete_Category' | translate }}
+            </button>
+          </mat-menu>
+          <div class="d-flex contents ">
+            <div class="card__img">
+
+              <img (click)="showDialog(row.coverImage)" style="width: 100px; height: 100px" [src]="row.coverImage" />
+            </div>
+            <div class="px-2">
+              <div class="card-label">{{ 'Search_Category' | translate }}</div>
+              <div class="card__header--title">{{row.typeValue}}</div>
+
+            </div>
+            <div class="px-2">
+              <div class="card-label">{{ 'Search_CategoryType' | translate }}</div>
+              <span class="card__header--title">{{row.typeValue}}</span>
+
+
+            </div>
+          </div>
+
+
         </div>
-      </ng-container>
+      </div>
+    </div>
+  </ng-container>
 
-      <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" [rowsPerPageOptions]="[4, 12, 20, 30]" (onPageChange)="paginate($event)"></p-paginator>
+  <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" [rowsPerPageOptions]="[4, 12, 20, 30]"
+    (onPageChange)="paginate($event)"></p-paginator>
 
-      <button class="add-button" (click)="OpenCategory()">
-        <span class="material-symbols-outlined">add</span>
-      </button>
+  <button class="add-button" (click)="OpenCategory()">
+    <span class="material-symbols-outlined">add</span>
+  </button>
 </form>
 
 <ng-template #ListView>
-    <div class="row">
-      <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 mb-4" *ngFor="let x of [1, 2, 3, 4, 5, 6, 7, 8]">
-        <p-skeleton height="10rem"></p-skeleton>
-      </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 mb-4" *ngFor="let x of [1, 2, 3, 4, 5, 6, 7, 8]">
+      <p-skeleton height="10rem"></p-skeleton>
     </div>
-  </ng-template>
-  
-  <p-toast key="toast"></p-toast>
+  </div>
+</ng-template>
+
+<p-toast key="toast"></p-toast>

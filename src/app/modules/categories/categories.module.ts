@@ -5,7 +5,7 @@ import { CategoriesRoutingModule } from './categories-routing.module';
 import { CategoriesComponent } from './categories/categories.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ResponseBase, SearchRequestBase } from 'src/app/shared/class/class';
+import { ResponseBase, SearchRequestBase, RequestBase } from 'src/app/shared/class/class';
 import { NgPrimeModule } from 'src/app/shared/ngprime.module';
 import { AddCategoryComponent } from './add-category/add-category/add-category.component';
 import { DefinitionsComponent } from './add-category/definitions/definitions.component';
@@ -19,7 +19,7 @@ import { VariantsComponent } from './add-category/variants/variants.component';
     AddCategoryComponent,
     DefinitionsComponent,
     VariantsComponent
-    
+
   ],
   imports: [
     CommonModule,
@@ -31,20 +31,49 @@ import { VariantsComponent } from './add-category/variants/variants.component';
 })
 export class CategoriesModule { }
 
-export interface CategoryTranslationRequest {
-
-}
-
 export interface CategoryResponse extends ResponseBase {
+  uuid?: string,
+  type: string,
+  typeValue: string,
+  coverImage: string,
+  categoryTranslation?: { [key: string]: CategoryTranslationResponse };
 
-  
 }
 export interface CategorySearchRequest extends SearchRequestBase {
- 
+  uuid?: string,
+  type?: string,
+  includeImages?: string,
 }
 export interface CategoryTranslationResponse {
-
+  uuid: string,
+  description: string,
+  language: string,
 }
-export interface EmployeeTranslationResponse {
-  
+
+export interface CategoryImageRequest extends RequestBase {
+  image: string,
+  categoryIDFK: string,
+}
+
+export interface CategoryImageResponse extends ResponseBase {
+  uuid?: string
+  image: string,
+}
+
+export interface CategoryRequest extends RequestBase {
+  categoryTranslation?: CategoryTranslationRequest[];
+  coverImage: string,
+  type: string,
+}
+
+export interface CategoryUpdateRequest extends RequestBase {
+  categoryTranslation?: CategoryTranslationRequest[];
+  coverImage: string,
+  type: string,
+}
+
+export interface CategoryTranslationRequest {
+  uuid?: string;
+  description?: string;
+  language?: string;
 }

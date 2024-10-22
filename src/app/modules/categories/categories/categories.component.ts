@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { CategoryResponse, CategorySearchRequest, EmployeeTranslationResponse } from '../categories.module';
+import { CategoryResponse, CategorySearchRequest } from '../categories.module';
 import { LayoutService } from 'src/app/layout/service/layout.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MessageService } from 'primeng/api';
@@ -18,11 +18,12 @@ export class CategoriesComponent {
   dataForm!: FormGroup;
   loading = false;
   data: CategoryResponse[] = [];
- 
+  link = '';
+  visible: boolean = false;
   categoryTotal: number = 0;
-  
+
   pageSize: number = 12;
- 
+
   totalRecords: number = 0;
   doneTypingInterval = 1000;
   typingTimer: any;
@@ -31,23 +32,22 @@ export class CategoriesComponent {
   constructor(
     public layoutService: LayoutService,
 
-    
+
     public categoryService: CategoryService,
     public messageService: MessageService,
     public formBuilder: FormBuilder,
     public translate: TranslateService,
-    public router:Router
+    public router: Router
   ) {
     this.dataForm = this.formBuilder.group({
       name: [''],
       centerIDFK: [''],
-      creationDate: ['']
     });
   }
 
   async ngOnInit() {
     await this.FillData();
-    
+
   }
 
   Search() {
@@ -62,8 +62,23 @@ export class CategoriesComponent {
     this.categoryTotal = 0;
 
     let filter: CategorySearchRequest = {
-    
-    };
+      uuid: '',
+      type: '',
+      includeImages: '0'
+
+    }
+    const response = (await this.categoryService.Search(filter)) as any;
+    console.log('Response: ', response)
+    if (response.data == null || response.data.length == 0) {
+      this.data = [];
+      this.categoryTotal = 0;
+    } else if (response.data != null && response.data.length != 0) {
+      this.data = response.data;
+      this.categoryTotal = response.data[0];
+    }
+
+    this.totalRecords = response.totalRecords;
+
     this.loading = false;
   }
 
@@ -72,32 +87,32 @@ export class CategoriesComponent {
     this.categoryService.SelectedData = row;
     this.router.navigate(['layout-admin/categories/add-category/definitions']);
   }
-  getFirstChar(trans: { [key: string]: EmployeeTranslationResponse } | undefined): string{
+  // getFirstChar(trans: { [key: string]: EmployeeTranslationResponse } | undefined): string {
 
-    console.log('xxxxxxxxxxxxxxxx');
+  //   console.log('xxxxxxxxxxxxxxxx');
 
-    console.log('trans : ', trans);
+  //   console.log('trans : ', trans);
 
-    var char = 'U';
+  //   var char = 'U';
 
-    if (trans == undefined || trans == null) {
-      char = this.layoutService.config.lang == 'ar' ? 'غ' : 'U';
-    } else {
-      var response;
+  //   if (trans == undefined || trans == null) {
+  //     char = this.layoutService.config.lang == 'ar' ? 'غ' : 'U';
+  //   } else {
+  //     var response;
 
-      if (this.layoutService.config.lang == 'ar') {
-        response = trans!['ar'];
-        char = response == null ? 'غ' : response!.name!.split('')[0].toUpperCase();
-      } else {
-        response = trans!['en'];
-        char = response == null ? 'U' : response!.name!.split('')[0].toUpperCase();
-      }
-    }
-    console.log('char : ', char);
+  //     if (this.layoutService.config.lang == 'ar') {
+  //       response = trans!['ar'];
+  //       char = response == null ? 'غ' : response!.name!.split('')[0].toUpperCase();
+  //     } else {
+  //       response = trans!['en'];
+  //       char = response == null ? 'U' : response!.name!.split('')[0].toUpperCase();
+  //     }
+  //   }
+  //   console.log('char : ', char);
 
-    return char;
+  //   return char;
 
-  }
+  // }
 
   async resetForm() {
     this.isResetting = true;
@@ -122,4 +137,8 @@ export class CategoriesComponent {
     this.FillData(event.pageIndex);
   }
 
+  showDialog(link: string) {
+    this.link = link;
+    this.visible = true;
+  }
 }
