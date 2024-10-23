@@ -46,7 +46,6 @@ export class NotificationsComponent {
 
     const NotifucationTypeResponse = await this.constantService.Search('NotificationType') as any;
     this.typeList = NotifucationTypeResponse.data;
-    console.log("Type List : ", this.typeList);
 
 
     await this.FillData();
@@ -63,7 +62,7 @@ export class NotificationsComponent {
     this.totalRecords = 0;
     let filter: NotificationSearchRequest = {
       uuid: '',
-      type: this.dataForm.controls['Type'].value.toString(),
+      type: this.dataForm.controls['Type'].value == null ? null : this.dataForm.controls['Type'].value.toString(),
       name: this.dataForm.controls['UserName'].value,
     };
     const response = (await this.notificationService.Search(filter)) as any;

@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { EmployeeResponse, EmployeesResponse, EmployeesSearchRequest } from '../employees.module';
+import { EmployeesResponse, EmployeeSearchRequest } from '../employees.module';
 import { EmployeesService } from 'src/app/Core/services/employees.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LayoutService } from 'src/app/layout/service/layout.service';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
+import { MessageService, ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
-  styleUrls: ['./employees.component.scss']
+  styleUrls: ['./employees.component.scss'],
+  providers: [MessageService, ConfirmationService]
+
 })
 export class EmployeesComponent {
   pageSize: number = 12;
@@ -22,52 +25,65 @@ export class EmployeesComponent {
   typingTimer: any;
   isResetting: boolean = false;
   ClientTotal: number = 0;
-   
-  constructor(public formBuilder:FormBuilder,public employeeService:EmployeesService,
-    public translate: TranslateService,public layoutService: LayoutService){
+  link = '';
+  visible: boolean = false;
+
+  constructor(public formBuilder: FormBuilder, public employeeService: EmployeesService,
+    public translate: TranslateService, public layoutService: LayoutService, public messageService: MessageService, public confirmationService: ConfirmationService) {
     this.dataForm = this.formBuilder.group({
       employeeName: [''],
       phone: [''],
       id: [''],
-      role:[''],
-      userName:['']
+      role: [''],
+      userName: ['']
 
-      
+
     });
   }
-  async ngOnInit(){
+  async ngOnInit() {
     await this.FillData();
   }
-  Search(){
+  Search() {
     this.FillData();
   }
 
   async FillData(pageIndex: number = 0) {
     this.loading = true;
     this.data = [];
-    this.ClientTotal=0;
-
-    let filter: EmployeesSearchRequest = {
-    
+    this.totalRecords = 0;
+    let filter: EmployeeSearchRequest = {
+      name: this.dataForm.controls['employeeName'].value,
+      phone: this.dataForm.controls['phone'].value,
     };
-   
-    
+    const response = (await this.employeeService.Search(filter)) as any;
+    console.log(response)
+    if (response.data == null || response.data.length == 0) {
+      this.data = [];
+      this.totalRecords = 0;
+    } else if (response.data != null && response.data.length != 0) {
+      this.data = response.data;
+      this.totalRecords = response.data[0];
+    }
+
+    this.totalRecords = response.totalRecords;
+
     this.loading = false;
   }
 
-  openDialog(row: EmployeeResponse | null =null){
-    window.scrollTo({top:0,behavior:'smooth'});
-    document.body.style.overflow='hidden';
-    let content=this.employeeService.SelectedData == null ? 'Create_Employee' : 'Update_Employee';
-     this.translate.get(content).subscribe((res:string) =>{
-      content=res
-     });
-     var component=this.layoutService.OpenDialog(AddEmployeeComponent,content);
-     this.employeeService.Dialog=component;
-     component.OnClose.subscribe(()=>{
-      document.body.style.overflow='';
+  openDialog(row: EmployeesResponse | null = null) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.body.style.overflow = 'hidden';
+    this.employeeService.SelectedData = row
+    let content = this.employeeService.SelectedData == null ? 'Create_Employee' : 'Update_Employee';
+    this.translate.get(content).subscribe((res: string) => {
+      content = res
+    });
+    var component = this.layoutService.OpenDialog(AddEmployeeComponent, content);
+    this.employeeService.Dialog = component;
+    component.OnClose.subscribe(() => {
+      document.body.style.overflow = '';
       this.FillData();
-     });
+    });
   }
   async resetform() {
     this.isResetting = true;
@@ -89,7 +105,35 @@ export class EmployeesComponent {
     this.pageSize = event.rows
     this.first = event.first
     this.FillData(event.first)
-    
+
   }
 
+  showDialog(link: string) {
+    this.link = link;
+    this.visible = true;
+  }
+  confirmDelete(row: EmployeesResponse) {
+
+    console.log(row)
+    this.confirmationService.confirm({
+      message: "Do_you_want_to_delete_this_record?",
+      header: "Delete_Confirmation",
+      icon: 'pi pi-info-circle',
+      key: 'positionDialog',
+      closeOnEscape: true,
+      accept: async () => {
+        const response = (await this.employeeService.Delete(row.uuid!)) as any;
+
+        this.confirmationService.close();
+
+        this.layoutService.showSuccess(this.messageService, 'toste', true, response.requestMessage);
+
+        this.FillData();
+
+      },
+      reject: () => {
+        // this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
+      },
+    });
+  }
 }

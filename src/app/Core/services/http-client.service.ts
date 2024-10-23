@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import axios,{ AxiosInstance } from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import { TokenService } from './token.service';
 import { environment } from 'src/environments/environment';
 
@@ -50,45 +50,45 @@ export class HttpClientService {
     );
   }
 
-async get(url: string, config = {}) {
-  return await this.axiosInstance.get(url, config)
-  .then((res) => {
-    return res.data;
-  })
-  .catch((error) => {
-    return error.response.data;
-  });
-}
+  async get(url: string, config = {}) {
+    return await this.axiosInstance.get(url, config)
+      .then((res) => {
+        return res.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
 
-async post(url: string, data = {}, config = {}) {
-  return await this.axiosInstance.post(url, data, config)
-  .then((res) => {
-    return res.data;
-  })
-  .catch((error) => {
-    return error.response.data;
-  });
-}
+  async post(url: string, data = {}, config = {}) {
+    return await this.axiosInstance.post(url, data, config)
+      .then((res) => {
+        return res.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
 
-async put(url: string, data = {}, config = {}) {
-  return await this.axiosInstance.put(url, data, config)
-  .then((res) => {
-    return res.data;
-  })
-  .catch((error) => {
-    return error.response.data;
-  });
-}
+  async put(url: string, data = {}, config = {}) {
+    return await this.axiosInstance.put(url, data, config)
+      .then((res) => {
+        return res.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
 
-async delete(url: string, data = {}, config = {}) {
-  return await this.axiosInstance.delete(url, config)
-  .then((res) => {
-    return res.data;
-  })
-  .catch((error) => {
-    return error.response.data;
-  });
-}
+  async delete(url: string, data = {}, config = {}) {
+    return await this.axiosInstance.delete(url, config)
+      .then((res) => {
+        return res.data;
+      })
+      .catch((error) => {
+        return error.response.data;
+      });
+  }
 
 
 

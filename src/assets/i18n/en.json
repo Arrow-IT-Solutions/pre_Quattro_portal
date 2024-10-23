@@ -229,10 +229,34 @@
   "RewardNameEn":"Reward Name in English",
   "Edit_Ad" : "Edit",
   "Delete_Ad" : "Delete",
-  "Ad-Image" : "Image"
-
-
-
+  "Ad-Image" : "Image",
+  "Edit_Reward" : "Edit",
+  "Delete_Reward" : "Delete",
+  "Edit_EventCategory" : "Edit",
+  "Delete_EventCategory" : "Delete",
+  "Create_EventCategory" : "Create New Event Category",
+  "Update_EventCategory" : "Update Event Category",
+  "FirstNameAr_Client" : "First Name in Arabic",
+  "LastNameAr_Client" : "Last Name in Arabic",
+  "FirstNameEn_Client" : "First Name in English",
+  "LastNameEn_Client" : "Last Name in English",
+  "CountryCode_Client" : "Country Code",
+  "CurrentQuattro_client" : "Current Quattro",
+  "Edit_Client" : "Edit",
+  "Delete_Client" : "Delete",
+  "Delete_Employee" : "Delete",
+  "Edit_Employee" : "Edit",
+  "Basic_Info_Employee" : "Basic Info Employee",
+  "FirstNameAr_Employee" : "First Name in Arabic",
+  "LastNameAr_Employee" : "Last Name in Arabic",
+  "FirstNameEn_Employee" : "First Name in English",
+  "LastNameEn_Employee" : "Last Name in English",
+  "CountryCode_Employee" : "Country Code",
+  "Employee-phone" : "Phone",
+  "Employee-username" : "Email/Username",
+  "Employee-gender" : "Gender",
+  "EmployeePassword" : "Password",
+  "Birthdate_Employee" : "BirthDate"
 
 
 }

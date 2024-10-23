@@ -5,42 +5,49 @@ import { LayoutService } from 'src/app/layout/service/layout.service';
 import { ImgControlComponent } from 'src/app/layout/component/img-control/img-control.component';
 import { ClientRequest, ClientUpdateRequest } from '../clients.module';
 import { MessageService } from 'primeng/api';
+import { ConstantService } from 'src/app/Core/services/constant.service';
+import { ConstantResponse } from 'src/app/Core/services/constant.service';
+import { CountryCodeService } from 'src/app/Core/services/country-code.service';
+import { CountryCodeResponse, CountryCodeSearchRequest } from '../../auth/auth.module';
 
 @Component({
   selector: 'app-add-client',
   templateUrl: './add-client.component.html',
   styleUrls: ['./add-client.component.scss'],
-  providers:[MessageService]
+  providers: [MessageService]
 })
-export class AddClientComponent  {
+export class AddClientComponent {
   dataForm!: FormGroup;
   submitted: boolean = false;
   btnLoading: boolean = false;
   loading: boolean = false;
-  contryCode: string[]=["+962","+963"];
-  selectedCode: string | null = null;
-  gender:any[] = [
-    { nameAr: 'ذكر', nameEn: 'Male', value: 0 },
-    { nameAr: 'أنثى', nameEn: 'Female', value: 1 }
-  ];
-  selectedgender:string | null=null;
-
-
-  constructor(public formBuilder:FormBuilder,public layoutService:LayoutService,public clientService:ClientsService){
-    this.dataForm=formBuilder.group({
-      clientNameAr:[''],
-      clientNameEn:[''],
-      contryCode:[''],
-      clientPhone:[''],
-      clientGender:[''],
-      password:[''],
-      birthDate:['']
+  gender: ConstantResponse[] = [];
+  codes: CountryCodeResponse[] = [];
+  file: any;
+  fileInput: any
+  img: boolean = true;
+  constructor(public formBuilder: FormBuilder, public layoutService: LayoutService, public clientService: ClientsService, public constantService: ConstantService
+    , public countryCodeService: CountryCodeService
+  ) {
+    this.dataForm = formBuilder.group({
+      firstNameAr: [''],
+      lastNameAr: [''],
+      firstNameEn: [''],
+      lastNameEn: [''],
+      contryCode: [''],
+      clientPhone: [''],
+      clientGender: [''],
+      password: [''],
+      birthDate: ['']
 
     })
   }
   async ngOnInit() {
     try {
       this.loading = true;
+      await this.RetriveCountryCode();
+      const GenderResponse = await this.constantService.Search('Gender') as any;
+      this.gender = GenderResponse.data;
 
       this.resetForm();
 
@@ -74,44 +81,81 @@ export class AddClientComponent  {
     }
   }
 
+  async RetriveCountryCode() {
 
+    var code: any;
 
+    if (this.clientService.SelectedData != null) {
+      code = this.clientService.SelectedData?.user?.countryCode
+    }
+
+    let filter: CountryCodeSearchRequest = {
+      name: '',
+      uuid: '',
+      code: code,
+      pageIndex: "",
+      pageSize: '100000'
+    }
+
+    const response = await this.countryCodeService.Search(filter) as any
+
+    this.codes = response.data;
+
+    await this.ReWriteCode();
+
+  }
 
   async Save() {
 
     let response;
     let birthDate = new Date(this.dataForm.controls['birthDate'].value)
 
-
     var clientTranslation = [
       {
-        clientName: this.dataForm.controls['clientNameAr'].value == null ? '' : this.dataForm.controls['clientNameAr'].value.toString(),
+        firstName: this.dataForm.controls['firstNameAr'].value == null ? '' : this.dataForm.controls['firstNameAr'].value.toString(),
+        lastName: this.dataForm.controls['lastNameAr'].value == null ? '' : this.dataForm.controls['lastNameAr'].value.toString(),
         language: 'ar'
       },
       {
-        clientName: this.dataForm.controls['clientNameEn'].value == null ? '' : this.dataForm.controls['clientNameEn'].value.toString(),
+        firstName: this.dataForm.controls['firstNameEn'].value == null ? '' : this.dataForm.controls['firstNameEn'].value.toString(),
+        lastName: this.dataForm.controls['lastNameEn'].value == null ? '' : this.dataForm.controls['lastNameEn'].value.toString(),
         language: 'en'
       }
     ];
+
     if (this.clientService.SelectedData != null) {
       // update
 
       var client: ClientUpdateRequest = {
-        
-      };
+        uuid: this.clientService.SelectedData?.uuid?.toString(),
+        clientTranslation: clientTranslation,
+        countryCode: this.dataForm.controls['contryCode'].value,
+        gender: this.dataForm.controls['clientGender'].value.toString(),
+        birthDate: birthDate.toISOString(),
+        phone: this.dataForm.controls['clientPhone'].value.toString(),
+        profileImage: this.file,
+        deviceType: ''
 
-     
+      };
+      console.log(client)
+      response = await this.clientService.Update(client);
+
     } else {
       // add
-      var client: ClientRequest = {
-        
+
+      var addClient: ClientRequest = {
+        clientTranslation: clientTranslation,
+        countryCode: this.dataForm.controls['contryCode'].value.toString(),
+        gender: this.dataForm.controls['clientGender'].value.toString(),
+        birthDate: birthDate.toISOString(),
+        phone: this.dataForm.controls['clientPhone'].value.toString(),
+        password: this.dataForm.controls['password'].value.toString(),
+        profileImage: this.file,
       };
+      console.log(addClient)
 
-      
-
+      response = await this.clientService.Add(addClient);
     }
-
-    
 
     this.btnLoading = false;
     this.submitted = false;
@@ -122,11 +166,72 @@ export class AddClientComponent  {
   }
 
   async FillData() {
+    let temp = {
+      firstNameAr: this.clientService.SelectedData?.user.userTranslation!['ar'].firstName,
+      lastNameAr: this.clientService.SelectedData?.user.userTranslation!['ar'].lastName,
+      firstNameEn: this.clientService.SelectedData?.user.userTranslation!['en'].firstName,
+      lastNameEn: this.clientService.SelectedData?.user.userTranslation!['en'].lastName,
+      contryCode: this.clientService.SelectedData?.user.countryCode,
+      clientPhone: this.clientService.SelectedData?.phone,
+      clientGender: Number(this.clientService.SelectedData?.gender),
+      birthDate: this.clientService.SelectedData?.birthDate
+    };
+    this.fileInput = this.clientService.SelectedData?.profileImage,
+      this.img = false
+    this.dataForm.patchValue(temp);
 
- 
   }
-  getGenderLable(): string {
-    return this.layoutService.config.lang == 'ar' ? 'nameAr' : 'nameEn';
+
+  async FillCodes(event: any = null) {
+
+    let filterInput = '';
+    if (event != null) {
+      filterInput = event.filter
+    }
+
+    let filter: CountryCodeSearchRequest = {
+
+      name: filterInput,
+      uuid: '',
+      code: "",
+      pageIndex: "",
+      pageSize: '100000'
+    }
+    const response = await this.countryCodeService.Search(filter) as any
+
+    this.codes = response.data;
+
+    await this.ReWriteCode()
   }
-        
+
+  ReWriteCode(): any {
+
+    var codeDTO: any[] = []
+
+    this.codes.map(code => {
+      const translation = code.countryCodeTranslation?.[this.layoutService.config.lang] as any;
+      const fullName = translation?.name;
+      const countryCode = code.code
+
+      var obj =
+      {
+        ...code,
+        fullName: `${fullName} ${code.code}`,
+        countryCode
+
+      }
+
+      codeDTO.push(obj)
+
+    })
+
+    this.codes = codeDTO;
+
+  }
+
+  OnSelectFile(file) {
+    this.file = file;
+    this.img = false;
+  }
+
 }

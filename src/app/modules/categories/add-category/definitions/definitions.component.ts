@@ -27,7 +27,7 @@ export class DefinitionsComponent {
 
 
 
-  constructor(public formBuilder: FormBuilder,  public router: Router, public layoutService: LayoutService,  public messageService: MessageService, public categoryService: CategoryService) {
+  constructor(public formBuilder: FormBuilder, public router: Router, public layoutService: LayoutService, public messageService: MessageService, public categoryService: CategoryService) {
     this.dataForm = formBuilder.group({
       nameAr: ['', Validators.required],
       nameEn: ['', Validators.required],
@@ -49,8 +49,8 @@ export class DefinitionsComponent {
       this.loading = true;
 
       this.resetForm();
-     
-      
+
+
 
       if (this.categoryService.SelectedData != null) {
         await this.FillData();
@@ -95,14 +95,12 @@ export class DefinitionsComponent {
     var productTranslationsDictionary: { [key: string]: CategoryTranslationResponse } = {
       ar: {
         uuid: '',
-        name: this.dataForm.controls['nameAr'].value.toString(),
-        desc: this.dataForm.controls['descAr'].value != null ? this.dataForm.controls['descAr'].value.toString() : '',
+        description: this.dataForm.controls['descAr'].value != null ? this.dataForm.controls['descAr'].value.toString() : '',
         language: 'ar'
       },
       en: {
         uuid: '',
-        name: this.dataForm.controls['nameEn'].value.toString(),
-        desc: this.dataForm.controls['descEn'].value != null ? this.dataForm.controls['descEn'].value.toString() : '',
+        description: this.dataForm.controls['descEn'].value != null ? this.dataForm.controls['descEn'].value.toString() : '',
         language: 'en'
       }
     };
@@ -122,12 +120,12 @@ export class DefinitionsComponent {
 
     console.log('fill this.productService.SelectedData : ', this.categoryService.SelectedData);
 
-   
 
-    
+
+
     // this.selectedImage.imageOriginalLink = this.productService.SelectedData?.imageLink ?? '';
 
-    
+
   }
   onSelectedFile(file: any) {
     this.file = file;
