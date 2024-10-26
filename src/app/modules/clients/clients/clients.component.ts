@@ -50,6 +50,7 @@ export class ClientsComponent {
     let filter: ClientSearchRequest = {
       name: this.dataForm.controls['clientName'].value,
       phone: this.dataForm.controls['phone'].value,
+      includeUser: '1'
     };
     const response = (await this.clientService.Search(filter)) as any;
     console.log(response)

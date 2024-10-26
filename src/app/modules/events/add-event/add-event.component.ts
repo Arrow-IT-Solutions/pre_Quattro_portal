@@ -313,7 +313,7 @@ export class AddEventComponent {
     var clientDTO: any[] = []
 
     this.clients.map(client => {
-      const translation = client.user.userTranslation?.[this.layoutService.config.lang] as any;
+      const translation = client.clientTranslation?.[this.layoutService.config.lang] as any;
       const firstName = translation?.firstName;
       const lastName = translation?.lastName;
 
