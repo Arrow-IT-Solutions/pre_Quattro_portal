@@ -38,6 +38,7 @@ export interface ClientsResponse extends ResponseBase {
   password?: string,
   profileImage: string,
   phone?: string,
+  clientTranslation?: { [key: string]: ClientTranslationResponse };
 }
 export interface ClientSearchRequest extends SearchRequestBase {
   uuid?: string
@@ -49,7 +50,7 @@ export interface ClientSearchRequest extends SearchRequestBase {
 
 export interface ClientUpdateRequest extends RequestBase {
   uuid?: string
-  clientTranslation?: UserTranslationUpdateRequest[];
+  clientTranslation?: ClientTranslationUpdateRequest[];
   deviceType?: string,
   gender?: string,
   birthDate?: string,
@@ -61,7 +62,7 @@ export interface ClientUpdateRequest extends RequestBase {
 }
 export interface ClientRequest extends RequestBase {
 
-  clientTranslation?: UserTranslationRequest[];
+  clientTranslation?: ClientTranslationRequest[];
   phone?: string,
   countryCode?: string,
   gender?: string,
@@ -69,5 +70,24 @@ export interface ClientRequest extends RequestBase {
   password?: string,
   profileImage?: string,
 
+}
+
+export interface ClientTranslationResponse {
+  uuid?: string;
+  firstName?: string;
+  lastName?: string;
+  language?: string;
+}
+export interface ClientTranslationRequest {
+  uuid?: string;
+  firstName?: string;
+  lastName?: string;
+  language?: string;
+}
+export interface ClientTranslationUpdateRequest {
+  uuid?: string;
+  firstName?: string;
+  lastName?: string;
+  language?: string
 }
 
