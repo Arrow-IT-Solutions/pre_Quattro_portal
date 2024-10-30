@@ -128,6 +128,13 @@ const routes: Routes = [
           import('./modules/transfer/transfer.module').then(
             (m)=>m.TransferModule
           )
+      },
+      {
+        path:'redeem-history',
+        loadChildren:()=>
+          import('./modules/redeem-history/redeem-history.module').then(
+            (m)=>m.RedeemHistoryModule
+          )
       }
     ],
   },
