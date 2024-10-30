@@ -101,6 +101,14 @@ export const navbarData: NavbarData[] = [
     icon: 'border_all',
     routeLink: "category-group"
   },
+  {
+    label: 'ٌGroup Item',
+    labelar: 'عنصر المجموعة',
+    id: 'group-item',
+    icon: 'line_weight',
+    routeLink: "group-item"
+  },
+  
   
   
 ];

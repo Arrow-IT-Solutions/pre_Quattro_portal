@@ -266,7 +266,16 @@
   "Create_Group":"Create New Category Group",
   "Update_Group":"Update Category Group",
   "groupNameAr":"Category Group Name in Arabic",
-  "groupNameEn":"Category Group Name in English"
+  "groupNameEn":"Category Group Name in English",
+  "Search_itemName":"Group Item Name",
+  "Item_name":"Name",
+  "price":"Price",
+  "Group_Type":"Category Group ",
+  "itemNameAr":"Group Item Name in Arabic",
+  "itemNameEn":"Group Item Name in English",
+  "Create_GroupItem":"Create New Group Item",
+  "Update_GroupItem":"Update  Group Item"
+  
 
 
 }
