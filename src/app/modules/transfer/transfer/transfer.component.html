@@ -1,6 +1,6 @@
-<div [formGroup]="dataForm" class="earned ">
+<div [formGroup]="dataForm" class="transfer">
     <div class="row mb-4 m-0 flex-row-reverse p-0">
-      <div class="col-lg-3 col-md-10 col p-0 earned__search">
+      <div class="col-lg-3 col-md-10 col p-0 transfer__search">
         <div class="flex flex-wrap justify-content-center gap-3">
           <span class="p-input-icon-left p-0">
             <i class="pi pi-search"></i>
@@ -9,7 +9,7 @@
           </span>
         </div>
       </div>
-   
+     
     </div>
   
     <ng-container *ngIf="!loading; else ListView">
@@ -33,9 +33,10 @@
                     </div>
                   </div>
                   <div class="card__contents__item">
-                    <div class="card-label">{{ 'Search_EmployeeName' | translate }}</div>
-                    <div class="card-info"> category Group</div>
+                    <div class="card-label">{{ 'event_date' | translate }}</div>
+                    <div class="card-info">30-10-2024</div>
                   </div>
+                 
                   
   
                 </div>
@@ -45,21 +46,12 @@
   
             </div>
             <div class="one">
-              <div [matMenuTriggerFor]="menu" class="card__actions">
-                <span class="material-symbols-outlined card__actions__details">more_vert</span>
+              <div  class="card__actions">
+                <button mat-menu-item >
+                    <span class="material-symbols-outlined">Delete</span>
+                   
+                  </button>
               </div>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item >
-                  <span class="material-symbols-outlined">Edit</span>
-                  {{ 'Edit_Group' | translate }}
-                </button>
-                <button mat-menu-item >
-                  <span class="material-symbols-outlined">Delete</span>
-                  {{ 'Delete_Group' | translate }}
-                </button>
-              </mat-menu>
-  
-  
             </div>
           </div>
         </div>
@@ -67,15 +59,13 @@
   
       <div class="row">
         <div class="total">
-          {{ "totalEarned" | translate }}:
+          {{ "totalTransfer" | translate }}:
           {{ totalRecords }}
         </div>
         <p-paginator [rows]="pageSize" [totalRecords]="totalRecords" [rowsPerPageOptions]="[4, 12, 20, 30]"
           [first]="first" (onPageChange)="paginate($event)"></p-paginator>
       </div>
-      <button class="add-button" (click)="openDialog()">
-        <span class="material-symbols-outlined">add</span>
-      </button>
+    
     </ng-container>
   
     <ng-template #ListView>
@@ -90,5 +80,6 @@
   
   
   </div>
+
 
 
