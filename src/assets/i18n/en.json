@@ -256,7 +256,17 @@
   "Employee-username" : "Email/Username",
   "Employee-gender" : "Gender",
   "EmployeePassword" : "Password",
-  "Birthdate_Employee" : "BirthDate"
+  "Birthdate_Employee" : "BirthDate",
+  "Search_GroupName":"Category Group Name",
+  "category_Type":"Category Type",
+  "Group_name":"Name",
+  "Edit_Group":"Edit",
+  "Delete_Group":"Delete",
+  "totalGroup":"Total Group",
+  "Create_Group":"Create New Category Group",
+  "Update_Group":"Update Category Group",
+  "groupNameAr":"Category Group Name in Arabic",
+  "groupNameEn":"Category Group Name in English"
 
 
 }

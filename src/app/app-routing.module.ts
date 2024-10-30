@@ -100,6 +100,13 @@ const routes: Routes = [
           import('./modules/rewards/rewards.module').then(
             (m)=>m.RewardsModule
           )
+      },
+      {
+        path:'category-group',
+        loadChildren:()=>
+          import('./modules/category-group/category-group.module').then(
+            (m)=>m.CategoryGroupModule
+          )
       }
     
     ],

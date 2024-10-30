@@ -94,5 +94,13 @@ export const navbarData: NavbarData[] = [
     icon: 'star',
     routeLink: "rewards"
   },
+  {
+    label: 'ٌCategory Group',
+    labelar: 'مجموعة الفئات',
+    id: 'category-group',
+    icon: 'border_all',
+    routeLink: "category-group"
+  },
+  
   
 ];
