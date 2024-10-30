@@ -121,6 +121,20 @@ const routes: Routes = [
           import('./modules/earned/earned.module').then(
             (m)=>m.EarnedModule
           )
+      },
+      {
+        path:'transfer',
+        loadChildren:()=>
+          import('./modules/transfer/transfer.module').then(
+            (m)=>m.TransferModule
+          )
+      },
+      {
+        path:'redeem-history',
+        loadChildren:()=>
+          import('./modules/redeem-history/redeem-history.module').then(
+            (m)=>m.RedeemHistoryModule
+          )
       }
     ],
   },

@@ -277,7 +277,11 @@
   "Update_GroupItem":"Update  Group Item",
   "totalEarned":"Total Earned",
   "Create_earned":"Create New Earned",
-  "Update_earned":"Update Earned"
+  "Update_earned":"Update Earned",
+  "totalTransfer":"Total Transfer",
+  "itemName":"Item Name",
+  "reseve":"Reseve",
+  "totalRedeem":"Total Redeem"
   
 
 

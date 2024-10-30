@@ -114,6 +114,20 @@ export const navbarData: NavbarData[] = [
     id: 'earned',
     icon: 'control_point',
     routeLink: "earned"
+  }, 
+  {
+    label: 'ٌTransfer',
+    labelar: 'التحويلات',
+    id: 'transfer',
+    icon: 'swap_vert',
+    routeLink: "transfer"
+  },
+  {
+    label: 'ٌRedeem History',
+    labelar: 'الاستردادات',
+    id: 'redeem-history',
+    icon: 'history',
+    routeLink: "redeem-history"
   },
   
   
