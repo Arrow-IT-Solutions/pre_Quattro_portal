@@ -278,6 +278,9 @@
   "totalEarned":"المجموع",
   "Create_earned":"إنشاء",
   "Update_earned":"تعديل",
-  "totalTransfer":"المجموع"
+  "totalTransfer":"المجموع",
+  "itemName":"اسم العنصر",
+  "reseve":"حجز",
+  "totalRedeem":"المجموع"
   
 }
