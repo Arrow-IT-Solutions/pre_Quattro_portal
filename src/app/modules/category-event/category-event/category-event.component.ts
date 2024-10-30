@@ -24,7 +24,8 @@ export class CategoryEventComponent {
   doneTypingInterval = 1000;
   typingTimer: any;
   isResetting: boolean = false;
-
+  link = '';
+  visible: boolean = false;
   constructor(public formBuilder: FormBuilder, public eventCategoryService: CategoryEventService, public translate: TranslateService, public layoutService: LayoutService, public messageService: MessageService, public confirmationService: ConfirmationService) {
     this.dataForm = this.formBuilder.group({
       eventName: ['']
@@ -117,5 +118,7 @@ export class CategoryEventComponent {
       },
     });
   }
+
+
 
 }

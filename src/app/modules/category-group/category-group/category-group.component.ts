@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { MessageService } from 'primeng/api';
 import { CategoryGroupService } from 'src/app/Core/services/category-group.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
-import { CategoryGroupResponse } from '../category-group.module';
+import { CategoryGroupResponse, CategoryGroupSearchRequest } from '../category-group.module';
 import { AddCategoryGroupComponent } from '../add-category-group/add-category-group.component';
+import { MessageService, ConfirmationService } from 'primeng/api';
+import { CategoryService } from 'src/app/Core/services/category.service';
+import { CategoryResponse, CategorySearchRequest } from '../../categories/categories.module';
+
 
 @Component({
   selector: 'app-category-group',
   templateUrl: './category-group.component.html',
   styleUrls: ['./category-group.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService, ConfirmationService]
 })
 export class CategoryGroupComponent {
   dataForm!: FormGroup;
@@ -21,14 +24,22 @@ export class CategoryGroupComponent {
   totalRecords: number = 0;
   pageSize: number = 12;
   first: number = 0;
-  
+  data: CategoryGroupResponse[] = [];
   loading = false;
-
-  constructor(public formBuilder: FormBuilder, public groupService:CategoryGroupService,
-    public translate: TranslateService, public layoutService: LayoutService, public messageService: MessageService, ) {
+  link = '';
+  categories: CategoryResponse[] = [];
+  visible: boolean = false;
+  constructor(
+    public formBuilder: FormBuilder,
+    public groupService: CategoryGroupService,
+    public translate: TranslateService,
+    public layoutService: LayoutService,
+    public messageService: MessageService,
+    public categoryService: CategoryService,
+    public confirmationService: ConfirmationService) {
     this.dataForm = this.formBuilder.group({
       groupName: [''],
-      Type: ['']
+      category: ['']
 
     });
   }
@@ -42,14 +53,64 @@ export class CategoryGroupComponent {
 
   }
   async ngOnInit() {
+    await this.RetriveCategory();
     await this.FillData();
   }
   Search() {
     this.FillData();
   }
-  
+
+  async RetriveCategory() {
+
+    var categoryID: any;
+
+    if (this.categoryService.SelectedData != null) {
+      categoryID = this.categoryService.SelectedData.uuid
+    }
+    else {
+      if (this.categoryService.SelectedData != null) {
+        //categoryID = this.paymentService.SelectedData?.driver?.uuid,
+      }
+    }
+
+
+    let filter: CategorySearchRequest = {
+
+      uuid: categoryID,
+      pageIndex: "",
+      pageSize: '100000'
+
+    }
+    const response = await this.categoryService.Search(filter) as any
+
+    this.categories = response.data;
+
+  }
+
   async FillData(pageIndex: number = 0) {
-    
+    this.loading = true;
+    this.data = [];
+    this.totalRecords = 0;
+    let filter: CategoryGroupSearchRequest = {
+      uuid: '',
+      name: this.dataForm.controls['groupName'].value,
+      categoryIDFK: this.dataForm.controls['category'].value == null ? null : this.dataForm.controls['category'].value.toString(),
+      includeCategory: "1"
+    };
+
+    const response = (await this.groupService.Search(filter)) as any;
+
+    if (response.data == null || response.data.length == 0) {
+      this.data = [];
+      this.totalRecords = 0;
+    } else if (response.data != null && response.data.length != 0) {
+      this.data = response.data;
+      this.totalRecords = response.data[0];
+    }
+
+    this.totalRecords = response.totalRecords;
+
+    this.loading = false;
   }
   async resetform() {
     this.isResetting = true;
@@ -78,5 +139,51 @@ export class CategoryGroupComponent {
       this.FillData();
     });
   }
+  showDialog(link: string) {
+    this.link = link;
+    this.visible = true;
+  }
 
+  async FillCategory(event: any = null) {
+
+    let filterInput = '';
+    if (event != null) {
+      filterInput = event.filter
+    }
+
+    let filter: CategorySearchRequest = {
+
+      uuid: '',
+      pageIndex: "",
+      pageSize: '100000'
+    }
+    const response = await this.categoryService.Search(filter) as any
+
+    this.categories = response.data
+  }
+
+  confirmDelete(row: CategoryGroupResponse) {
+
+    console.log(row)
+    this.confirmationService.confirm({
+      message: "Do_you_want_to_delete_this_record?",
+      header: "Delete_Confirmation",
+      icon: 'pi pi-info-circle',
+      key: 'positionDialog',
+      closeOnEscape: true,
+      accept: async () => {
+        const response = (await this.groupService.Delete(row.uuid!)) as any;
+
+        this.confirmationService.close();
+
+        this.layoutService.showSuccess(this.messageService, 'toste', true, response.requestMessage);
+
+        this.FillData();
+
+      },
+      reject: () => {
+        // this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
+      },
+    });
+  }
 }
