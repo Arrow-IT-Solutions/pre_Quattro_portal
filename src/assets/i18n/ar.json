@@ -274,6 +274,9 @@
   "itemNameAr":"اسم المجموعة باللغة العربية",
   "itemNameEn":"اسم المجموعة باللغة الانكليزية",
   "Create_GroupItem":"إنشاء عنصر مجموعة جديد",
-  "Update_GroupItem":"تعديل عنصر المجموعة"
+  "Update_GroupItem":"تعديل عنصر المجموعة",
+  "totalEarned":"المجموع",
+  "Create_earned":"إنشاء",
+  "Update_earned":"تعديل"
   
 }

@@ -23,8 +23,5 @@ import { ResponseBase } from 'src/app/shared/class/class';
 })
 export class GroupItemModule { }
 export interface GroupItemResponse extends ResponseBase {
-
-
-
 }
 

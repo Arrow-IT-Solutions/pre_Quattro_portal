@@ -114,8 +114,14 @@ const routes: Routes = [
           import('./modules/group-item/group-item.module').then(
             (m)=>m.GroupItemModule
           )
+      },
+      {
+        path:'earned',
+        loadChildren:()=>
+          import('./modules/earned/earned.module').then(
+            (m)=>m.EarnedModule
+          )
       }
-    
     ],
   },
 

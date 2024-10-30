@@ -108,6 +108,13 @@ export const navbarData: NavbarData[] = [
     icon: 'line_weight',
     routeLink: "group-item"
   },
+  {
+    label: 'ٌEarned',
+    labelar: 'المكاسب',
+    id: 'earned',
+    icon: 'control_point',
+    routeLink: "earned"
+  },
   
   
   

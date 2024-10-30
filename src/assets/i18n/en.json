@@ -274,7 +274,10 @@
   "itemNameAr":"Group Item Name in Arabic",
   "itemNameEn":"Group Item Name in English",
   "Create_GroupItem":"Create New Group Item",
-  "Update_GroupItem":"Update  Group Item"
+  "Update_GroupItem":"Update  Group Item",
+  "totalEarned":"Total Earned",
+  "Create_earned":"Create New Earned",
+  "Update_earned":"Update Earned"
   
 
 
