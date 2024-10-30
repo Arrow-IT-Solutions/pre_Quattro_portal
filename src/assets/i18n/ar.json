@@ -256,5 +256,15 @@
   "Employee-username" : "الإيميل/اسم المستخدم",
   "Employee-gender" : "الجنس",
   "EmployeePassword" : "الرقم السري",
-  "Birthdate_Employee" : "تاريخ الميلاد"
+  "Birthdate_Employee" : "تاريخ الميلاد",
+  "Search_GroupName":"اسم المجموعة ",
+  "category_Type":"نوع الفئة",
+  "Group_name":"الاسم",
+  "Edit_Group":"تعديل",
+  "Delete_Group":"حذف",
+  "totalGroup":"المجموع",
+  "Create_Group":"إنشاء مجموعة فئات جديدة",
+  "Update_Group":"تعديل مجموعة الفئات",
+  "groupNameAr":"اسم مجموعة الفئة باللغة العربية",
+  "groupNameEn":"اسم مجموعةالفئة باللغة الانكليزية"
 }
