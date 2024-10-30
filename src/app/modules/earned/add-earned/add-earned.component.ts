@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { CategoryGroupService } from 'src/app/Core/services/category-group.service';
+import { EarnedService } from 'src/app/Core/services/earned.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
 
 @Component({
-  selector: 'app-add-category-group',
-  templateUrl: './add-category-group.component.html',
-  styleUrls: ['./add-category-group.component.scss'],
+  selector: 'app-add-earned',
+  templateUrl: './add-earned.component.html',
+  styleUrls: ['./add-earned.component.scss'],
   providers: [MessageService]
 })
-export class AddCategoryGroupComponent {
-
+export class AddEarnedComponent {
   selectedtype: string | null = null;
   dataForm!: FormGroup;
   submitted: boolean = false;
@@ -19,11 +18,10 @@ export class AddCategoryGroupComponent {
   loading: boolean = false;
   
 
-  constructor(public formBuilder: FormBuilder, public layoutService: LayoutService, public groupService: CategoryGroupService,  public messageService: MessageService) {
+  constructor(public formBuilder: FormBuilder, public layoutService: LayoutService, public earnedService:EarnedService,  public messageService: MessageService) {
     this.dataForm = formBuilder.group({
-      type: [''],
-      groupNameAr: [''],
-      groupNameEn: [''],
+      client_name: [''],
+      quattros:['']
       
 
     })
@@ -35,7 +33,7 @@ export class AddCategoryGroupComponent {
 
       this.resetForm();
 
-      if (this.groupService.SelectedData != null) {
+      if (this.earnedService.SelectedData != null) {
         await this.FillData();
       }
     } catch (exceptionVar) {
@@ -77,8 +75,5 @@ export class AddCategoryGroupComponent {
     
   }
 
-  getTypeLable(): string {
-    return this.layoutService.config.lang == 'ar' ? 'nameAr' : 'nameEn';
-  }
-  
+
 }

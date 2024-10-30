@@ -78,9 +78,7 @@ export class AddGroupItemComponent {
     
   }
 
-  getTypeLable(): string {
-    return this.layoutService.config.lang == 'ar' ? 'nameAr' : 'nameEn';
-  }
+ 
   
 
 }
