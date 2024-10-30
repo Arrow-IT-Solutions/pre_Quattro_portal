@@ -114,6 +114,12 @@ export const navbarData: NavbarData[] = [
     id: 'earned',
     icon: 'control_point',
     routeLink: "earned"
+  }, {
+    label: 'ٌTransfer',
+    labelar: 'التحويلات',
+    id: 'transfer',
+    icon: 'sync',
+    routeLink: "transfer"
   },
   
   
