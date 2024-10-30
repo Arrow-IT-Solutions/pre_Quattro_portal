@@ -107,8 +107,21 @@ const routes: Routes = [
           import('./modules/category-group/category-group.module').then(
             (m)=>m.CategoryGroupModule
           )
+      },
+      {
+        path:'group-item',
+        loadChildren:()=>
+          import('./modules/group-item/group-item.module').then(
+            (m)=>m.GroupItemModule
+          )
+      },
+      {
+        path:'earned',
+        loadChildren:()=>
+          import('./modules/earned/earned.module').then(
+            (m)=>m.EarnedModule
+          )
       }
-    
     ],
   },
 

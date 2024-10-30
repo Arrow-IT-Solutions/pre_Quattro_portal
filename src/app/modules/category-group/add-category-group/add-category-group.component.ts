@@ -14,10 +14,7 @@ import { CategoryService } from 'src/app/Core/services/category.service';
   providers: [MessageService]
 })
 export class AddCategoryGroupComponent {
-  // Type: any[] = [
-  //   { nameAr: 'منتج', nameEn: 'product', value: 0 },
-  //   { nameAr: 'ميزة', nameEn: 'feature', value: 1 }
-  // ];
+
   selectedtype: string | null = null;
   dataForm!: FormGroup;
   submitted: boolean = false;
