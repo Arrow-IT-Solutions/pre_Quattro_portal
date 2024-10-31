@@ -1,76 +1,98 @@
 <form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
-    <div class="definitions row">
-      <div class="col-lg-6 col-md-12">
-        <div class="box-shadow mb-3">
-          <div class="row">
-            <div class="col-12 side-icon">
-              <span class="material-symbols-outlined">info</span>
-              <span>{{ 'Basic_Info_Category' | translate }}</span>
+  <div class="definitions row">
+    <div class="col-lg-6 col-md-12">
+      <div class="box-shadow mb-3">
+        <div class="row">
+          <div class="col-12 side-icon">
+            <span class="material-symbols-outlined">info</span>
+            <span>{{ 'Basic_Info_Category' | translate }}</span>
+          </div>
+          <div class="col-12 row m-0 p-0">
+            <!-- <div class="col-12 mb-3">
+              <div class="p-float-label">
+                <input pInputText type="text" formControlName="nameAr" />
+                <label>{{ 'NameAr_Category' | translate }}</label>
+                <span *ngIf="submitted && form['nameAr'].errors" class="error-validation">{{ 'Field_Required_Product' |
+                  translate }}</span>
+              </div>
             </div>
-            <div class="col-12 row m-0 p-0">
-              <div class="col-12 mb-3">
-                <div class="p-float-label">
-                  <input pInputText type="text" formControlName="nameAr" />
-                  <label>{{ 'NameAr_Category' | translate }}</label>
-                  <span *ngIf="submitted && form['nameAr'].errors" class="error-validation">{{ 'Field_Required_Product' | translate }}</span>
-                </div>
+            <div class="col-12 mb-3">
+              <div class="p-float-label">
+                <input pInputText type="text" formControlName="nameEn" />
+                <label>{{ 'NameEn_Category' | translate }}</label>
+                <span *ngIf="submitted && form['nameEn'].errors" class="error-validation">{{ 'Field_Required_Product' |
+                  translate }}</span>
               </div>
-              <div class="col-12 mb-3">
-                <div class="p-float-label">
-                  <input pInputText type="text" formControlName="nameEn" />
-                  <label>{{ 'NameEn_Category' | translate }}</label>
-                  <span *ngIf="submitted && form['nameEn'].errors" class="error-validation">{{ 'Field_Required_Product' | translate }}</span>
-                </div>
+            </div> -->
+            <div class="col-12 mb-3">
+              <div class="p-float-label">
+                <p-dropdown [options]="categoryTypes" optionLabel="value" optionValue="key"
+                  formControlName="type"></p-dropdown>
+                <label>{{ 'Type_Category' | translate }}</label>
+                <span *ngIf="submitted && form['type'].errors" class="error-validation">{{ 'Field_Required_Product' |
+                  translate }}</span>
               </div>
-              <div class="col-12 mb-3">
-                <div class="p-float-label">
-                  <input pInputText type="text" formControlName="nameEn" />
-                  <label>{{ 'Type_Category' | translate }}</label>
-                  <span *ngIf="submitted && form['nameEn'].errors" class="error-validation">{{ 'Field_Required_Product' | translate }}</span>
-                </div>
-              </div>
-              
             </div>
+
+            <div class="col-12 mb-3">
+              <div class="p-float-label">
+                <textarea pInputText formControlName="descAr"></textarea>
+                <label>{{ 'DescAr_Category' | translate }}</label>
+                <span *ngIf="submitted && form['descAr'].errors" class="error-validation">{{ 'Field_Required_Product' |
+                  translate }}</span>
+              </div>
+            </div>
+
+
+            <div class="col-12 mb-3">
+              <div class="p-float-label">
+                <textarea pInputText formControlName="descEn"></textarea>
+                <label>{{ 'DescEn_Category' | translate }}</label>
+                <span *ngIf="submitted && form['descEn'].errors" class="error-validation">{{ 'Field_Required_Product' |
+                  translate }}</span>
+              </div>
+            </div>
+
           </div>
         </div>
-        
       </div>
-  
-      <div class="col-lg-6 col-md-12">
-        <div class="box-shadow mb-3">
-          <div class="row">
-            <div class="side-icon col-12">
-              <span class="material-symbols-outlined">add_photo_alternate</span>
-              <span>{{ 'Image_Category' | translate }}</span>
-            </div>
-            <div class="col-12">
-              <app-img-control [fileInput]="fileInput" (onSelected)="onSelectedFile($event)"></app-img-control>
-              <!-- original variant image -->
-  
-              <!-- <div class="upload-images__file ml-auto" *ngIf="selectedImage != null && selectedImage.imageOriginalLink != ''">
+
+    </div>
+
+    <div class="col-lg-6 col-md-12">
+      <div class="box-shadow mb-3">
+        <div class="row">
+          <div class="side-icon col-12">
+            <span class="material-symbols-outlined">add_photo_alternate</span>
+            <span>{{ 'Image_Category' | translate }}</span>
+          </div>
+          <div class="col-12">
+            <app-img-control [fileInput]="fileInput" (onSelected)="onSelectedFile($event)"></app-img-control>
+            <!-- original variant image -->
+
+            <!-- <div class="upload-images__file ml-auto" *ngIf="selectedImage != null && selectedImage.imageOriginalLink != ''">
                 <p-overlayPanel #op>
                   <img [src]="selectedImage.imageOriginalLink == '' ? defultImg : selectedImage.imageOriginalLink" alt="product" />
                 </p-overlayPanel>
-  
+
                 <div class="file-thumbnail">
                   <img [src]="selectedImage.imageOriginalLink == '' ? defultImg : selectedImage.imageOriginalLink" (click)="op.toggle($event)" />
                 </div>
-  
+
                 <span class="file-name">{{ 'Original_Image_Product' | translate }}</span>
                 <span class="file-size"></span>
               </div> -->
-            </div>
           </div>
         </div>
-  
-      
       </div>
-  
-     
-  
-      <div class="col-xs-12 text-end mt-4">
-        <p-button type="Submit" class="btn-primary">{{ 'Next_Category' | translate }}</p-button>
-      </div>
+
+
     </div>
-  </form>
-  
+
+
+
+    <div class="col-xs-12 text-end mt-4">
+      <p-button type="Submit" class="btn-primary">{{ 'Next_Category' | translate }}</p-button>
+    </div>
+  </div>
+</form>

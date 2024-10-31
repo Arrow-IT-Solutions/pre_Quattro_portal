@@ -281,8 +281,15 @@
   "totalTransfer":"Total Transfer",
   "itemName":"Item Name",
   "reseve":"Reseve",
-  "totalRedeem":"Total Redeem"
-  
+  "totalRedeem":"Total Redeemed",
+  "Search_ClientID" : "Client",
+  "Status_RewardHistory" : "Status",
+  "Recieved_RewardHistory" : "Deliver",
+  "Type_Transfer" : "Transfer Type",
+  "Delete_Earned" : "Delete",
+  "DescriptionAr_GroupItem" : "Description in Arabic",
+  "DescriptionEn_GroupItem" : "Description in English"
+
 
 
 }

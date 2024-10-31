@@ -52,7 +52,6 @@ export interface CategoryTranslationResponse {
 
 export interface CategoryImageRequest extends RequestBase {
   image: string,
-  categoryIDFK: string,
 }
 
 export interface CategoryImageResponse extends ResponseBase {
@@ -64,6 +63,7 @@ export interface CategoryRequest extends RequestBase {
   categoryTranslation?: CategoryTranslationRequest[];
   coverImage: string,
   type: string,
+  categoryImages?: CategoryImageRequest[];
 }
 
 export interface CategoryUpdateRequest extends RequestBase {

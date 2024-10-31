@@ -47,22 +47,10 @@ export class EventsComponent {
   }
   async RetriveCategory() {
 
-    var categoryID: any;
-
-    if (this.eventService.SelectedData != null) {
-      categoryID = this.eventService.SelectedData.eventCategoryIDFK
-    }
-    else {
-      if (this.eventService.SelectedData != null) {
-        //categoryID = this.paymentService.SelectedData?.driver?.uuid,
-      }
-    }
-
-
     let filter: EventCategorySearchRequest = {
 
       name: '',
-      uuid: categoryID,
+      uuid: '',
       pageIndex: "",
       pageSize: '100000'
 

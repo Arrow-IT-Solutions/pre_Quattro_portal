@@ -35,7 +35,8 @@ export interface EmployeesResponse extends ResponseBase {
   password?: string,
   image: string,
   phone?: string,
-  email?: string
+  email?: string,
+  employeeTranslation?: { [key: string]: EmployeeTranslationResponse };
 }
 export interface EmployeeSearchRequest extends SearchRequestBase {
   uuid?: string
@@ -47,7 +48,7 @@ export interface EmployeeSearchRequest extends SearchRequestBase {
 
 export interface EmployeeUpdateRequest extends RequestBase {
   uuid?: string
-  employeeTranslation?: UserTranslationRequest[];
+  employeeTranslation?: EmployeeTranslationRequest[];
   deviceType?: string,
   gender?: string,
   birthDate?: string,
@@ -61,7 +62,7 @@ export interface EmployeeUpdateRequest extends RequestBase {
 }
 export interface EmployeeRequest extends RequestBase {
 
-  employeeTranslation?: UserTranslationRequest[];
+  employeeTranslation?: EmployeeTranslationRequest[];
   phone?: string,
   gender?: string,
   birthDate?: string,
@@ -70,4 +71,23 @@ export interface EmployeeRequest extends RequestBase {
   image?: string,
   countryCode?: string,
 
+}
+
+export interface EmployeeTranslationResponse {
+  uuid?: string;
+  firstName?: string;
+  lastName?: string;
+  language?: string;
+}
+export interface EmployeeTranslationRequest {
+  uuid?: string;
+  firstName?: string;
+  lastName?: string;
+  language?: string;
+}
+export interface EmployeeTranslationUpdateRequest {
+  uuid?: string;
+  firstName?: string;
+  lastName?: string;
+  language?: string
 }

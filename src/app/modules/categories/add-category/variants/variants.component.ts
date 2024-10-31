@@ -1,10 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { CategoryService } from 'src/app/Core/services/category.service';
 import { ImgControlComponent } from 'src/app/layout/component/img-control/img-control.component';
 import { LayoutService } from 'src/app/layout/service/layout.service';
+import { CategoryImageRequest, CategoryRequest, CategoryUpdateRequest } from '../../categories.module';
 
 @Component({
   selector: 'app-variants',
@@ -21,32 +22,33 @@ export class VariantsComponent {
   genCode: boolean = false;
   centerOptions: any[] = [];
   defultImg = '../../../../../../assets/images/upload.jpg';
+  categoryImages: CategoryImageRequest[] = [];
 
   @ViewChild('imgControl') imgControl: ImgControlComponent;
- 
+
   brandOptions: any[] = [];
   sizeOptions: any = [];
   colorOptions: any = [];
   fileInput: string;
   file: any;
+  images: string[] = [];
 
-  constructor(public formBuilder: FormBuilder,  private router: Router, public productService:CategoryService, public layoutService: LayoutService, public messageService: MessageService) {
+  constructor(
+    public formBuilder: FormBuilder,
+    private router: Router,
+    public categoryService: CategoryService,
+    public layoutService: LayoutService,
+    public messageService: MessageService,
+    public route: ActivatedRoute) {
     this.dataForm = formBuilder.group({
-      code: ['', Validators.required],
-      brandIDFK: [''],
-      sizeIDFK: [''],
-      colorIDFK: [''],
-      modelNumber: [''],
-      salePrice: [0],
-      boughtPrice: [0],
-      status: [true]
+
       // currentQuantity: [0]
     });
 
-    
+
     // todo : put the first variant (if not empty variants) as a selected variant
 
-    
+
     // else {
     //   this.selectedVariantKey = Object.keys(this.productService.SelectedData?.productVariant)[0];
     //   this.selectedVariantValue = Object.values(this.productService.SelectedData?.productVariant)[0];
@@ -75,12 +77,27 @@ export class VariantsComponent {
   async ngOnInit() {
     try {
       this.loading = true;
+      console.log('HERE')
+      // const navigation = this.router.getCurrentNavigation();
+      // const state = navigation?.extras?.state as { categoryData: CategoryUpdateRequest | CategoryRequest };
 
+      // console.log('state', state)
+
+      // if (state) {
+      //   console.log('Received category data:', state.categoryData);
+      // }
+      this.route.queryParams.subscribe(params => {
+        if (params['data']) {
+          const categoryData = JSON.parse(params['data']);
+          console.log('Received category data:', categoryData);
+          // Now `categoryData` is accessible in this component
+        }
+      });
       this.resetForm();
 
-      
 
-      if (this.productService.SelectedData != null) {
+
+      if (this.categoryService.SelectedData != null) {
         await this.FillData();
       }
     } catch (exceptionVar) {
@@ -101,13 +118,6 @@ export class VariantsComponent {
       this.btnLoading = true;
 
       console.log('this.dataFrom : ', this.dataForm);
-
-      // if (this.dataForm.invalid) {
-      //   console.log('invalid form ?  : ' + this.dataForm.invalid);
-
-      //   this.submitted = true;
-      //   return;
-      // }
       await this.Save();
     } catch (exceptionVar) {
     } finally {
@@ -118,51 +128,43 @@ export class VariantsComponent {
   async Save() {
     let response;
 
-    // var productTranslations = Object.entries(this.productService.SelectedData?.productTranslation!).map(([language, translation]) => ({
-    //   name: translation.name,
-    //   desc: translation.desc,
-    //   language: language
-    // }));
+    this.categoryImages = this.images.map((image, index) => ({
+      image: image
+    }));
 
-    
+    let categoryData
 
-    // if (this.productService.SelectedData?.uuid != '-1') {
-    //   //update
-    //   var productUpdate: ProductUpdateRequest = {
-    //     uuid: this.productService.SelectedData?.uuid?.toString(),
-    //     productTranslation: productTranslations,
-    //     productVariant: this.ConvertToUpdateRequest(this.variants),
-    //     //TODO
-       
-    //     status: this.productService.SelectedData?.status?.toString(),
-    //     imageLink: this.productService.SelectedData?.imageLink
-    //   };
-    //   response = await this.productService.Update(productUpdate);
-    // } else {
-      // add
+    this.route.queryParams.subscribe(params => {
+      if (params['data']) {
+        categoryData = JSON.parse(params['data']);
+        console.log('Received category data:', categoryData);
+        // Now `categoryData` is accessible in this component
+      }
+    });
 
-  //     var productAdd: ProductRequest = {
-  //       uuid: '',
-  //       productTranslation: productTranslations,
-  //       productVariant: this.ConvertToAddRequest(this.variants),
-  //       //TODO
-  //       categoryIDFK: this.productService.SelectedData?.category?.uuid?.toString(),
-  //       centerIDFK: this.productService.SelectedData?.center?.uuid?.toString(),
-  //       tags: tags,
-  //       status: this.productService.SelectedData?.status?.toString(),
-  //       imageLink: this.productService.SelectedData?.imageLink
-  //     };
-  //     response = await this.productService.Add(productAdd);
-  //   }
-  //   if (response?.requestStatus?.toString() == '200') {
-  //     this.layoutService.showSuccess(this.messageService, 'toast', true, response?.requestMessage);
+    var categoryRequest: CategoryRequest = {
+      categoryTranslation: categoryData.categoryTranslation,
+      type: categoryData.type,
+      categoryImages: this.categoryImages,
+      coverImage: categoryData.coverImage
+    }
 
-  //     this.router.navigate(['layout-admin/products']);
-  //   } else {
-  //     this.layoutService.showError(this.messageService, 'toast', true, response?.requestMessage);
-  //   }
-  //   this.btnLoading = false;
-  //   this.submitted = false;
+    console.log(categoryRequest)
+
+    response = await this.categoryService.Add(categoryRequest)
+    if (response?.requestStatus?.toString() == '200') {
+      this.layoutService.showSuccess(this.messageService, 'toast', true, response?.requestMessage);
+      if (this.categoryService.SelectedData == null) {
+        this.resetForm();
+      } else {
+        this.categoryService.Dialog.close();
+      }
+    } else {
+      this.layoutService.showError(this.messageService, 'toast', true, response?.requestMessage);
+    }
+
+    this.btnLoading = false;
+    this.submitted = false;
   }
 
   resetForm() {
@@ -174,32 +176,22 @@ export class VariantsComponent {
 
   onSelectedFile(file: any) {
     this.file = file;
-    // if (this.selectedVariantValue != null) {
-    //   this.selectedVariantValue.newImage = file;
-    // }
-    console.log('image : ', this.file);
   }
   AddVariant() {
-    // var item: ProductVariantResponse = {
-    //   code: '',
-    //   brand: { uuid: undefined },
-    //   size: { uuid: undefined },
-    //   color: { uuid: undefined },
-    //   modelNumber: '',
-    //   salePrice: '0',
-    //   boughtPrice: '0',
-    //   imageLink: '',
-    //   status: '1'
 
-    //   // quantity: '0'
-    // };
-    // item.uuid = Object.keys(this.variants).length.toString();
-    // this.variants[Object.keys(this.variants).length.toString()] = item;
-    // this.selectedVariantKey = (Object.keys(this.variants).length - 1).toString();
-    // this.selectedVariantValue = this.variants[(Object.keys(this.variants).length - 1).toString()];
-    // this.FillForm();
-    // console.log('adddva : variants :', this.variants);
-    // console.log('adddva :  this.selectedVariantKey :', this.selectedVariantKey);
+    if (this.file != undefined || this.file != null || this.file == '') {
+      this.images.push(this.file);
+      this.file = ''
+      this.fileInput = ''
+    }
+
+
+    console.log(this.images)
+
+  }
+
+  deleteImage(index: number) {
+    this.images.splice(index, 1);
   }
 
 }
