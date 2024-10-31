@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { CategoryService } from 'src/app/Core/services/category.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
-import { CategoryTranslationResponse } from '../../categories.module';
+import { CategoryTranslationResponse, CategoryRequest, CategoryUpdateRequest } from '../../categories.module';
+import { ConstantService } from 'src/app/Core/services/constant.service';
+import { ConstantResponse } from 'src/app/Core/services/constant.service';
 
 @Component({
   selector: 'app-definitions',
@@ -24,19 +26,20 @@ export class DefinitionsComponent {
   defultImg = '../../../../../../assets/images/upload.jpg';
   fileInput: string;
   file: any;
-
-
-
-  constructor(public formBuilder: FormBuilder, public router: Router, public layoutService: LayoutService, public messageService: MessageService, public categoryService: CategoryService) {
+  categoryTypes: ConstantResponse[] = [];
+  addCategory: CategoryRequest
+  category: CategoryUpdateRequest
+  constructor(
+    public formBuilder: FormBuilder,
+    public router: Router,
+    public layoutService: LayoutService,
+    public messageService: MessageService,
+    public categoryService: CategoryService,
+    public constantService: ConstantService) {
     this.dataForm = formBuilder.group({
-      nameAr: ['', Validators.required],
-      nameEn: ['', Validators.required],
-      category: ['', Validators.required],
-      center: ['', Validators.required],
-      tags: [''],
-      descAr: [''],
-      descEn: [''],
-      status: [true]
+      type: ['', Validators.required],
+      descAr: ['', Validators.required],
+      descEn: ['', Validators.required],
     });
 
     console.log('constr selected data : ', this.categoryService.SelectedData);
@@ -47,10 +50,9 @@ export class DefinitionsComponent {
 
     try {
       this.loading = true;
-
+      const categoryTypeResponse = await this.constantService.Search('CategoryType', 2) as any;
+      this.categoryTypes = categoryTypeResponse.data;
       this.resetForm();
-
-
 
       if (this.categoryService.SelectedData != null) {
         await this.FillData();
@@ -79,7 +81,51 @@ export class DefinitionsComponent {
       //   return;
       // }
       // await this.Save();
-      this.router.navigate(['layout-admin/categories/add-category/variants']);
+
+      var categoryTranslation = [
+        {
+          description: this.dataForm.controls['descAr'].value == null ? '' : this.dataForm.controls['descAr'].value.toString(),
+          language: 'ar'
+        },
+        {
+          description: this.dataForm.controls['descEn'].value == null ? '' : this.dataForm.controls['descEn'].value.toString(),
+          language: 'en'
+        }
+      ];
+
+      if (this.categoryService.SelectedData != null) {
+        // update
+
+        this.category = {
+          uuid: this.categoryService.SelectedData?.uuid?.toString(),
+          categoryTranslation: categoryTranslation,
+          type: this.dataForm.controls['type'].value.toString(),
+          coverImage: this.file
+        };
+        console.log(this.category)
+
+      } else {
+        // add
+
+        this.addCategory = {
+          categoryTranslation: categoryTranslation,
+          type: this.dataForm.controls['type'].value.toString(),
+          coverImage: this.file
+        };
+        console.log(this.addCategory)
+
+      }
+
+
+      // this.router.navigate(['layout-admin/categories/add-category/variants'], {
+      //   state: {
+      //     categoryData: this.categoryService.SelectedData != null ? this.category : this.addCategory
+      //   }
+      // });
+      const categoryData = JSON.stringify(this.categoryService.SelectedData != null ? this.category : this.addCategory);
+      this.router.navigate(['layout-admin/categories/add-category/variants'], {
+        queryParams: { data: categoryData }
+      });
     } catch (exceptionVar) {
     } finally {
       this.btnLoading = false;

@@ -99,8 +99,8 @@ export class LoginComponent implements AfterViewInit {
           this.router.navigateByUrl('layout-admin/dashBoard'); // admin or user
           break;
 
-        case '3':
-          this.router.navigateByUrl('layout/home'); // cashier
+        case '1':
+          this.router.navigateByUrl('layout-admin/dashBoard'); // cashier
           break;
       }
 

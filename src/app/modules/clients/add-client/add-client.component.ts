@@ -26,8 +26,12 @@ export class AddClientComponent {
   file: any;
   fileInput: any
   img: boolean = true;
-  constructor(public formBuilder: FormBuilder, public layoutService: LayoutService, public clientService: ClientsService, public constantService: ConstantService
-    , public countryCodeService: CountryCodeService
+  constructor(
+    public formBuilder: FormBuilder,
+    public layoutService: LayoutService,
+    public clientService: ClientsService,
+    public constantService: ConstantService,
+    public countryCodeService: CountryCodeService
   ) {
     this.dataForm = formBuilder.group({
       firstNameAr: [''],

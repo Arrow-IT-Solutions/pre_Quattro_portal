@@ -60,22 +60,11 @@ export class AddEventComponent {
 
   async RetriveClient() {
 
-    var clientID: any;
-
-    if (this.eventService.SelectedData != null) {
-      clientID = this.eventService.SelectedData.client?.uuid
-    }
-    else {
-      if (this.eventService.SelectedData != null) {
-        //clientID = this.paymentService.SelectedData?.driver?.uuid,
-      }
-    }
-
 
     let filter: ClientSearchRequest = {
 
       name: '',
-      uuid: clientID,
+      uuid: '',
       pageIndex: "",
       pageSize: '100000'
 
@@ -90,22 +79,10 @@ export class AddEventComponent {
 
   async RetriveCategory() {
 
-    var categoryID: any;
-
-    if (this.eventService.SelectedData != null) {
-      categoryID = this.eventService.SelectedData.eventCategoryIDFK
-    }
-    else {
-      if (this.eventService.SelectedData != null) {
-        //categoryID = this.paymentService.SelectedData?.driver?.uuid,
-      }
-    }
-
-
     let filter: EventCategorySearchRequest = {
 
       name: '',
-      uuid: categoryID,
+      uuid: '',
       pageIndex: "",
       pageSize: '100000'
 
@@ -214,7 +191,15 @@ export class AddEventComponent {
   }
 
   async FillData() {
-
+    let temp = {
+      clientName: this.eventService.SelectedData?.client.uuid,
+      contryCode: this.eventService.SelectedData?.countryCode,
+      clientPhone: this.eventService.SelectedData?.phone,
+      eventCategory: this.eventService.SelectedData?.eventCategory.uuid,
+      nuOfPersons: this.eventService.SelectedData?.noofPerson,
+      Date: this.eventService.SelectedData?.date
+    };
+    this.dataForm.patchValue(temp);
 
   }
 

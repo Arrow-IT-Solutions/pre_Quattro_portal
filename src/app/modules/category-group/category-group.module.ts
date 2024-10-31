@@ -34,8 +34,8 @@ export interface CategoryGroupResponse extends ResponseBase {
 }
 export interface CategoryGroupSearchRequest extends SearchRequestBase {
   uuid?: string;
-  name: string;
-  categoryIDFK: string,
+  name?: string;
+  categoryIDFK?: string,
   includeCategory: string
 
 }
