@@ -36,8 +36,6 @@ export class EmployeesComponent {
       id: [''],
       role: [''],
       userName: ['']
-
-
     });
   }
   async ngOnInit() {
@@ -54,6 +52,7 @@ export class EmployeesComponent {
     let filter: EmployeeSearchRequest = {
       name: this.dataForm.controls['employeeName'].value,
       phone: this.dataForm.controls['phone'].value,
+      includeUser: '1'
     };
     const response = (await this.employeeService.Search(filter)) as any;
     console.log(response)
