@@ -288,7 +288,9 @@
   "Type_Transfer" : "Transfer Type",
   "Delete_Earned" : "Delete",
   "DescriptionAr_GroupItem" : "Description in Arabic",
-  "DescriptionEn_GroupItem" : "Description in English"
+  "DescriptionEn_GroupItem" : "Description in English",
+  "DescAr_Category" : "Description in Arabic",
+  "DescEn_Category" : "Description in English"
 
 
 

@@ -37,6 +37,7 @@ export interface CategoryResponse extends ResponseBase {
   typeValue: string,
   coverImage: string,
   categoryTranslation?: { [key: string]: CategoryTranslationResponse };
+  categoryImage: CategoryImageResponse[]
 
 }
 export interface CategorySearchRequest extends SearchRequestBase {

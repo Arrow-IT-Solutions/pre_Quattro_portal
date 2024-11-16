@@ -67,7 +67,7 @@
             <span>{{ 'Image_Category' | translate }}</span>
           </div>
           <div class="col-12">
-            <app-img-control [fileInput]="fileInput" (onSelected)="onSelectedFile($event)"></app-img-control>
+            <app-img-control [fileInput]="file" (onSelected)="onSelectedFile($event)"></app-img-control>
             <!-- original variant image -->
 
             <!-- <div class="upload-images__file ml-auto" *ngIf="selectedImage != null && selectedImage.imageOriginalLink != ''">
