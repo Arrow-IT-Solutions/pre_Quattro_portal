@@ -281,6 +281,8 @@
   "totalTransfer":"المجموع",
   "itemName":"اسم العنصر",
   "reseve":"حجز",
-  "totalRedeem":"المجموع"
-  
+  "totalRedeem":"المجموع",
+  "DescAr_Category" : "وصف الفئة بالعربية",
+  "DescEn_Category" : "وصف الفئة بالإنجليزية "
+
 }

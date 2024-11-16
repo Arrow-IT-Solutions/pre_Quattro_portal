@@ -58,7 +58,7 @@
             <span class="material-symbols-outlined" [matMenuTriggerFor]="menu">more_vert</span>
           </div>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button mat-menu-item (click)="OpenCategory(row)">
               <span class="material-symbols-outlined">edit</span>
               {{ 'Edit_Category' | translate }}
             </button>

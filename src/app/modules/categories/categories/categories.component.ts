@@ -64,7 +64,7 @@ export class CategoriesComponent {
     let filter: CategorySearchRequest = {
       uuid: '',
       type: '',
-      includeImages: '0'
+      includeImages: '1'
 
     }
     const response = (await this.categoryService.Search(filter)) as any;
