@@ -143,7 +143,7 @@ export class AddEmployeeComponent {
       console.log(client)
       response = await this.employeeService.Update(client);
 
-      
+    
       if(response.requestStatus == "200")
       {
         this.employeeService.Dialog.adHostChild.viewContainerRef.clear();
