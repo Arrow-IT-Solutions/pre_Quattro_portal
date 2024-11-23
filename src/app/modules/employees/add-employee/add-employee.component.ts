@@ -143,6 +143,13 @@ export class AddEmployeeComponent {
       console.log(client)
       response = await this.employeeService.Update(client);
 
+      
+      if(response.requestStatus == "200")
+      {
+        this.employeeService.Dialog.adHostChild.viewContainerRef.clear();
+        this.employeeService.Dialog.adHostDynamic.viewContainerRef.clear();
+      }
+
     } else {
       // add
 
@@ -159,6 +166,7 @@ export class AddEmployeeComponent {
       console.log(addClient)
 
       response = await this.employeeService.Add(addClient);
+    
     }
 
     this.btnLoading = false;
