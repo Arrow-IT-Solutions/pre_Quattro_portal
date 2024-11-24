@@ -146,6 +146,13 @@ export class AddEmployeeComponent {
       };
       response = await this.employeeService.Update(employee);
 
+    
+      if(response.requestStatus == "200")
+      {
+        this.employeeService.Dialog.adHostChild.viewContainerRef.clear();
+        this.employeeService.Dialog.adHostDynamic.viewContainerRef.clear();
+      }
+
     } else {
       // add
 

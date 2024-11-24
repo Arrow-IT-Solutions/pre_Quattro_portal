@@ -81,6 +81,9 @@ export class EmployeesComponent {
     });
     var component = this.layoutService.OpenDialog(AddEmployeeComponent, content);
     this.employeeService.Dialog = component;
+
+    //console.log("component : ",component);
+
     component.OnClose.subscribe(() => {
       document.body.style.overflow = '';
       if (row == null)
