@@ -41,7 +41,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SharedModule {
-  constructor() {}
+  constructor() { }
 }
 
 // export function httpTranslateLoader(http: HttpClient) {

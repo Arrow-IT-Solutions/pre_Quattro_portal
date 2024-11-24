@@ -32,108 +32,115 @@ const routes: Routes = [
     // canActivate: [AuthGuardService],
     children: [
       {
-        path:'clients',
+        path: 'clients',
         loadChildren: () =>
           import('./modules/clients/clients.module').then(
-            (m)=>m.ClientsModule
+            (m) => m.ClientsModule
           )
       },
       {
-        path:'Advertisement',
-        loadChildren:()=>
+        path: 'Advertisement',
+        loadChildren: () =>
           import('./modules/advertisement/advertisement.module').then(
-            (m)=>m.AdvertisementModule
+            (m) => m.AdvertisementModule
           )
       },
       {
-        path:'employees',
-        loadChildren:()=>
+        path: 'employees',
+        loadChildren: () =>
           import('./modules/employees/employees.module').then(
-            (m)=>m.EmployeesModule
+            (m) => m.EmployeesModule
           )
       },
       {
-        path:'categories',
-        loadChildren:()=>
+        path: 'categories',
+        loadChildren: () =>
           import('./modules/categories/categories.module').then(
-            (m)=>m.CategoriesModule
+            (m) => m.CategoriesModule
           )
       },
       {
-        path:'dashBoard',
-        loadChildren:()=>
+        path: 'dashBoard',
+        loadChildren: () =>
           import('./modules/dashboard/dashboard.module').then(
-            (m)=>m.DashboardModule
+            (m) => m.DashboardModule
           )
       },
       {
-        path:'category-event',
-        loadChildren:()=>
+        path: 'category-event',
+        loadChildren: () =>
           import('./modules/category-event/category-event.module').then(
-            (m)=>m.CategoryEventModule
+            (m) => m.CategoryEventModule
           )
       },
       {
-        path:'events',
-        loadChildren:()=>
+        path: 'events',
+        loadChildren: () =>
           import('./modules/events/events.module').then(
-            (m)=>m.EventsModule
+            (m) => m.EventsModule
           )
       },
       {
-        path:'feedback',
-        loadChildren:()=>
+        path: 'feedback',
+        loadChildren: () =>
           import('./modules/feedback/feedback.module').then(
-            (m)=>m.FeedbackModule
+            (m) => m.FeedbackModule
           )
       },
       {
-        path:'notification',
-        loadChildren:()=>
+        path: 'notification',
+        loadChildren: () =>
           import('./modules/notification/notification.module').then(
-            (m)=>m.NotificationModule
+            (m) => m.NotificationModule
           )
       },
       {
-        path:'rewards',
-        loadChildren:()=>
+        path: 'rewards',
+        loadChildren: () =>
           import('./modules/rewards/rewards.module').then(
-            (m)=>m.RewardsModule
+            (m) => m.RewardsModule
           )
       },
       {
-        path:'category-group',
-        loadChildren:()=>
+        path: 'password',
+        loadChildren: () =>
+          import('./modules/Password/password.module').then(
+            (m) => m.PasswordModule
+          )
+      },
+      {
+        path: 'category-group',
+        loadChildren: () =>
           import('./modules/category-group/category-group.module').then(
-            (m)=>m.CategoryGroupModule
+            (m) => m.CategoryGroupModule
           )
       },
       {
-        path:'group-item',
-        loadChildren:()=>
+        path: 'group-item',
+        loadChildren: () =>
           import('./modules/group-item/group-item.module').then(
-            (m)=>m.GroupItemModule
+            (m) => m.GroupItemModule
           )
       },
       {
-        path:'earned',
-        loadChildren:()=>
+        path: 'earned',
+        loadChildren: () =>
           import('./modules/earned/earned.module').then(
-            (m)=>m.EarnedModule
+            (m) => m.EarnedModule
           )
       },
       {
-        path:'transfer',
-        loadChildren:()=>
+        path: 'transfer',
+        loadChildren: () =>
           import('./modules/transfer/transfer.module').then(
-            (m)=>m.TransferModule
+            (m) => m.TransferModule
           )
       },
       {
-        path:'redeem-history',
-        loadChildren:()=>
+        path: 'redeem-history',
+        loadChildren: () =>
           import('./modules/redeem-history/redeem-history.module').then(
-            (m)=>m.RedeemHistoryModule
+            (m) => m.RedeemHistoryModule
           )
       }
     ],

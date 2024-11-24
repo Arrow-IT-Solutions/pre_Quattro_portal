@@ -51,6 +51,13 @@ export class UserService {
     return await this.httpClient.put(apiUrl, data);
   }
 
+  async EmployeeResetPass(data: any) {
+
+    const apiUrl = `/api/user/employeeResetPassword`;
+
+    return await this.httpClient.put(apiUrl, data);
+  }
+
   async addUser(data: UserRequest) {
 
 

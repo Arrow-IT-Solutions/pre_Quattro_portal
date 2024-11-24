@@ -20,6 +20,24 @@
             </div>
           </div>
 
+          <div class="col-12 mb-3">
+            <div class="p-float-label">
+              <textarea pInputText formControlName="descAr"></textarea>
+              <label>{{ 'DescAr_advertise' | translate }}</label>
+              <span *ngIf="submitted && form['descAr'].errors" class="error-validation">{{ 'Field_Required_Product' |
+                translate }}</span>
+            </div>
+          </div>
+
+          <div class="col-12 mb-3">
+            <div class="p-float-label">
+              <textarea pInputText formControlName="descEn"></textarea>
+              <label>{{ 'DescEn_advertise' | translate }}</label>
+              <span *ngIf="submitted && form['descEn'].errors" class="error-validation">{{ 'Field_Required_Product' |
+                translate }}</span>
+            </div>
+          </div>
+
 
           <div class="col-12 mb-3">
             <div class="p-float-label">

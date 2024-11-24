@@ -283,6 +283,14 @@
   "reseve":"حجز",
   "totalRedeem":"المجموع",
   "DescAr_Category" : "وصف الفئة بالعربية",
-  "DescEn_Category" : "وصف الفئة بالإنجليزية "
+  "DescEn_Category" : "وصف الفئة بالإنجليزية ",
+  "FirstNameAr_Password" : "الأسم الأول بالعربية",
+  "LastNameAr_Password" : "الأسم الأخير بالعربية",
+  "FirstNameEn_Password" : "الأسم الأول بالإنجليزية",
+  "LastNameEn_Password" : "الإسم الأخير بالإنجليزية",
+  "Username_Password" : "اسم المستخدم",
+  "Password_Password" : "كلمة السر",
+  "ResetPassword_Employee" : "تغيير كلمة السر",
+  "Password_ResetPassword" : "كلمة السر"
 
 }
