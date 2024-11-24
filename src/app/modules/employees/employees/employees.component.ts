@@ -6,6 +6,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { LayoutService } from 'src/app/layout/service/layout.service';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { MessageService, ConfirmationService } from 'primeng/api';
+import { PasswordComponent } from '../../Password/password.component';
+import { ResetPasswordComponent } from '../../Password/reset-password/reset-password.component';
 
 @Component({
   selector: 'app-employees',
@@ -81,7 +83,8 @@ export class EmployeesComponent {
     this.employeeService.Dialog = component;
     component.OnClose.subscribe(() => {
       document.body.style.overflow = '';
-      this.FillData();
+      if (row == null)
+        this.OpenInfoPage(this.employeeService.SelectedData)
     });
   }
   async resetform() {
@@ -100,6 +103,7 @@ export class EmployeesComponent {
     }, this.doneTypingInterval);
 
   }
+
   paginate(event: any) {
     this.pageSize = event.rows
     this.first = event.first
@@ -111,6 +115,7 @@ export class EmployeesComponent {
     this.link = link;
     this.visible = true;
   }
+
   confirmDelete(row: EmployeesResponse) {
 
     console.log(row)
@@ -133,6 +138,41 @@ export class EmployeesComponent {
       reject: () => {
         // this.msgs = [{severity:'info', summary:'Rejected', detail:'You have rejected'}];
       },
+    });
+  }
+
+  async OpenInfoPage(response) {
+
+    console.log('here')
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.body.style.overflow = 'hidden';
+    this.employeeService.SelectedData = response
+    console.log('selectedData', this.employeeService.SelectedData)
+    let content = 'Info';
+    this.translate.get(content).subscribe((res: string) => {
+      content = res
+    });
+    var component = this.layoutService.OpenDialog(PasswordComponent, content);
+    this.employeeService.Dialog = component;
+    component.OnClose.subscribe(() => {
+      document.body.style.overflow = '';
+      this.FillData();
+    });
+  }
+
+  resetPass(row: EmployeesResponse | null = null) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.body.style.overflow = 'hidden';
+    this.employeeService.SelectedData = row
+    let content = 'ResetPassword_Employee';
+    this.translate.get(content).subscribe((res: string) => {
+      content = res
+    });
+    var component = this.layoutService.OpenDialog(ResetPasswordComponent, content);
+    this.employeeService.Dialog = component;
+    component.OnClose.subscribe(() => {
+      document.body.style.overflow = '';
+      this.FillData();
     });
   }
 }

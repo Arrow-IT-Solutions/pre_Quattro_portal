@@ -144,6 +144,10 @@
                 <span class="material-symbols-outlined">Edit</span>
                 {{ 'Edit_Employee' | translate }}
               </button>
+              <button mat-menu-item (click)="resetPass(row)">
+                <span class="material-symbols-outlined">Edit</span>
+                {{ 'ResetPassword_Employee' | translate }}
+              </button>
               <button mat-menu-item (click)="confirmDelete(row)">
                 <span class="material-symbols-outlined">delete</span>
                 {{ 'Delete_Employee' | translate }}

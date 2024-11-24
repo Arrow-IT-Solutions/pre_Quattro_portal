@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
-
 import { EmployeesRoutingModule } from './employees-routing.module';
 import { EmployeesComponent } from './employees/employees.component';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
@@ -56,7 +55,6 @@ export interface EmployeeUpdateRequest extends RequestBase {
   phone?: string
   email?: string
   countryCode: string,
-  image: string,
 
 
 }
@@ -66,7 +64,6 @@ export interface EmployeeRequest extends RequestBase {
   phone?: string,
   gender?: string,
   birthDate?: string,
-  password?: string,
   email?: string,
   image?: string,
   countryCode?: string,
