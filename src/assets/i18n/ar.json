@@ -291,6 +291,16 @@
   "Username_Password" : "اسم المستخدم",
   "Password_Password" : "كلمة السر",
   "ResetPassword_Employee" : "تغيير كلمة السر",
-  "Password_ResetPassword" : "كلمة السر"
+  "Password_ResetPassword" : "كلمة السر",
+  "DateFrom_Dashboard" : "من تاريخ",
+  "DateTo_Dashboard" : "الى تاريخ",
+  "QuattrosCount_Dashboard" : "عدد الكواترو",
+  "ProductsCount_Dashboard": "عدد الأصناف",
+  "FeaturesCount_Dashboard" : "عدد المزايا",
+  "Offers_Count_Dashboard" : "عدد العروض",
+  "Tranfer_Count_Dashboard" : "عدد التحويلات",
+  "Request_Redeem_Count_Dashboard" : "عدد طلبات الاسترداد",
+  "Employees_Count_Dashboard" : "عدد الموظفين",
+  "Customers_Count_Dashboard": "عدد الزبائن"
 
 }
