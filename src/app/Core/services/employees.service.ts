@@ -9,6 +9,7 @@ import { EmployeeRequest, EmployeeSearchRequest, EmployeeUpdateRequest, Employee
 export class EmployeesService {
   public SelectedData: EmployeesResponse | null = null;
   public Dialog: any | null = null;
+  public submitted: any | null = "";
   constructor(public layoutService: LayoutService, public httpClient: HttpClientService) { }
   async Add(data: EmployeeRequest) {
     const apiUrl = `/api/employee`;

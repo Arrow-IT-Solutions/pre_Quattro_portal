@@ -298,7 +298,17 @@
   "Username_Password" : "Username",
   "Password_Password" : "Password",
   "ResetPassword_Employee" : "Reset Password",
-  "Password_ResetPassword" : "Password"
+  "Password_ResetPassword" : "Password",
+  "DateFrom_Dashboard" : "From Date",
+  "DateTo_Dashboard" : "To Date",
+  "QuattrosCount_Dashboard" : "Quattros Count",
+  "ProductsCount_Dashboard": "Products Count",
+  "FeaturesCount_Dashboard" : "Features Count",
+  "Offers_Count_Dashboard" : "Features Count",
+  "Tranfer_Count_Dashboard" : "Tranfer Count",
+  "Request_Redeem_Count_Dashboard" : "Request Redeem Count",
+  "Employees_Count_Dashboard" : "Employees Count",
+  "Customers_Count_Dashboard": "Customers Count"
 
 
 

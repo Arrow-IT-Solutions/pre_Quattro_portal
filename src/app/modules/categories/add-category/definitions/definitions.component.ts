@@ -70,18 +70,9 @@ export class DefinitionsComponent {
   }
 
   async onSubmit() {
-    console.log('onSubmit dataform : ', this.dataForm);
 
     try {
       this.btnLoading = true;
-
-      // if (this.dataForm.invalid) {
-      //   console.log('onSubmit form invaild  :  ', this.dataForm.invalid);
-
-      //   this.submitted = true;
-      //   return;
-      // }
-      // await this.Save();
 
       var categoryTranslation = [
         {
@@ -116,13 +107,6 @@ export class DefinitionsComponent {
         console.log(this.addCategory)
 
       }
-
-
-      // this.router.navigate(['layout-admin/categories/add-category/variants'], {
-      //   state: {
-      //     categoryData: this.categoryService.SelectedData != null ? this.category : this.addCategory
-      //   }
-      // });
       const categoryData = JSON.stringify(this.categoryService.SelectedData != null ? this.category : this.addCategory);
       this.router.navigate(['layout-admin/categories/add-category/variants'], {
         queryParams: { data: categoryData }
@@ -135,7 +119,6 @@ export class DefinitionsComponent {
 
 
   async Save() {
-    console.log('save');
 
     let response;
 
@@ -163,9 +146,6 @@ export class DefinitionsComponent {
 
 
   async FillData() {
-    console.log('fill');
-
-    console.log('fill this.productService.SelectedData : ', this.categoryService.SelectedData);
 
     let temp = {
       type: Number(this.categoryService.SelectedData?.type),

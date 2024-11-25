@@ -76,7 +76,11 @@ export class ResetPasswordComponent {
       response = await this.userService.EmployeeResetPass(employee);
       if (response?.requestStatus?.toString() == '200') {
         this.layoutService.showSuccess(this.messageService, 'toast', true, response?.requestMessage);
-        this.employeeService.Dialog.close();
+        setTimeout(() => {
+          this.employeeService.Dialog.adHostChild.viewContainerRef.clear();
+          this.employeeService.Dialog.adHostDynamic.viewContainerRef.clear();
+        }, 600);
+
       } else {
         this.layoutService.showError(this.messageService, 'toast', true, response?.requestMessage);
 
