@@ -51,14 +51,14 @@
   </div>
   <ng-container *ngIf="!loading; else ListView">
     <div class="row" *ngFor="let row of data">
-      <div class="col-lg-12 col-md-4 col-sm-6 col-xs-12 mt-2 mb-2">
+      <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12 mt-2 mb-2">
         <div class="card">
           <div class="card__header mb-3"></div>
           <div class="card__edit">
             <span class="material-symbols-outlined" [matMenuTriggerFor]="menu">more_vert</span>
           </div>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button mat-menu-item (click)="OpenCategory(row)">
               <span class="material-symbols-outlined">edit</span>
               {{ 'Edit_Category' | translate }}
             </button>
@@ -70,7 +70,7 @@
           <div class="d-flex contents ">
             <div class="card__img">
 
-              <img (click)="showDialog(row.coverImage)" style="width: 100px; height: 100px" [src]="row.coverImage" />
+              <img (click)="showDialog(row.coverImage)"  [src]="row.coverImage" />
             </div>
             <div class="px-2">
               <div class="card-label">{{ 'Search_Category' | translate }}</div>

@@ -8,6 +8,8 @@ import { ConstantService } from 'src/app/Core/services/constant.service';
 import { CountryCodeService } from 'src/app/Core/services/country-code.service';
 import { CountryCodeResponse, CountryCodeSearchRequest } from '../../auth/auth.module';
 import { EmployeeRequest, EmployeeSearchRequest, EmployeeUpdateRequest, EmployeesResponse } from '../employees.module';
+import { PasswordComponent } from '../../Password/password.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-employee',
@@ -25,8 +27,13 @@ export class AddEmployeeComponent {
   file: any;
   fileInput: any
   img: boolean = true;
-  constructor(public formBuilder: FormBuilder, public layoutService: LayoutService, public employeeService: EmployeesService, public constantService: ConstantService
-    , public countryCodeService: CountryCodeService
+  constructor(
+    public formBuilder: FormBuilder,
+    public layoutService: LayoutService,
+    public employeeService: EmployeesService,
+    public constantService: ConstantService,
+    public countryCodeService: CountryCodeService,
+    public translate: TranslateService
   ) {
     this.dataForm = formBuilder.group({
       firstNameAr: [''],
@@ -36,7 +43,6 @@ export class AddEmployeeComponent {
       contryCode: [''],
       clientPhone: [''],
       clientGender: [''],
-      password: [''],
       birthDate: [''],
       username: ['']
 
@@ -93,8 +99,6 @@ export class AddEmployeeComponent {
     try {
       this.btnLoading = true;
 
-
-
       if (this.dataForm.invalid) {
         this.submitted = true;
         return;
@@ -128,37 +132,50 @@ export class AddEmployeeComponent {
     if (this.employeeService.SelectedData != null) {
       // update
 
-      var client: EmployeeUpdateRequest = {
+      var employee: EmployeeUpdateRequest = {
         uuid: this.employeeService.SelectedData?.uuid?.toString(),
         employeeTranslation: clientTranslation,
         countryCode: this.dataForm.controls['contryCode'].value,
         gender: this.dataForm.controls['clientGender'].value.toString(),
         birthDate: birthDate.toISOString(),
         phone: this.dataForm.controls['clientPhone'].value.toString(),
-        image: this.file,
+        profileImage: this.file,
         deviceType: '',
         email: this.dataForm.controls['username'].value
 
       };
-      console.log(client)
-      response = await this.employeeService.Update(client);
+      response = await this.employeeService.Update(employee);
+
+    
+      if(response.requestStatus == "200")
+      {
+        this.employeeService.Dialog.adHostChild.viewContainerRef.clear();
+        this.employeeService.Dialog.adHostDynamic.viewContainerRef.clear();
+      }
 
     } else {
       // add
 
-      var addClient: EmployeeRequest = {
+      var addEmployee: EmployeeRequest = {
         employeeTranslation: clientTranslation,
         countryCode: this.dataForm.controls['contryCode'].value.toString(),
         gender: this.dataForm.controls['clientGender'].value.toString(),
         birthDate: birthDate.toISOString(),
         phone: this.dataForm.controls['clientPhone'].value.toString(),
-        password: this.dataForm.controls['password'].value.toString(),
         image: this.file,
         email: this.dataForm.controls['username'].value
       };
-      console.log(addClient)
+      response = await this.employeeService.Add(addEmployee);
+      if (response != null) {
+        if (response.requestStatus == 200) {
+          console.log('response after add', response)
+          this.employeeService.SelectedData = response
+          console.log('Selected Data after add', this.employeeService.SelectedData)
+          this.OpenInfoPage(this.employeeService.SelectedData)
+          this.employeeService.Dialog.close();
 
-      response = await this.employeeService.Add(addClient);
+        }
+      }
     }
 
     this.btnLoading = false;
@@ -241,4 +258,26 @@ export class AddEmployeeComponent {
     this.file = file;
     this.img = false;
   }
+
+
+  async OpenInfoPage(response) {
+
+    console.log('here')
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.body.style.overflow = 'hidden';
+    this.employeeService.SelectedData = response
+    console.log('selectedData', this.employeeService.SelectedData)
+    let content = 'Info';
+    this.translate.get(content).subscribe((res: string) => {
+      content = res
+    });
+    var component = this.layoutService.OpenDialog(PasswordComponent, content);
+    this.employeeService.Dialog = component;
+    component.OnClose.subscribe(() => {
+      document.body.style.overflow = '';
+      this.FillData();
+    });
+  }
+
+
 }

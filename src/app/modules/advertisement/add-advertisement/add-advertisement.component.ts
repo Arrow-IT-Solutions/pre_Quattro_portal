@@ -23,13 +23,19 @@ export class AddAdvertisementComponent {
   fileInput: any
   img: boolean = true;
   selectedgender: string | null = null;
-  constructor(public formBuilder: FormBuilder, public layoutService: LayoutService, public advertiseService: AdvertisementService, public messageService: MessageService) {
+  constructor(
+    public formBuilder: FormBuilder,
+    public layoutService: LayoutService,
+    public advertiseService: AdvertisementService,
+    public messageService: MessageService) {
     this.dataForm = formBuilder.group({
       tittleAr: [''],
       tittleEn: [''],
       quattros: [''],
       startDate: [''],
-      endDate: ['']
+      endDate: [''],
+      descAr: [''],
+      descEn: ['']
     })
   }
   async ngOnInit() {
@@ -76,6 +82,8 @@ export class AddAdvertisementComponent {
     let temp = {
       tittleAr: this.advertiseService.SelectedData?.adTranslation!['ar'].name,
       tittleEn: this.advertiseService.SelectedData?.adTranslation!['en'].name,
+      descEn: this.advertiseService.SelectedData?.adTranslation!['en'].description,
+      descAr: this.advertiseService.SelectedData?.adTranslation!['ar'].description,
       quattros: this.advertiseService.SelectedData?.quattro,
       startDate: this.advertiseService.SelectedData?.startDate,
       endDate: this.advertiseService.SelectedData?.endDate,
@@ -93,10 +101,12 @@ export class AddAdvertisementComponent {
     var adTranslation = [
       {
         name: this.dataForm.controls['tittleAr'].value == null ? '' : this.dataForm.controls['tittleAr'].value.toString(),
+        description: this.dataForm.controls['descAr'].value == null ? '' : this.dataForm.controls['descAr'].value.toString(),
         language: 'ar'
       },
       {
         name: this.dataForm.controls['tittleEn'].value == null ? '' : this.dataForm.controls['tittleEn'].value.toString(),
+        description: this.dataForm.controls['descEn'].value == null ? '' : this.dataForm.controls['descEn'].value.toString(),
         language: 'en'
       }
     ];

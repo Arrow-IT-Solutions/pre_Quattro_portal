@@ -72,8 +72,8 @@
         <div class="card col-12 mx-0 mb-2">
           <div class="col-lg-2 col-md-6 col-sm-6 d-flex card__left">
             <div class="image-container">
-              <div class="user-card__image">
-                <img (click)="showDialog(row.image)" style="width: 100px; height: 100px" [src]="row.image" />
+              <div class="user-card__image employee_image">
+                <img (click)="showDialog(row.image)"  [src]="row.image" />
               </div>
             </div>
           </div>
@@ -86,8 +86,8 @@
                   <div class="card-label">{{ 'EmployeeName' | translate }}</div>
                   <div class="card-info">
                     <span class="material-symbols-outlined fill"></span>
-                    {{ row.user.userTranslation![layoutService.config.lang]?.firstName }} {{
-                    row.user.userTranslation![layoutService.config.lang]?.lastName }}
+                    {{ row.employeeTranslation![layoutService.config.lang]?.firstName }} {{
+                    row.employeeTranslation![layoutService.config.lang]?.lastName }}
                   </div>
                 </div>
                 <div class="card__contents__item">
@@ -101,7 +101,7 @@
               </div>
             </div>
 
-            <div class="card-section d-flex">
+            <div class="card-section d-flex box3">
               <div class="card__contents__item">
                 <div class="card-label">{{ 'contryCode' | translate }}</div>
                 <div class="card-info">{{row.user.countryCode}}</div>
@@ -143,6 +143,10 @@
               <button mat-menu-item (click)="openDialog(row)">
                 <span class="material-symbols-outlined">Edit</span>
                 {{ 'Edit_Employee' | translate }}
+              </button>
+              <button mat-menu-item (click)="resetPass(row)">
+                <span class="material-symbols-outlined">Edit</span>
+                {{ 'ResetPassword_Employee' | translate }}
               </button>
               <button mat-menu-item (click)="confirmDelete(row)">
                 <span class="material-symbols-outlined">delete</span>

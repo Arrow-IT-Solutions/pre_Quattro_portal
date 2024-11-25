@@ -29,6 +29,7 @@ export class DefinitionsComponent {
   categoryTypes: ConstantResponse[] = [];
   addCategory: CategoryRequest
   category: CategoryUpdateRequest
+  img: boolean = true;
   constructor(
     public formBuilder: FormBuilder,
     public router: Router,
@@ -165,6 +166,15 @@ export class DefinitionsComponent {
     console.log('fill');
 
     console.log('fill this.productService.SelectedData : ', this.categoryService.SelectedData);
+
+    let temp = {
+      type: Number(this.categoryService.SelectedData?.type),
+      descAr: this.categoryService.SelectedData?.categoryTranslation!['ar'].description,
+      descEn: this.categoryService.SelectedData?.categoryTranslation!['en'].description,
+    };
+    this.file = this.categoryService.SelectedData?.coverImage,
+      this.img = false
+    this.dataForm.patchValue(temp);
 
 
 

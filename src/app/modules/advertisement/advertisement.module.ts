@@ -62,15 +62,20 @@ export interface AdRequest extends RequestBase {
 export interface AdTranslationResponse {
   uuid?: string;
   name?: string;
+  description?: string;
   language?: string;
 }
 export interface AdTranslationRequest {
   uuid?: string;
   name?: string;
+  description?: string;
+
   language?: string;
 }
 export interface AdTranslationUpdateRequest {
   uuid?: string;
   name?: string;
+  description?: string;
+
 }
 

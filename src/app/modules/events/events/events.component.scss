@@ -296,8 +296,27 @@
     &__items{
         display: flex;
         width: 95%;
-    //    column-gap: 0.5rem;
+       column-gap: 1rem;
     padding: 0.5rem;
+    .icon-container{
+      padding-top: 0.5rem;
+       display: flex;
+       @media (max-width:767px) {
+         padding-top: 0;
+         margin-bottom: 1rem;
+       }
+       @media (max-width: 991px) and (min-width: 768px) {
+        padding-top: 0;
+        margin-bottom: 1rem;
+
+       }
+       .fill{
+         color: $primary-color;
+       
+        
+        }
+
+      }
 
         @media (max-width:767px){
           display: flex;
@@ -309,6 +328,8 @@
         @media (max-width: 991px) and (min-width: 768px) {
           width: 100%;
            // Tablets
+           display: flex;
+          flex-direction: column;
         }
 
     }

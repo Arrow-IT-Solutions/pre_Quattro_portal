@@ -186,10 +186,13 @@
     border-color: rgba($primary-color, 0.5);
     @media (max-width:767px) {
       flex-direction: column;
+      
+    
 
     }
     @media (max-width: 991px) and (min-width: 768px) {
       flex-direction: column;
+      
      // Tablets
     }
 
@@ -263,7 +266,25 @@
     &__items{
         display: flex;
         width: 80%;
-       column-gap: 0.5rem;
+       column-gap: 1.5rem;
+       @media (max-width:767px) {
+        width: 100%;
+       }
+       .icon-container{
+       padding-top: 0.5rem;
+        display: flex;
+        @media (max-width:767px) {
+          padding-top: 0;
+          margin-bottom: 1rem;
+        }
+        .fill{
+          color: $primary-color;
+        
+         
+         }
+
+       }
+       
 
         @media (max-width:767px){
           display: flex;
@@ -349,7 +370,7 @@
          // Tablets
       }
       @media(max-width:767px){
-        width: 100%;
+        width: 90%;
       }
 
 

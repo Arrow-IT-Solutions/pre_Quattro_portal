@@ -176,6 +176,7 @@
 
     & .chart-card{
        
+       
 
         &__header{
             display: flex;
@@ -239,20 +240,24 @@
             height: 200px;
             margin: auto;
             display: flex;
-            ;
             align-items: center;
             justify-content: center;
-            
-
             & ::ng-deep canvas{
                 height:200px !important;
+                width: 100%;
+                @media (max-width: 991px) and (min-width: 768px) {
+                    width: 90% !important;
+                }
+                @media(max-width:767px){
+                   
+                    width: 100% !important;
+                }
             }
 
             &.h-350{
                 height: 350px !important;
-
                 & ::ng-deep canvas{
-                    height:350px !important;
+                    height:350px !important;  
                 }
             }
 

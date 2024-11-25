@@ -1,7 +1,6 @@
 import { Inject, NgModule, OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule, DOCUMENT } from '@angular/common';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ButtonModule } from 'primeng/button';
