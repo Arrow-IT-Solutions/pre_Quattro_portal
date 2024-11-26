@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeesService } from 'src/app/Core/services/employees.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
 import { MessageService } from 'primeng/api';
@@ -31,7 +31,7 @@ export class ResetPasswordComponent {
     public messageService: MessageService
   ) {
     this.dataForm = formBuilder.group({
-      password: [''],
+      password: ['', Validators.required],
 
     })
   }

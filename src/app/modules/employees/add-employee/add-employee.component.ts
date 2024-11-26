@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmployeesService } from 'src/app/Core/services/employees.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
 import { MessageService } from 'primeng/api';
@@ -36,15 +36,15 @@ export class AddEmployeeComponent {
     public translate: TranslateService
   ) {
     this.dataForm = formBuilder.group({
-      firstNameAr: [''],
-      lastNameAr: [''],
-      firstNameEn: [''],
-      lastNameEn: [''],
-      contryCode: [''],
-      clientPhone: [''],
-      clientGender: [''],
-      birthDate: [''],
-      username: ['']
+      firstNameAr: ['', Validators.required],
+      lastNameAr: ['', Validators.required],
+      firstNameEn: ['', Validators.required],
+      lastNameEn: ['', Validators.required],
+      contryCode: ['', Validators.required],
+      clientPhone: ['', Validators.required],
+      clientGender: ['', Validators.required],
+      birthDate: ['', Validators.required],
+      username: ['', Validators.required]
 
     })
   }
@@ -146,9 +146,8 @@ export class AddEmployeeComponent {
       };
       response = await this.employeeService.Update(employee);
 
-    
-      if(response.requestStatus == "200")
-      {
+
+      if (response.requestStatus == "200") {
         this.employeeService.Dialog.adHostChild.viewContainerRef.clear();
         this.employeeService.Dialog.adHostDynamic.viewContainerRef.clear();
       }
@@ -168,9 +167,7 @@ export class AddEmployeeComponent {
       response = await this.employeeService.Add(addEmployee);
       if (response != null) {
         if (response.requestStatus == 200) {
-          console.log('response after add', response)
           this.employeeService.SelectedData = response
-          console.log('Selected Data after add', this.employeeService.SelectedData)
           this.OpenInfoPage(this.employeeService.SelectedData)
           this.employeeService.Dialog.close();
 
@@ -262,11 +259,9 @@ export class AddEmployeeComponent {
 
   async OpenInfoPage(response) {
 
-    console.log('here')
     window.scrollTo({ top: 0, behavior: 'smooth' });
     document.body.style.overflow = 'hidden';
     this.employeeService.SelectedData = response
-    console.log('selectedData', this.employeeService.SelectedData)
     let content = 'Info';
     this.translate.get(content).subscribe((res: string) => {
       content = res

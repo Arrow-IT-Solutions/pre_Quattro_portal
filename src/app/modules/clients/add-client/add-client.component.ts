@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientsService } from 'src/app/Core/services/clients.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
 import { ImgControlComponent } from 'src/app/layout/component/img-control/img-control.component';
@@ -31,18 +31,19 @@ export class AddClientComponent {
     public layoutService: LayoutService,
     public clientService: ClientsService,
     public constantService: ConstantService,
-    public countryCodeService: CountryCodeService
+    public countryCodeService: CountryCodeService,
+    public messageService: MessageService
   ) {
     this.dataForm = formBuilder.group({
-      firstNameAr: [''],
-      lastNameAr: [''],
-      firstNameEn: [''],
-      lastNameEn: [''],
-      contryCode: [''],
-      clientPhone: [''],
-      clientGender: [''],
-      password: [''],
-      birthDate: ['']
+      firstNameAr: ['', Validators.required],
+      lastNameAr: ['', Validators.required],
+      firstNameEn: ['', Validators.required],
+      lastNameEn: ['', Validators.required],
+      contryCode: ['', Validators.required],
+      clientPhone: ['', Validators.required],
+      clientGender: ['', Validators.required],
+      password: ['', Validators.required],
+      birthDate: ['', Validators.required]
 
     })
   }
@@ -159,6 +160,20 @@ export class AddClientComponent {
       console.log(addClient)
 
       response = await this.clientService.Add(addClient);
+    }
+
+    if (response?.requestStatus?.toString() == '200') {
+      this.layoutService.showSuccess(this.messageService, 'toast', true, response?.requestMessage);
+      if (this.clientService.SelectedData == null) {
+        this.resetForm();
+      } else {
+        setTimeout(() => {
+          this.clientService.Dialog.adHostChild.viewContainerRef.clear();
+          this.clientService.Dialog.adHostDynamic.viewContainerRef.clear();
+        }, 600);
+      }
+    } else {
+      this.layoutService.showError(this.messageService, 'toast', true, response?.requestMessage);
     }
 
     this.btnLoading = false;

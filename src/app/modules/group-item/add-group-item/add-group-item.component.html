@@ -11,18 +11,24 @@
             <div class="p-float-label">
               <input pInputText type="text" formControlName="itemNameAr" />
               <label>{{ 'itemNameAr' | translate }}</label>
+              <span *ngIf="submitted && form['itemNameAr'].errors" class="error-validation">{{ 'Field_Required' |
+                translate }}</span>
             </div>
           </div>
           <div class="col-12 mb-3">
             <div class="p-float-label">
               <input pInputText type="text" formControlName="itemNameEn" />
               <label>{{ 'itemNameEn' | translate }}</label>
+              <span *ngIf="submitted && form['itemNameEn'].errors" class="error-validation">{{ 'Field_Required' |
+                translate }}</span>
             </div>
           </div>
           <div class="col-12 mb-3">
             <div class="p-float-label">
               <input pInputText type="text" formControlName="price" />
               <label>{{ 'price' | translate }}</label>
+              <span *ngIf="submitted && form['price'].errors" class="error-validation">{{ 'Field_Required' |
+                translate }}</span>
             </div>
           </div>
           <div class="col-12 mb-3">
@@ -31,6 +37,8 @@
                 [showClear]="true" [filter]="true" [showClear]="true" filterBy="name"
                 (onFilter)="FillCategory($event)"></p-dropdown>
               <label>{{ 'Search_GroupName' | translate }}</label>
+              <span *ngIf="submitted && form['categoryGroup'].errors" class="error-validation">{{ 'Field_Required' |
+                translate }}</span>
             </div>
           </div>
 
@@ -38,6 +46,8 @@
             <div class="p-float-label">
               <textarea pInputText formControlName="descriptionAr"></textarea>
               <label>{{ 'DescriptionAr_GroupItem' | translate }}</label>
+              <span *ngIf="submitted && form['descriptionAr'].errors" class="error-validation">{{ 'Field_Required' |
+                translate }}</span>
             </div>
           </div>
 
@@ -45,6 +55,8 @@
             <div class="p-float-label">
               <textarea pInputText formControlName="descriptionEn"></textarea>
               <label>{{ 'DescriptionEn_GroupItem' | translate }}</label>
+              <span *ngIf="submitted && form['descriptionEn'].errors" class="error-validation">{{ 'Field_Required' |
+                translate }}</span>
             </div>
           </div>
 

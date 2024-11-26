@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { EarnedService } from 'src/app/Core/services/earned.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
@@ -31,8 +31,8 @@ export class AddEarnedComponent {
     public clientService: ClientsService,
     public userService: UserService) {
     this.dataForm = formBuilder.group({
-      clientName: [''],
-      quattros: ['']
+      clientName: ['', Validators.required],
+      quattros: ['', Validators.required]
 
 
     })
@@ -114,8 +114,6 @@ export class AddEarnedComponent {
         employeeIDFK: this.userService.currentUser.userUUID.toString()
       };
 
-      console.log(event)
-
       response = await this.earnedService.Add(event);
     }
 
@@ -124,7 +122,10 @@ export class AddEarnedComponent {
       if (this.earnedService.SelectedData == null) {
         this.resetForm();
       } else {
-        this.earnedService.Dialog.close();
+        setTimeout(() => {
+          this.earnedService.Dialog.adHostChild.viewContainerRef.clear();
+          this.earnedService.Dialog.adHostDynamic.viewContainerRef.clear();
+        }, 600);
       }
     } else {
       this.layoutService.showError(this.messageService, 'toast', true, response?.requestMessage);

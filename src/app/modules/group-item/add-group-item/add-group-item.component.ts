@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { GroupItemService } from 'src/app/Core/services/group-item.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
@@ -32,12 +32,12 @@ export class AddGroupItemComponent {
     public messageService: MessageService,
     public groupService: CategoryGroupService) {
     this.dataForm = formBuilder.group({
-      categoryGroup: [''],
-      itemNameAr: [''],
-      itemNameEn: [''],
-      descriptionAr: [''],
-      descriptionEn: [''],
-      price: ['']
+      categoryGroup: ['', Validators.required],
+      itemNameAr: ['', Validators.required],
+      itemNameEn: ['', Validators.required],
+      descriptionAr: ['', Validators.required],
+      descriptionEn: ['', Validators.required],
+      price: ['', Validators.required]
     })
   }
 
@@ -143,7 +143,10 @@ export class AddGroupItemComponent {
       if (this.groupService.SelectedData == null) {
         this.resetForm();
       } else {
-        this.groupItemService.Dialog.close();
+        setTimeout(() => {
+          this.groupService.Dialog.adHostChild.viewContainerRef.clear();
+          this.groupService.Dialog.adHostDynamic.viewContainerRef.clear();
+        }, 600);
       }
     } else {
       this.layoutService.showError(this.messageService, 'toast', true, response?.requestMessage);

@@ -13,6 +13,8 @@
                 formControlName="eventCategory" [filter]="true" [showClear]="true" filterBy="name"
                 (onFilter)="FillCategory($event)"></p-dropdown>
               <label id="month">{{ 'EventCategory' | translate }}</label>
+              <span *ngIf="submitted && form['eventCategory'].errors" class="error-validation">{{ 'Field_Required' |
+                translate }}</span>
             </div>
           </div>
 
@@ -21,6 +23,8 @@
               <p-dropdown [options]="codes" optionLabel="fullName" optionValue="code" formControlName="contryCode"
                 [filter]="true" [showClear]="true" filterBy="name" (onFilter)="FillCodes($event)"></p-dropdown>
               <label id="month">{{ 'CountryCode_Client' | translate }}</label>
+              <span *ngIf="submitted && form['contryCode'].errors" class="error-validation">{{ 'Field_Required' |
+                translate }}</span>
             </div>
           </div>
 
@@ -28,6 +32,8 @@
             <div class="p-float-label">
               <input pInputText type="text" formControlName="clientPhone" />
               <label>{{ 'client-phone' | translate }}</label>
+              <span *ngIf="submitted && form['clientPhone'].errors" class="error-validation">{{ 'Field_Required' |
+                translate }}</span>
             </div>
           </div>
           <div class="col-12 mb-3">
@@ -35,6 +41,8 @@
               <p-dropdown [options]="clients" optionLabel="fullName" optionValue="uuid" formControlName="clientName"
                 [filter]="true" [showClear]="true" filterBy="fullName" (onFilter)="FillClient($event)"></p-dropdown>
               <label id="month">{{ 'client-Name' | translate }}</label>
+              <span *ngIf="submitted && form['clientName'].errors" class="error-validation">{{ 'Field_Required' |
+                translate }}</span>
             </div>
           </div>
 
@@ -42,6 +50,8 @@
             <div class="p-float-label">
               <input pInputText formControlName="nuOfPersons" />
               <label>{{ 'PersonsNumber' | translate }}</label>
+              <span *ngIf="submitted && form['nuOfPersons'].errors" class="error-validation">{{ 'Field_Required' |
+                translate }}</span>
             </div>
           </div>
 
@@ -53,6 +63,8 @@
             <div class="p-float-label">
               <p-calendar [showIcon]="true" formControlName="Date"></p-calendar>
               <label>{{ 'event_date' | translate }}</label>
+              <span *ngIf="submitted && form['Date'].errors" class="error-validation">{{ 'Field_Required' |
+                translate }}</span>
             </div>
           </div>
 
