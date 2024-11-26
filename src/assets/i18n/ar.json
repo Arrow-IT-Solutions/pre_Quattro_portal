@@ -301,6 +301,10 @@
   "Tranfer_Count_Dashboard" : "عدد التحويلات",
   "Request_Redeem_Count_Dashboard" : "عدد طلبات الاسترداد",
   "Employees_Count_Dashboard" : "عدد الموظفين",
-  "Customers_Count_Dashboard": "عدد الزبائن"
-
+  "Customers_Count_Dashboard": "عدد الزبائن",
+  "Field_Required" : "حقل مطلوب",
+  "DescAr_advertise" : "الوصف بالعربية",
+  "DescEn_advertise" : "الوصف بالإنجليزية",
+  "NameAr_EventCategory" : "الإسم بالعربية",
+  "NameEn_EventCategory" : "الإسم بالإنجليزية"
 }

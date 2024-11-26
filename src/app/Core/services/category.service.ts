@@ -8,6 +8,8 @@ import { CategoryRequest, CategoryResponse, CategorySearchRequest, CategoryUpdat
 })
 export class CategoryService {
   public SelectedData: CategoryResponse | null = null;
+  public CategoryData
+
   public Dialog: any | null = null;
   constructor(public layoutService: LayoutService, public httpClient: HttpClientService) { }
   async Add(data: CategoryRequest) {

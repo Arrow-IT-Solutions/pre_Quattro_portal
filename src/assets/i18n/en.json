@@ -308,7 +308,12 @@
   "Tranfer_Count_Dashboard" : "Tranfer Count",
   "Request_Redeem_Count_Dashboard" : "Request Redeem Count",
   "Employees_Count_Dashboard" : "Employees Count",
-  "Customers_Count_Dashboard": "Customers Count"
+  "Customers_Count_Dashboard": "Customers Count",
+  "Field_Required" : "Required Field",
+  "DescAr_advertise" : "Description in Arabic",
+  "DescEn_advertise" : "Description in English",
+  "NameAr_EventCategory" : "Name in Arabic",
+  "NameEn_EventCategory" : "Name in English"
 
 
 

@@ -107,10 +107,10 @@ export class DefinitionsComponent {
         console.log(this.addCategory)
 
       }
-      const categoryData = JSON.stringify(this.categoryService.SelectedData != null ? this.category : this.addCategory);
-      this.router.navigate(['layout-admin/categories/add-category/variants'], {
-        queryParams: { data: categoryData }
-      });
+      this.categoryService.CategoryData = this.categoryService.SelectedData != null ? this.category : this.addCategory;
+
+      this.OpenVariants()
+
     } catch (exceptionVar) {
     } finally {
       this.btnLoading = false;
@@ -168,6 +168,10 @@ export class DefinitionsComponent {
 
     // this.selectedImage.imageFile = file;
     console.log('image : ', this.file);
+  }
+
+  OpenVariants() {
+    this.router.navigate(['layout-admin/categories/add-category/variants']);
   }
 
 }

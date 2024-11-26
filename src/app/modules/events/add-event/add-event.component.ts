@@ -165,8 +165,6 @@ export class AddEventComponent {
         date: date.toISOString(),
       };
 
-      console.log(event)
-
       response = await this.eventService.Add(event);
     }
 
@@ -175,7 +173,10 @@ export class AddEventComponent {
       if (this.eventService.SelectedData == null) {
         this.resetForm();
       } else {
-        this.eventService.Dialog.close();
+        setTimeout(() => {
+          this.eventService.Dialog.adHostChild.viewContainerRef.clear();
+          this.eventService.Dialog.adHostDynamic.viewContainerRef.clear();
+        }, 600);
       }
     } else {
       this.layoutService.showError(this.messageService, 'toast', true, response?.requestMessage);
