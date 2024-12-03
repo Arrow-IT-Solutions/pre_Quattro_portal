@@ -97,21 +97,9 @@ export class VariantsComponent {
     this.categoryImages = this.images.map((image, index) => ({
       image: image
     }));
-
-    // let categoryData
-
-    // this.route.queryParams.subscribe(params => {
-    //   if (params['data']) {
-    //     categoryData = JSON.parse(params['data']);
-    //     console.log('Received category data:', categoryData);
-    //     // Now `categoryData` is accessible in this component
-    //   }
-    // });
-
     if (this.categoryService.SelectedData != null) {
-
-    } else {
-      var categoryRequest: CategoryRequest = {
+      var categoryRequest: CategoryUpdateRequest = {
+        uuid: this.categoryService.SelectedData.uuid?.toString(),
         categoryTranslation: this.categoryService.CategoryData.categoryTranslation,
         type: this.categoryService.CategoryData.type,
         categoryImages: this.categoryImages,
@@ -120,7 +108,16 @@ export class VariantsComponent {
 
       console.log(categoryRequest)
 
-      response = await this.categoryService.Add(categoryRequest)
+      response = await this.categoryService.Update(categoryRequest)
+    } else {
+      var updateCategoryRequest: CategoryRequest = {
+        categoryTranslation: this.categoryService.CategoryData.categoryTranslation,
+        type: this.categoryService.CategoryData.type,
+        categoryImages: this.categoryImages,
+        coverImage: this.categoryService.CategoryData.coverImage
+      }
+
+      response = await this.categoryService.Add(updateCategoryRequest)
     }
 
 
