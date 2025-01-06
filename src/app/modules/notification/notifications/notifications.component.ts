@@ -64,6 +64,7 @@ export class NotificationsComponent {
       uuid: '',
       type: this.dataForm.controls['Type'].value == null ? null : this.dataForm.controls['Type'].value.toString(),
       name: this.dataForm.controls['UserName'].value,
+      includeUser: '1'
     };
     const response = (await this.notificationService.Search(filter)) as any;
     if (response.data == null || response.data.length == 0) {
