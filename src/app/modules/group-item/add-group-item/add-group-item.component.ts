@@ -24,7 +24,9 @@ export class AddGroupItemComponent {
   file: any;
   fileInput: any
   img: boolean = true;
-
+  coverimg: boolean = true
+  fileCoverImage: any;
+  fileInputCoverImage: any
   constructor(
     public formBuilder: FormBuilder,
     public layoutService: LayoutService,
@@ -114,16 +116,18 @@ export class AddGroupItemComponent {
         language: 'en'
       }
     ];
-    if (this.groupService.SelectedData != null) {
+    if (this.groupItemService.SelectedData != null) {
       // update
 
       var groupItem: GroupItemUpdateRequest = {
-        uuid: this.groupService.SelectedData?.uuid?.toString(),
+        uuid: this.groupItemService.SelectedData?.uuid?.toString(),
         groupItemTranslation: groupItemTranslation,
         image: this.file,
         categoryGroupIDFK: this.dataForm.controls['categoryGroup'].value.toString(),
         price: this.dataForm.controls['price'].value.toString(),
+        coverImage: this.fileCoverImage
       };
+      console.log('gi', groupItem)
 
       response = await this.groupItemService.Update(groupItem);
     } else {
@@ -131,6 +135,7 @@ export class AddGroupItemComponent {
       var groupItem: GroupItemRequest = {
         groupItemTranslation: groupItemTranslation,
         image: this.file,
+        coverImage: this.fileCoverImage,
         categoryGroupIDFK: this.dataForm.controls['categoryGroup'].value.toString(),
         price: this.dataForm.controls['price'].value.toString()
       };
@@ -172,6 +177,8 @@ export class AddGroupItemComponent {
     };
     this.file = this.groupItemService.SelectedData?.image,
       this.img = false
+    this.fileCoverImage = this.groupItemService.SelectedData?.coverImage
+    this.coverimg = false
     this.dataForm.patchValue(temp);
 
   }
@@ -225,6 +232,11 @@ export class AddGroupItemComponent {
   OnSelectFile(file) {
     this.file = file;
     this.img = false;
+  }
+
+  OnSelectCoverFile(file) {
+    this.fileCoverImage = file;
+    this.coverimg = false;
   }
 
 }
