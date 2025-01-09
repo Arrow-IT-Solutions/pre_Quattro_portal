@@ -28,6 +28,7 @@ export interface GroupItemResponse extends ResponseBase {
   uuid?: string;
   groupItemTranslation?: { [key: string]: GroupItemTranslationResponse };
   image: string,
+  coverImage: string,
   categoryGroupIDFK: string,
   price: string;
   categoryGroup: CategoryGroupResponse
@@ -43,6 +44,7 @@ export interface GroupItemSearchRequest extends SearchRequestBase {
 export interface GroupItemUpdateRequest extends RequestBase {
   groupItemTranslation?: GroupItemTranslationRequest[];
   image: string,
+  coverImage: string,
   price: string;
   categoryGroupIDFK: string,
 }
@@ -50,6 +52,7 @@ export interface GroupItemUpdateRequest extends RequestBase {
 export interface GroupItemRequest extends RequestBase {
   groupItemTranslation?: GroupItemTranslationRequest[];
   image: string,
+  coverImage: string,
   price: string;
   categoryGroupIDFK: string,
 }
