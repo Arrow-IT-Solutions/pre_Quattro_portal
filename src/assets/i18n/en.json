@@ -298,7 +298,17 @@
   "Username_Password" : "Username",
   "Password_Password" : "Password",
   "ResetPassword_Employee" : "Reset Password",
-  "Password_ResetPassword" : "Password"
+  "Password_ResetPassword" : "Password",
+  "Quattros_count":"Quattros count",
+  "Products_Count":"Products Count",
+  "Features_Count":"Features Count",
+  "Offers_Count":"Offers Count",
+  "Tranfer_Count":"Tranfer Count",
+  "Request_Redeem_Count":"Request Redeem Count",
+  "Employees_Count":"Employees Count",
+  "Customers_Count":"Customers Count",
+  "Our_visitors":"Our visitors"
+
 
 
 

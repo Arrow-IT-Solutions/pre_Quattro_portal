@@ -291,6 +291,15 @@
   "Username_Password" : "اسم المستخدم",
   "Password_Password" : "كلمة السر",
   "ResetPassword_Employee" : "تغيير كلمة السر",
-  "Password_ResetPassword" : "كلمة السر"
+  "Password_ResetPassword" : "كلمة السر",
+  "Quattros_count":"عدد النقاط",
+  "Products_Count":"عدد المنتجات",
+  "Features_Count":"عدد الميزات",
+  "Offers_Count":"عدد الإعلانات",
+  "Tranfer_Count":"عدد المناقلات",
+  "Request_Redeem_Count":"طلبات الاسترداد",
+  "Employees_Count":"عدد الموظفين",
+  "Customers_Count":"عدد العملاء",
+  "Our_visitors":"زوارنا"
 
 }
