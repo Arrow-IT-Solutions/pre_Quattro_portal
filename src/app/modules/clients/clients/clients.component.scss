@@ -185,9 +185,11 @@
 
     border-color: rgba($primary-color, 0.5);
     padding-left: 1rem;
+    padding-right: 1rem;
     
     :lang(ar){
      padding-left: 0;
+    
      
      }
     
@@ -214,6 +216,9 @@
 
     &__left {
       align-items: center;
+      :lang(ar){
+        
+      }
      
     }
 
@@ -452,7 +457,9 @@
   height: 120px;
   border: none;
   border-radius: 10px;
- 
+ :lang(ar){
+  
+ }
   
   @media (max-width: 991px) and (min-width: 768px) {
     width: 200px;
@@ -474,6 +481,7 @@
     justify-content: center;
     font-size: 3rem;
     font-weight: bold;
+  
    
     
     
