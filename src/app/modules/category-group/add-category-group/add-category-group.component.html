@@ -11,12 +11,16 @@
             <div class="p-float-label">
               <input pInputText type="text" formControlName="groupNameAr" />
               <label>{{ 'groupNameAr' | translate }}</label>
+              <span *ngIf="submitted && form['groupNameAr'].errors" class="error-validation">{{ 'Field_Required' |
+                translate }}</span>
             </div>
           </div>
           <div class="col-12 mb-3">
             <div class="p-float-label">
               <input pInputText type="text" formControlName="groupNameEn" />
               <label>{{ 'groupNameEn' | translate }}</label>
+              <span *ngIf="submitted && form['groupNameEn'].errors" class="error-validation">{{ 'Field_Required' |
+                translate }}</span>
             </div>
           </div>
           <div class="col-12 mb-3">
@@ -24,6 +28,8 @@
               <p-dropdown [options]="categories" optionLabel="typeValue" optionValue="uuid" formControlName="category"
                 [showClear]="true"></p-dropdown>
               <label>{{ 'category_Type' | translate }}</label>
+              <span *ngIf="submitted && form['category'].errors" class="error-validation">{{ 'Field_Required' |
+                translate }}</span>
             </div>
           </div>
 

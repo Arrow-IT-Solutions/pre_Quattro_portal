@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { GroupItemService } from 'src/app/Core/services/group-item.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
@@ -24,7 +24,9 @@ export class AddGroupItemComponent {
   file: any;
   fileInput: any
   img: boolean = true;
-
+  coverimg: boolean = true
+  fileCoverImage: any;
+  fileInputCoverImage: any
   constructor(
     public formBuilder: FormBuilder,
     public layoutService: LayoutService,
@@ -32,12 +34,12 @@ export class AddGroupItemComponent {
     public messageService: MessageService,
     public groupService: CategoryGroupService) {
     this.dataForm = formBuilder.group({
-      categoryGroup: [''],
-      itemNameAr: [''],
-      itemNameEn: [''],
-      descriptionAr: [''],
-      descriptionEn: [''],
-      price: ['']
+      categoryGroup: ['', Validators.required],
+      itemNameAr: ['', Validators.required],
+      itemNameEn: ['', Validators.required],
+      descriptionAr: ['', Validators.required],
+      descriptionEn: ['', Validators.required],
+      price: ['', Validators.required]
     })
   }
 
@@ -114,16 +116,18 @@ export class AddGroupItemComponent {
         language: 'en'
       }
     ];
-    if (this.groupService.SelectedData != null) {
+    if (this.groupItemService.SelectedData != null) {
       // update
 
       var groupItem: GroupItemUpdateRequest = {
-        uuid: this.groupService.SelectedData?.uuid?.toString(),
+        uuid: this.groupItemService.SelectedData?.uuid?.toString(),
         groupItemTranslation: groupItemTranslation,
         image: this.file,
         categoryGroupIDFK: this.dataForm.controls['categoryGroup'].value.toString(),
         price: this.dataForm.controls['price'].value.toString(),
+        coverImage: this.fileCoverImage
       };
+      console.log('gi', groupItem)
 
       response = await this.groupItemService.Update(groupItem);
     } else {
@@ -131,6 +135,7 @@ export class AddGroupItemComponent {
       var groupItem: GroupItemRequest = {
         groupItemTranslation: groupItemTranslation,
         image: this.file,
+        coverImage: this.fileCoverImage,
         categoryGroupIDFK: this.dataForm.controls['categoryGroup'].value.toString(),
         price: this.dataForm.controls['price'].value.toString()
       };
@@ -143,7 +148,10 @@ export class AddGroupItemComponent {
       if (this.groupService.SelectedData == null) {
         this.resetForm();
       } else {
-        this.groupItemService.Dialog.close();
+        setTimeout(() => {
+          this.groupService.Dialog.adHostChild.viewContainerRef.clear();
+          this.groupService.Dialog.adHostDynamic.viewContainerRef.clear();
+        }, 600);
       }
     } else {
       this.layoutService.showError(this.messageService, 'toast', true, response?.requestMessage);
@@ -169,6 +177,8 @@ export class AddGroupItemComponent {
     };
     this.file = this.groupItemService.SelectedData?.image,
       this.img = false
+    this.fileCoverImage = this.groupItemService.SelectedData?.coverImage
+    this.coverimg = false
     this.dataForm.patchValue(temp);
 
   }
@@ -222,6 +232,11 @@ export class AddGroupItemComponent {
   OnSelectFile(file) {
     this.file = file;
     this.img = false;
+  }
+
+  OnSelectCoverFile(file) {
+    this.fileCoverImage = file;
+    this.coverimg = false;
   }
 
 }

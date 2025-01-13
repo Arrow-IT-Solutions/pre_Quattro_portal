@@ -68,13 +68,21 @@ export interface CategoryRequest extends RequestBase {
 }
 
 export interface CategoryUpdateRequest extends RequestBase {
-  categoryTranslation?: CategoryTranslationRequest[];
+  uuid?: string
+  categoryTranslation?: CategoryTranslationUpdateRequest[];
   coverImage: string,
   type: string,
+  categoryImages?: CategoryImageRequest[];
 }
 
 export interface CategoryTranslationRequest {
   uuid?: string;
   description?: string;
   language?: string;
+}
+
+export interface CategoryTranslationUpdateRequest {
+  description?: string;
+  language: string
+
 }

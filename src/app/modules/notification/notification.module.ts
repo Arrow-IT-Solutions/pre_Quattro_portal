@@ -38,6 +38,7 @@ export interface NotificationSearchRequest extends SearchRequestBase {
   uuid?: string;
   name: string;
   type: string;
+  includeUser?: string
 
 }
 

@@ -30,8 +30,13 @@ export class EmployeesComponent {
   link = '';
   visible: boolean = false;
 
-  constructor(public formBuilder: FormBuilder, public employeeService: EmployeesService,
-    public translate: TranslateService, public layoutService: LayoutService, public messageService: MessageService, public confirmationService: ConfirmationService) {
+  constructor(
+    public formBuilder: FormBuilder,
+    public employeeService: EmployeesService,
+    public translate: TranslateService,
+    public layoutService: LayoutService,
+    public messageService: MessageService,
+    public confirmationService: ConfirmationService) {
     this.dataForm = this.formBuilder.group({
       employeeName: [''],
       phone: [''],
@@ -198,7 +203,9 @@ export class EmployeesComponent {
     this.employeeService.Dialog = component;
     component.OnClose.subscribe(() => {
       document.body.style.overflow = '';
-      this.FillData();
+      if (this.employeeService.submitted == 'submitted') {
+        this.FillData();
+      }
     });
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { AdvertisementService } from 'src/app/Core/services/advertisement.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
@@ -29,13 +29,13 @@ export class AddAdvertisementComponent {
     public advertiseService: AdvertisementService,
     public messageService: MessageService) {
     this.dataForm = formBuilder.group({
-      tittleAr: [''],
-      tittleEn: [''],
-      quattros: [''],
-      startDate: [''],
-      endDate: [''],
-      descAr: [''],
-      descEn: ['']
+      tittleAr: ['', Validators.required],
+      tittleEn: ['', Validators.required],
+      quattros: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+      descAr: ['', Validators.required],
+      descEn: ['', Validators.required]
     })
   }
   async ngOnInit() {
@@ -143,7 +143,10 @@ export class AddAdvertisementComponent {
       if (this.advertiseService.SelectedData == null) {
         this.resetForm();
       } else {
-        this.advertiseService.Dialog.close();
+        setTimeout(() => {
+          this.advertiseService.Dialog.adHostChild.viewContainerRef.clear();
+          this.advertiseService.Dialog.adHostDynamic.viewContainerRef.clear();
+        }, 600);
       }
     } else {
       this.layoutService.showError(this.messageService, 'toast', true, response?.requestMessage);

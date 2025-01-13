@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { CategoryEventService } from 'src/app/Core/services/category-event.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
@@ -19,8 +19,8 @@ export class AddCategoryEventComponent {
 
   constructor(public formBuilder: FormBuilder, public layoutService: LayoutService, public categoryEventService: CategoryEventService, public messageService: MessageService) {
     this.dataForm = formBuilder.group({
-      tittleAr: [''],
-      tittleEn: [''],
+      tittleAr: ['', Validators.required],
+      tittleEn: ['', Validators.required],
     })
   }
 
@@ -31,7 +31,6 @@ export class AddCategoryEventComponent {
       this.resetForm();
 
       if (this.categoryEventService.SelectedData != null) {
-        console.log(this.categoryEventService.SelectedData)
         await this.FillData();
       }
     } catch (exceptionVar) {
@@ -110,7 +109,10 @@ export class AddCategoryEventComponent {
       if (this.categoryEventService.SelectedData == null) {
         this.resetForm();
       } else {
-        this.categoryEventService.Dialog.close();
+        setTimeout(() => {
+          this.categoryEventService.Dialog.adHostChild.viewContainerRef.clear();
+          this.categoryEventService.Dialog.adHostDynamic.viewContainerRef.clear();
+        }, 600);
       }
     } else {
       this.layoutService.showError(this.messageService, 'toast', true, response?.requestMessage);

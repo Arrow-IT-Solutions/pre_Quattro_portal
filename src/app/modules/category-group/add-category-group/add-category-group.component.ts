@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { CategoryGroupService } from 'src/app/Core/services/category-group.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
@@ -32,9 +32,9 @@ export class AddCategoryGroupComponent {
     public messageService: MessageService,
     public categoryService: CategoryService) {
     this.dataForm = formBuilder.group({
-      category: [''],
-      groupNameAr: [''],
-      groupNameEn: [''],
+      category: ['', Validators.required],
+      groupNameAr: ['', Validators.required],
+      groupNameEn: ['', Validators.required],
     })
   }
   async ngOnInit() {
@@ -128,7 +128,10 @@ export class AddCategoryGroupComponent {
       if (this.groupService.SelectedData == null) {
         this.resetForm();
       } else {
-        this.groupService.Dialog.close();
+        setTimeout(() => {
+          this.groupService.Dialog.adHostChild.viewContainerRef.clear();
+          this.groupService.Dialog.adHostDynamic.viewContainerRef.clear();
+        }, 600);
       }
     } else {
       this.layoutService.showError(this.messageService, 'toast', true, response?.requestMessage);
