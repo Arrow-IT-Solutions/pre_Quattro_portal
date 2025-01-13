@@ -184,13 +184,30 @@
     border-radius: 6px;
 
     border-color: rgba($primary-color, 0.5);
+    padding-left: 1rem;
+    
+    :lang(ar){
+     padding-left: 0;
+     
+     }
     
     @media (max-width:767px) {
       flex-direction: column;
+      row-gap: 1rem;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
 
     }
     @media (max-width: 991px) and (min-width: 768px) {
       flex-direction: column;
+     
+      row-gap: 1rem;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+      :lang(ar){
+
+      }
+      
      // Tablets
     }
 
@@ -206,8 +223,8 @@
       border-radius: 50%;
       clip-path: circle(50% at 50% 50%);
       position: relative;
-    margin: auto;
-    
+      margin: auto;
+
 
       & img{
           width: fit-content;
@@ -259,7 +276,7 @@
 
 
     @media(max-width:767px){
-      width: 100%;
+    width: 100%;
     border-inline-end: 1px solid $lighter-gray;
 
     }
@@ -288,6 +305,18 @@
         margin-bottom: 0.75rem;
         display: none;
     }
+    
+    .card-section{
+      display: flex;
+      @media (max-width:767px){
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        padding-left: 2rem;
+
+
+      }
+    }
 
     &__items{
         display: flex;
@@ -297,7 +326,7 @@
         @media (max-width:767px){
           display: flex;
           flex-direction: column;
-          margin: auto;
+          
 
 
         }
@@ -316,7 +345,7 @@
       display: flex;
      flex-direction: column;
       row-gap: 1rem;
-      width: 70%;
+      width: 75%;
 
       @media(max-width:767px){
         width: 100%;
@@ -417,6 +446,52 @@
   font-weight: bold;
   color: black;
 }
-.client-image{
-  background-color: red;
+.image-container{
+  background-color:  #D9D9D9;
+  width: 120px;
+  height: 120px;
+  border: none;
+  border-radius: 10px;
+ 
+  
+  @media (max-width: 991px) and (min-width: 768px) {
+    width: 200px;
+    height: 200px;
+    margin-left: 1.5rem;
+    
+  }
+  @media(max-width:767px){
+    width: 200px;
+    height: 200px;
+  }
+
+  .client-image{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: bold;
+   
+    
+    
+    img{
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      
+    }
+    
+  }
+
 }
+#box3{
+  display: flex;
+  @media(max-width: 767px){
+    flex-direction: column;
+    
+  }
+}
+

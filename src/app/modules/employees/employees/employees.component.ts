@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { EmployeesResponse, EmployeeSearchRequest } from '../employees.module';
+import { EmployeesResponse, EmployeeSearchRequest, EmployeeTranslationResponse } from '../employees.module';
 import { EmployeesService } from 'src/app/Core/services/employees.service';
 import { TranslateService } from '@ngx-translate/core';
 import { LayoutService } from 'src/app/layout/service/layout.service';
@@ -94,6 +94,29 @@ export class EmployeesComponent {
       if (row == null)
         this.OpenInfoPage(this.employeeService.SelectedData)
     });
+  }
+  getFirstChar(trans: { [key: string]: EmployeeTranslationResponse } | undefined): string {
+    console.log('xxxxxxxxxxxxxxxx');
+
+    console.log('trans : ', trans);
+    var char = 'U';
+
+    if (trans == undefined || trans == null) {
+      char = this.layoutService.config.lang == 'ar' ? 'غ' : 'U';
+    } else {
+      var response;
+
+      if (this.layoutService.config.lang == 'ar') {
+        response = trans!['ar'];
+        char = response == null ? 'غ' : response!.firstName!.split('')[0].toUpperCase();
+      } else {
+        response = trans!['en'];
+        char = response == null ? 'U' : response!.firstName!.split('')[0].toUpperCase();
+      }
+    }
+    console.log('char : ', char);
+
+    return char;
   }
   async resetform() {
     this.isResetting = true;

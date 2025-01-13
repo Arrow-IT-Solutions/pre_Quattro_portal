@@ -56,12 +56,13 @@
     <div class="row mx-0 mt-2 box">
       <div *ngFor="let row of data">
         <div class="card col-12 mx-0 mb-2">
-          <div class="col-lg-2 col-md-6 col-sm-6 d-flex card__left">
+          <div class="col-lg-2 col-md-6 col-sm-6 d-flex card__left" style="border: none;">
             <div class="image-container">
-              <div class="user-card__image  client-image">
+              <div class="user-card__image client-image">
 
-                <img (click)="showDialog(row.profileImage)" style="width: 100px; height: 100px"
+                <img *ngIf="row.profileImage != null && row.profileImage != ''; else char" (click)="showDialog(row.profileImage)"
                   [src]="row.profileImage" />
+                  <ng-template #char>{{ getFirstChar(row.clientTranslation) }}</ng-template>
               </div>
             </div>
           </div>
@@ -82,7 +83,7 @@
               </div>
             </div>
 
-            <div class="card-section d-flex">
+            <div class="card-section  d-flex" id="box3">
               <div class="card__contents__item">
                 <div class="card-label">{{ 'contryCode' | translate }}</div>
                 <div class="card-info">{{row.user.countryCode}}</div>
