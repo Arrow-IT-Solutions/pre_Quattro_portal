@@ -52,7 +52,6 @@ import { DisableElementDirective } from './Core/directive/disable-element.direct
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,

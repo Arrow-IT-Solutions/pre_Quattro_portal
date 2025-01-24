@@ -127,7 +127,6 @@ export class AddGroupItemComponent {
         price: this.dataForm.controls['price'].value.toString(),
         coverImage: this.fileCoverImage
       };
-      console.log('gi', groupItem)
 
       response = await this.groupItemService.Update(groupItem);
     } else {

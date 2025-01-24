@@ -4,6 +4,7 @@ import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component'
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { AuthGuardService } from './Core/guard/auth-guard.service';
 import { ContentLayoutAdminComponent } from './layout/content-layout-admin/content-layout-admin.component';
+import { VerifyComponent } from './modules/Verify/Verify/verify.component';
 
 const routes: Routes = [
   {
@@ -11,7 +12,11 @@ const routes: Routes = [
     redirectTo: '/auth/login',
     pathMatch: 'full',
   },
-
+  {
+    path: '',
+    redirectTo: 'verify',
+    pathMatch: 'full',
+  },
   // {
   //   path: 'layout',
   //   component: ContentLayoutComponent,
@@ -142,7 +147,8 @@ const routes: Routes = [
           import('./modules/redeem-history/redeem-history.module').then(
             (m) => m.RedeemHistoryModule
           )
-      }
+      },
+
     ],
   },
 
@@ -152,6 +158,14 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
+
+  {
+    path: 'verify',
+    component: VerifyComponent,
+    loadChildren: () =>
+      import('./modules/Verify/verify.module').then((m) => m.VerifyModule),
+  },
+
   // {
   //   path: 'segments',
   //   component: AuthLayoutComponent,
