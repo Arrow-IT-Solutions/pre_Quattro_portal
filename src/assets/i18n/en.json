@@ -313,7 +313,9 @@
   "DescAr_advertise" : "Description in Arabic",
   "DescEn_advertise" : "Description in English",
   "NameAr_EventCategory" : "Name in Arabic",
-  "NameEn_EventCategory" : "Name in English"
+  "NameEn_EventCategory" : "Name in English",
+  "Title" : "Title",
+  "Title_Notification" : "Title"
 
 
 

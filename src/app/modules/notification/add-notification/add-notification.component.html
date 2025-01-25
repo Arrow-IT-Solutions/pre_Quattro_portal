@@ -9,6 +9,14 @@
         <div class="col-12 row m-0 p-0">
           <div class="col-12 mb-3">
             <div class="p-float-label">
+              <input pInputText type="text" formControlName="title" />
+              <label>{{ 'Title_Notification' | translate }}</label>
+              <span *ngIf="submitted && form['title'].errors" class="error-validation">{{ 'Field_Required' |
+                translate }}</span>
+            </div>
+          </div>
+          <div class="col-12 mb-3">
+            <div class="p-float-label">
               <p-dropdown [options]="typeList" optionLabel="value" optionValue="key"
                 formControlName="Type"></p-dropdown>
               <label>{{ 'notification_Type' | translate }}</label>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { NotificationService } from 'src/app/Core/services/notification.service';
 import { LayoutService } from 'src/app/layout/service/layout.service';
@@ -28,9 +28,10 @@ export class AddNotificationComponent {
 
   constructor(public formBuilder: FormBuilder, public layoutService: LayoutService, public notification: NotificationService, public constantService: ConstantService, public userService: UserService, public notificationService: NotificationService, public messageService: MessageService) {
     this.dataForm = formBuilder.group({
-      Type: [''],
+      Type: ['', Validators.required],
       UserName: [''],
-      notes: ['']
+      notes: ['', Validators.required],
+      title: ['', Validators.required]
 
     })
   }
@@ -116,6 +117,8 @@ export class AddNotificationComponent {
         uuid: this.notificationService.SelectedData?.uuid?.toString(),
         note: this.dataForm.controls['notes'].value,
         notificationType: this.dataForm.controls['Type'].value.toString(),
+        title: this.dataForm.controls['title'].value,
+
       };
 
       response = await this.notificationService.Update(notification);
@@ -125,6 +128,7 @@ export class AddNotificationComponent {
         note: this.dataForm.controls['notes'].value,
         userIDFK: this.dataForm.controls['UserName'].value == null ? null : this.dataForm.controls['UserName'].value.toString(),
         notificationType: this.dataForm.controls['Type'].value.toString(),
+        title: this.dataForm.controls['title'].value,
       };
 
       console.log(addnotification)

@@ -32,13 +32,14 @@ export interface NotificationResponse extends ResponseBase {
   NotificationType: string;
   notificationTypeValue: string,
   user: UserResponse
-
+  title: string
 }
 export interface NotificationSearchRequest extends SearchRequestBase {
   uuid?: string;
   name: string;
   type: string;
-  includeUser?: string
+  includeUser?: string,
+
 
 }
 
@@ -46,6 +47,7 @@ export interface NotificationUpdateRequest extends RequestBase {
   uuid?: string,
   notificationType?: string,
   note?: string,
+  title?: string
 }
 
 export interface NotificationRequest extends RequestBase {
@@ -53,4 +55,5 @@ export interface NotificationRequest extends RequestBase {
   notificationType?: string,
   note?: string,
   userIDFK?: string,
+  title?: string
 }
