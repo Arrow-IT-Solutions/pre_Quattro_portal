@@ -18,6 +18,7 @@ export interface AuthRequest {
   userName: string;
   password: string;
   platformType: string
+  countryCode?: string
 }
 
 export interface CurrentUser {

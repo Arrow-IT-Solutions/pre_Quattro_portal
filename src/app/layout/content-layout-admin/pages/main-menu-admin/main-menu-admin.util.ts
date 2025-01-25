@@ -21,26 +21,27 @@ export const navbarData: NavbarData[] = [
     routeLink: 'dashBoard'
   },
   {
-  label: 'Users',
-  labelar: 'المستخدمين',
-  id: 'Users',
-  icon: 'group',
-  items: [
-    {
-      label: 'Clients',
-      labelar: 'الزبائن',
-      id: 'Clients',
-      routeLink: "clients"
-    },
-    {
-      label: 'Employees',
-      labelar: 'الموظفين',
-      id: 'Employees',
-      
-      routeLink: "employees"
-    }
+    label: 'Users',
+    labelar: 'المستخدمين',
+    id: 'Users',
+    icon: 'group',
+    items: [
+      {
+        label: 'Clients',
+        labelar: 'الزبائن',
+        id: 'Clients',
+        routeLink: "clients"
+      },
+      {
+        label: 'Employees',
+        labelar: 'الموظفين',
+        id: 'Employees',
 
-  ]},
+        routeLink: "employees"
+      }
+
+    ]
+  },
   {
     label: 'Categories',
     labelar: ' الفئات',
@@ -48,7 +49,7 @@ export const navbarData: NavbarData[] = [
     icon: 'category',
     routeLink: "categories"
   },
-   
+
   {
     label: 'Advertisement',
     labelar: 'الإعلانات',
@@ -56,8 +57,7 @@ export const navbarData: NavbarData[] = [
     icon: 'dvr',
     routeLink: "Advertisement"
   },
- 
-  
+
   {
     label: 'Category Event',
     labelar: ' حدث الفئة',
@@ -114,7 +114,7 @@ export const navbarData: NavbarData[] = [
     id: 'earned',
     icon: 'control_point',
     routeLink: "earned"
-  }, 
+  },
   {
     label: 'ٌTransfer',
     labelar: 'التحويلات',
@@ -129,7 +129,4 @@ export const navbarData: NavbarData[] = [
     icon: 'history',
     routeLink: "redeem-history"
   },
-  
-  
-  
 ];
